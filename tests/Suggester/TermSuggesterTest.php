@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL;
+namespace Gskema\ElasticSearchQueryDSL\Suggester;
 
-use Gskema\ElasticSearchQueryDSL\Suggester\TermSuggester;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
 
 class TermSuggesterTest extends AbstractJsonSerializeTest
 {

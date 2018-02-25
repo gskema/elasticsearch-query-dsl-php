@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL;
+namespace Gskema\ElasticSearchQueryDSL\Suggester;
 
-use Gskema\ElasticSearchQueryDSL\Suggester\CompletionSuggester;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
 
 class CompletionSuggesterTest extends AbstractJsonSerializeTest
 {

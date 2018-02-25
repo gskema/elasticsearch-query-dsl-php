@@ -1,9 +1,9 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL;
+namespace Gskema\ElasticSearchQueryDSL\Suggester;
 
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
 use Gskema\ElasticSearchQueryDSL\Suggester\CandidateGenerator\DirectCandidateGenerator;
-use Gskema\ElasticSearchQueryDSL\Suggester\PhraseSuggester;
 
 class PhraseSuggesterTest extends AbstractJsonSerializeTest
 {

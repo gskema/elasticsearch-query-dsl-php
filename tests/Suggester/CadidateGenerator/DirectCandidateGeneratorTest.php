@@ -1,9 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Suggester;
+namespace Gskema\ElasticSearchQueryDSL\Suggester\CandidateGenerator;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
-use Gskema\ElasticSearchQueryDSL\Suggester\CandidateGenerator\DirectCandidateGenerator;
 
 class DirectCandidateGeneratorTest extends AbstractJsonSerializeTest
 {
