@@ -1,0 +1,46 @@
+{
+    "name": "gskema/elasticsearch-query-dsl-php",
+    "type": "library",
+    "description": "Feature complete, object oriented, composable, extendable ElasticSearch query DSL builder for PHP.",
+    "keywords": [
+        "elasticsearch",
+        "query",
+        "dsl"
+    ],
+    "homepage": "https://github.com/gskema/elasticsearch-query-dsl-php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gytis Šk",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : ">=5.4.3",
+        "squizlabs/php_codesniffer": "^2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gskema\\ElasticSearchQueryDSL\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": { "Gskema\\ElasticSearchQueryDSL\\": "tests/" }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests",
+        "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
