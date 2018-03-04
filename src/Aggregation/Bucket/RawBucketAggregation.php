@@ -21,6 +21,8 @@ class RawBucketAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = $this->body;
+
         if ($this->hasAggs()) {
             $body['aggs'] = $this->jsonSerializeAggs();
         }
