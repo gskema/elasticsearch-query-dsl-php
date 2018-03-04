@@ -52,9 +52,7 @@ class RangeAggregation implements BucketAggregationInterface
 
     public static function fromScript(ScriptInterface $script, array $ranges, array $options = []): RangeAggregation
     {
-        $body['script'] = $script->jsonSerialize();
-
-        return new static($body, $ranges, $options);
+        return new static(['script' => $script->jsonSerialize()], $ranges, $options);
     }
 
     /**

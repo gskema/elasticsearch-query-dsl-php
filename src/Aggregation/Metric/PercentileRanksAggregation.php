@@ -63,6 +63,7 @@ class PercentileRanksAggregation implements MetricAggregationInterface
         ScriptInterface $script,
         array $options = []
     ): PercentileRanksAggregation {
+        $body = [];
         $body['values'] = $values;
         $body['script'] = $script->jsonSerialize();
 

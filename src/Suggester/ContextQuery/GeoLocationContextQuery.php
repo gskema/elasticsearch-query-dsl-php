@@ -19,6 +19,7 @@ class GeoLocationContextQuery implements ContextQueryInterface
         float $boost = null,
         array $neighbours = []
     ): GeoLocationContextQuery {
+        $clause = [];
         $clause['context'] = $point->jsonSerialize();
         if (null !== $precision) {
             $clause['precision'] = $precision;

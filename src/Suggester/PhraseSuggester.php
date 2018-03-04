@@ -87,6 +87,7 @@ class PhraseSuggester implements SuggesterInterface
      */
     public function setCollate(MatcherInterface $query, array $params = [], bool $prune = null): PhraseSuggester
     {
+        $rawCollate = [];
         $rawCollate['query'] = $query->jsonSerialize();
         if (!empty($params)) {
             $rawCollate['params'] = $params;
