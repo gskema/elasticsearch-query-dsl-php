@@ -23,7 +23,7 @@ class GeoDistanceSorterTest extends AbstractJsonSerializeTest
                     "mode": "avg"
                 }
             }',
-            (new GeoDistanceSorter('field1', new GeoPoint(1, 2)))->setMode('avg'),
+            (new GeoDistanceSorter('field1', [new GeoPoint(1, 2)]))->setMode('avg'),
         ];
 
         // #1
@@ -39,7 +39,7 @@ class GeoDistanceSorterTest extends AbstractJsonSerializeTest
                     "distance_type": "arc"
                 }
             }',
-            (new GeoDistanceSorter('field1', new GeoPoint(1, 2)))
+            (new GeoDistanceSorter('field1', [new GeoPoint(1, 2)]))
                 ->setMode('avg')
                 ->setOption('distance_type', 'arc'),
         ];
