@@ -25,6 +25,7 @@ class ConstantScoreMatcher implements MatcherInterface
     {
         $this->filter = $filter;
         $this->boost = $boost;
+        $this->options = $options;
     }
 
     /**
