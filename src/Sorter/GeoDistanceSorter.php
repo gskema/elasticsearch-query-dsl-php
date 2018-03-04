@@ -118,6 +118,7 @@ class GeoDistanceSorter implements SorterInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body[$this->field] = $this->field;
 
         $rawPoints = array_map(function (GeoPointInterface $origin) {

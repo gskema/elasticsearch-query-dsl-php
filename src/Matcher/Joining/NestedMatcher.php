@@ -36,6 +36,7 @@ class NestedMatcher implements MatcherInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['path'] = $this->path;
         $body += $this->options;
         $body['query'] = $this->query;

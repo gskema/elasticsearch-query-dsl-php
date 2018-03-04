@@ -28,6 +28,7 @@ class NotMatcher implements MatcherInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['must_not'] = $this->matcher->jsonSerialize();
         $body += $this->options;
 

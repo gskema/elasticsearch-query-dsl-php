@@ -28,6 +28,7 @@ class ExistsMatcher implements MatcherInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['field'] = $this->field;
         $body += $this->options;
 

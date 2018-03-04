@@ -36,6 +36,7 @@ class RegexMatcher implements MultiTermMatcherInterface
     public function jsonSerialize()
     {
         if (!empty($this->options)) {
+            $body = [];
             $body['value'] = $this->regex;
             $body += $this->options;
         } else {

@@ -33,6 +33,7 @@ class TermsMatcher implements MatcherInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body[$this->field] = $this->values;
         $body += $this->options;
 

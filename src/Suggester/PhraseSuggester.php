@@ -105,6 +105,7 @@ class PhraseSuggester implements SuggesterInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['text'] = $this->text;
         $body['phrase']['field'] = $this->field;
         $body['phrase'] += $this->options;

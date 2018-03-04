@@ -34,6 +34,7 @@ class SpanOrMatcher implements SpanMatcherInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['clauses'] =array_map(function (SpanMatcherInterface $matcher) {
             return $matcher->jsonSerialize();
         }, $this->spanMatchers);

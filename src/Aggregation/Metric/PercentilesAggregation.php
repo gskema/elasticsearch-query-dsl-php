@@ -34,6 +34,7 @@ class PercentilesAggregation implements MetricAggregationInterface
         array $options = [],
         InlineScript $valueScript = null
     ): PercentilesAggregation {
+        $body = [];
         $body['field'] = $field;
         if (null !== $valueScript) {
             $body['script'] = $valueScript->jsonSerialize();
@@ -44,6 +45,7 @@ class PercentilesAggregation implements MetricAggregationInterface
 
     public static function fromScript(ScriptInterface $script, array $options = []): PercentilesAggregation
     {
+        $body = [];
         $body['script'] = $script->jsonSerialize();
 
         return new static($body, $options);

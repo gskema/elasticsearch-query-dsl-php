@@ -33,6 +33,7 @@ class AdjacencyMatrixAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['adjacency_matrix']['filters'] = array_map(function (MatcherInterface $filter) {
             return $filter->jsonSerialize();
         }, $this->filters);

@@ -28,6 +28,7 @@ class GeoBoundsAggregation implements MetricAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['field'] = $this->field;
         $body += $this->options;
 

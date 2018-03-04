@@ -25,6 +25,7 @@ class ChildrenAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['children']['type'] = $this->childrenType;
 
         if ($this->hasAggs()) {

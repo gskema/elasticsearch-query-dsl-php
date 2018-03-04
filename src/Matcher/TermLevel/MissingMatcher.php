@@ -28,6 +28,7 @@ class MissingMatcher implements MatcherInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['must_not']['exists']['field'] = $this->field;
         $body += $this->options;
 

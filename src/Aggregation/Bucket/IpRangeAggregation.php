@@ -39,6 +39,7 @@ class IpRangeAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['ip_ranges']['field'] = $this->field;
         $body['ip_ranges']['ranges'] = $this->ranges;
         $body['ip_ranges'] += $this->options;

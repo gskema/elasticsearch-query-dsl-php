@@ -25,6 +25,7 @@ class IndexedScript implements ScriptInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['id'] = $this->id;
         if (!empty($this->params)) {
             $body['params'] = $this->params;

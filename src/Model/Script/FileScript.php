@@ -29,6 +29,7 @@ class FileScript implements ScriptInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['file'] = $this->file;
         if (null !== $this->lang) {
             $body['lang'] = $this->lang;

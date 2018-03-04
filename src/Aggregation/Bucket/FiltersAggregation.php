@@ -32,6 +32,7 @@ class FiltersAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['filters']['filters'] = array_map(function (MatcherInterface $filter) {
             return $filter->jsonSerialize();
         }, $this->filters);

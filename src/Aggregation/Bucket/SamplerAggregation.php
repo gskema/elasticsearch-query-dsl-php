@@ -27,6 +27,7 @@ class SamplerAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         if (empty($this->options)) {
             $body['sampler'] = new stdClass();
         } else {

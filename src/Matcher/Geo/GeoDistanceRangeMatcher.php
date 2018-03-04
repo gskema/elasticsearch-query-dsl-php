@@ -54,6 +54,7 @@ class GeoDistanceRangeMatcher implements MatcherInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body[$this->field] = $this->origin->jsonSerialize();
         $body += $this->range;
         $body += $this->options;

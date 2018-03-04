@@ -43,6 +43,7 @@ class DayOfWeekAggregation implements BucketAggregationInterface
     {
         $script = new InlineScript('doc[\''.$this->field.'\'].date.dayOfWeek', [], 'expression');
 
+        $body = [];
         $body['terms']['script'] = $script->jsonSerialize();
         $body['terms'] += $this->options;
 

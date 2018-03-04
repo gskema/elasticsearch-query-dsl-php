@@ -44,6 +44,7 @@ class TermSuggester implements SuggesterInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['text'] = $this->text;
         $body['term']['field'] = $this->field;
         $body['term'] += $this->options;

@@ -38,6 +38,7 @@ class SimpleQueryStringMatcher implements MatcherInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['query'] = $this->query;
         $body += $this->options;
 

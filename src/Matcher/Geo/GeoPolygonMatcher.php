@@ -51,6 +51,7 @@ class GeoPolygonMatcher implements MatcherInterface
             return $point->jsonSerialize();
         }, $this->points);
 
+        $body = [];
         $body[$this->field]['points'] = $rawPoints;
         $body += $this->options;
 

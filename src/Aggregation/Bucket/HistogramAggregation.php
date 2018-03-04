@@ -63,6 +63,7 @@ class HistogramAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['histogram'] = $this->body;
         $body['histogram']['interval'] = $this->interval;
         $body['histogram'] += $this->options;

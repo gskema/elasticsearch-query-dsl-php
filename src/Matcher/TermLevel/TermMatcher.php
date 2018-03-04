@@ -40,6 +40,7 @@ class TermMatcher implements MatcherInterface
     public function jsonSerialize()
     {
         if (!empty($this->options)) {
+            $body = [];
             $body['value'] = $this->value;
             $body += $this->options;
         } else {

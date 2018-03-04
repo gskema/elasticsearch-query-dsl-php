@@ -39,6 +39,7 @@ class DisMaxScoreMatcher implements MatcherInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['queries'] = array_map(function (MatcherInterface $query) {
             return $query->jsonSerialize();
         }, $this->queries);

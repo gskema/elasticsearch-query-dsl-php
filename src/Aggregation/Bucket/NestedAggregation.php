@@ -25,6 +25,7 @@ class NestedAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['nested']['path'] = $this->path;
 
         if ($this->hasAggs()) {

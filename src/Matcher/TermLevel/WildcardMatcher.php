@@ -35,6 +35,7 @@ class WildcardMatcher implements MultiTermMatcherInterface
     public function jsonSerialize()
     {
         if (!empty($this->options)) {
+            $body = [];
             $body['value'] = $this->value;
             $body += $this->options;
         } else {

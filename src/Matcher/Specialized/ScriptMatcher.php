@@ -29,6 +29,7 @@ class ScriptMatcher implements MatcherInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['script'] = $this->script->jsonSerialize();
         $body += $this->options;
 

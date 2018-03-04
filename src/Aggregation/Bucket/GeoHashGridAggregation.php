@@ -32,6 +32,7 @@ class GeoHashGridAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['geohash_grid']['field'] = $this->field;
         $body['geohash_grid'] += $this->options;
 

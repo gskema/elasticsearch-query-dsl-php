@@ -70,6 +70,7 @@ class DateHistogramAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['date_histogram'] = $this->body;
         $body['date_histogram']['interval'] = $this->interval;
         $body['date_histogram'] += $this->options;

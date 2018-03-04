@@ -25,6 +25,7 @@ class MissingAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['missing']['field'] = $this->field;
 
         if ($this->hasAggs()) {

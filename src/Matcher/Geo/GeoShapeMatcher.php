@@ -50,6 +50,7 @@ class GeoShapeMatcher implements MatcherInterface
     {
         $shapeKey = $this->geoShape instanceof IndexedGeoShape ? 'indexed_shape' : 'shape';
 
+        $body = [];
         $body[$this->field][$shapeKey] = $this->geoShape->jsonSerialize();
         if (null !== $this->relation) {
             $body[$this->field]['relation'] = $this->relation;

@@ -24,6 +24,7 @@ class RandomScoreFunction implements ScoreFunctionInterface
     public function jsonSerialize()
     {
         if (null !== $this->seed) {
+            $body = [];
             $body['seed'] = $this->seed;
         } else {
             $body = new stdClass();

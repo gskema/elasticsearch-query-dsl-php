@@ -59,6 +59,7 @@ class TermsAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['terms'] = $this->body;
         $body['terms'] += $this->options;
 

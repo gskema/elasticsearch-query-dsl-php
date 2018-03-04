@@ -31,6 +31,7 @@ class SerialDifferencingBucketAggregation implements PipelineAggregationInterfac
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['buckets_path'] = $this->bucketsPath;
         $body += $this->options;
 

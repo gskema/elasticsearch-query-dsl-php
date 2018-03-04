@@ -38,6 +38,7 @@ class DirectCandidateGenerator implements CandidateGeneratorInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['field'] = $this->field;
         $body += $this->options;
 

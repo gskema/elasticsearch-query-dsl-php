@@ -18,6 +18,7 @@ class GlobalAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['global'] = new stdClass();
 
         if ($this->hasAggs()) {

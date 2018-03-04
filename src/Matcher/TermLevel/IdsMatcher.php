@@ -36,6 +36,7 @@ class IdsMatcher implements MatcherInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['values'] = $this->ids;
         if (null !== $this->type) {
             $body['type'] = $this->type;

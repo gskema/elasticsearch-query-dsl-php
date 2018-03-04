@@ -13,6 +13,7 @@ class CategoryContextQuery implements ContextQueryInterface
 
     public function addCategory(string $category, float $boost = null, bool $prefix = null): CategoryContextQuery
     {
+        $clause = [];
         $clause['context'] = $category;
         if (null !== $boost) {
             $clause['boost'] = $boost;

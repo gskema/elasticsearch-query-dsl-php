@@ -45,6 +45,7 @@ class GeoDistanceAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['geo_distance'] = [
             'field' => $this->field,
             'origin' => $this->origin->jsonSerialize(),

@@ -112,6 +112,7 @@ class NestedSorter implements SorterInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['nested_path'] = $this->nestedPath;
         if (null !== $this->nestedFilter) {
             $body['nested_filter'] = $this->nestedFilter->jsonSerialize();

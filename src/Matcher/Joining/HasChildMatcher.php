@@ -38,10 +38,9 @@ class HasChildMatcher implements MatcherInterface
      */
     public function jsonSerialize()
     {
-        $body = [
-            'type' => $this->childType,
-            'query' => $this->query->jsonSerialize(),
-        ];
+        $body = [];
+        $body['type'] = $this->childType;
+        $body['query'] = $this->query->jsonSerialize();
         $body += $this->options;
 
         if ($this->hasInnerHits()) {

@@ -93,6 +93,7 @@ class SourceFilter implements SourceFilterInterface
         $includes = 1 === count($this->includes) ? $this->includes[0] : $this->includes;
         $excludes = 1 === count($this->excludes) ? $this->excludes[0] : $this->excludes;
 
+        $body = [];
         if ($includes && $excludes) {
             $body['includes'] = $includes;
             $body['excludes'] = $excludes;

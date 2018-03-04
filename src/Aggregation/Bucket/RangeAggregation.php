@@ -61,6 +61,7 @@ class RangeAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['range'] = $this->body;
         $body['range']['ranges'] = $this->ranges;
         $body['range'] += $this->options;

@@ -87,6 +87,7 @@ class GeoBoundingBoxMatcher implements MatcherInterface
             $rawBox['bottom_right'] = $this->bottomRight->jsonSerialize();
         }
 
+        $body = [];
         $body[$this->field] = $rawBox;
         $body += $this->options;
 

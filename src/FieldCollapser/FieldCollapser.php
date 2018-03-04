@@ -68,6 +68,7 @@ class FieldCollapser implements FieldCollapserInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['field'] = $this->field;
         if (count($this->innerHits) > 1) {
             foreach ($this->innerHits as $request) {

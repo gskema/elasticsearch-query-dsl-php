@@ -30,6 +30,7 @@ class FieldValueFactorScoreFunction implements ScoreFunctionInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['field'] = $this->field;
         $body += $this->options;
 

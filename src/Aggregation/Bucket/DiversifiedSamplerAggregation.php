@@ -43,6 +43,7 @@ class DiversifiedSamplerAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['diversified_sampler'] = $this->body;
         $body['diversified_sampler'] += $this->options;
 

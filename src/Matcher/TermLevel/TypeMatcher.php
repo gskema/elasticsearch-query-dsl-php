@@ -28,6 +28,7 @@ class TypeMatcher implements MatcherInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['value'] = $this->docType;
         $body += $this->options;
 

@@ -40,6 +40,7 @@ class DateRangeAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['date_range']['field'] = $this->field;
         $body['date_range']['ranges'] = $this->ranges;
         $body['date_range'] += $this->options;

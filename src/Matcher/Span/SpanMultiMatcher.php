@@ -28,6 +28,7 @@ class SpanMultiMatcher implements SpanMatcherInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['match'] = $this->matcher->jsonSerialize();
         $body += $this->options;
 

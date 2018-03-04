@@ -26,6 +26,7 @@ class FilterAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['filter'] = $this->filter->jsonSerialize();
 
         if ($this->hasAggs()) {

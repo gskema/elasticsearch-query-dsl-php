@@ -33,6 +33,7 @@ class SpanTermMatcher implements SpanMatcherInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         if (!empty($this->options)) {
             $body[$this->field]['value'] = $this->value;
             $body[$this->field] += $this->options;

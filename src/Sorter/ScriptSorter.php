@@ -83,6 +83,7 @@ class ScriptSorter implements SorterInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['type'] = $this->type;
         $body['script'] = $this->script->jsonSerialize();
 

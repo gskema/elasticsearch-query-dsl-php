@@ -33,6 +33,7 @@ class MatrixStatsAggregation implements MatrixAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['fields'] = [$this->field1, $this->field2];
         $body += $this->options;
 

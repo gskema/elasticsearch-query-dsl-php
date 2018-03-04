@@ -36,6 +36,7 @@ class HasParentMatcher implements MatcherInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body['parent_type'] = $this->parentType;
         $body += $this->options;
         $body['query'] = $this->query;

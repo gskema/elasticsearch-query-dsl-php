@@ -45,6 +45,7 @@ class SignificantTermsAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $aggBody = [];
         $aggBody['field'] = $this->field;
         $aggBody += $this->options;
 
@@ -60,6 +61,7 @@ class SignificantTermsAggregation implements BucketAggregationInterface
             $aggBody['scripted_heuristic'] = $script->jsonSerialize();
         }
 
+        $body = [];
         $body['significant_terms'] = $aggBody;
         if ($this->hasAggs()) {
             $body['aggs'] = $this->jsonSerializeAggs();

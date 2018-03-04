@@ -54,6 +54,7 @@ class LookupTermsMatcher implements MatcherInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         $body[$this->field] = [
             'index' => $this->index,
             'type' => $this->type,
