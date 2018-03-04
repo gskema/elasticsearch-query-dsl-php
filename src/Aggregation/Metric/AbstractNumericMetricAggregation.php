@@ -24,6 +24,7 @@ abstract class AbstractNumericMetricAggregation implements MetricAggregationInte
         array $options = [],
         InlineScript $valueScript = null
     ): AbstractNumericMetricAggregation {
+        $body = [];
         $body['field'] = $field;
         if (null !== $valueScript) {
             $body['script'] = $valueScript->jsonSerialize();

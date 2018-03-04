@@ -27,16 +27,12 @@ class CardinalityAggregation implements MetricAggregationInterface
 
     public static function fromField(string $field, array $options = []): CardinalityAggregation
     {
-        $body['field'] = $field;
-
-        return new static($body, $options);
+        return new static(['field' => $field], $options);
     }
 
     public static function fromScript(ScriptInterface $script, array $options = []): CardinalityAggregation
     {
-        $body['script'] = $script->jsonSerialize();
-
-        return new static($body, $options);
+        return new static(['script' => $script->jsonSerialize()], $options);
     }
 
     /**

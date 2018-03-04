@@ -41,6 +41,7 @@ class PercentileRanksAggregation implements MetricAggregationInterface
         array $options = [],
         InlineScript $valueScript = null
     ): PercentileRanksAggregation {
+        $body = [];
         $body['values'] = $values;
         $body['field'] = $field;
         if (null !== $valueScript) {

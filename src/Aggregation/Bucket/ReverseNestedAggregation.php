@@ -26,6 +26,7 @@ class ReverseNestedAggregation implements BucketAggregationInterface
      */
     public function jsonSerialize()
     {
+        $body = [];
         if (null !== $this->path) {
             $body['reverse_nested']['path'] = $this->path;
         } else {

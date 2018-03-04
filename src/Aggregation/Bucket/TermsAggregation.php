@@ -41,6 +41,7 @@ class TermsAggregation implements BucketAggregationInterface
         array $options = [],
         ScriptInterface $valueScript = null
     ): TermsAggregation {
+        $body = [];
         $body['field'] = $field;
         if (null !== $valueScript) {
             $body['script'] = $valueScript->jsonSerialize();

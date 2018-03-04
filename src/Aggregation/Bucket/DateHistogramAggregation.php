@@ -49,6 +49,7 @@ class DateHistogramAggregation implements BucketAggregationInterface
         array $options = [],
         InlineScript $valueScript = null
     ): DateHistogramAggregation {
+        $body = [];
         $body['field'] = $field;
         if (null !== $valueScript) {
             $body['script'] = $valueScript->jsonSerialize();

@@ -35,6 +35,7 @@ class CompletionSuggester implements SuggesterInterface
      */
     public static function fromPrefix(string $field, string $prefix, array $options = [])
     {
+        $body = [];
         $body['prefix'] = $prefix;
         $body['completion']['field'] = $field;
 
@@ -50,6 +51,7 @@ class CompletionSuggester implements SuggesterInterface
      */
     public static function fromRegex(string $field, string $regex, array $options = [])
     {
+        $body = [];
         $body['regex'] = $regex;
         $body['completion']['field'] = $field;
 

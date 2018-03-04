@@ -45,6 +45,7 @@ class FunctionScoreMatcher implements MatcherInterface
         MatcherInterface $filter = null,
         int $weight = null
     ): FunctionScoreMatcher {
+        $rawFunction = [];
         $rawFunction['_function'] = $function;
         if (null !== $filter) {
             $rawFunction['filter'] = $filter;

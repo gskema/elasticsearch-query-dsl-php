@@ -42,6 +42,7 @@ class HistogramAggregation implements BucketAggregationInterface
         array $options = [],
         InlineScript $valueScript = null
     ): HistogramAggregation {
+        $body = [];
         $body['field'] = $field;
         if (null !== $valueScript) {
             $body['script'] = $valueScript->jsonSerialize();

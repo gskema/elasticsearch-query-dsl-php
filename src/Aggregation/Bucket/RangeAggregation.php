@@ -41,6 +41,7 @@ class RangeAggregation implements BucketAggregationInterface
         array $options = [],
         InlineScript $valueScript = null
     ): RangeAggregation {
+        $body = [];
         $body['field'] = $field;
         if (null !== $valueScript) {
             $body['script'] = $valueScript->jsonSerialize();
