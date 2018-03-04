@@ -31,10 +31,10 @@ class GeoDistanceSorter implements SorterInterface
     protected $mode;
 
     /**
-     * @param string                    $field
-     * @param GeoPointInterface[] ...$origins
+     * @param string              $field
+     * @param GeoPointInterface[] $origins
      */
-    public function __construct(string $field, ...$origins)
+    public function __construct(string $field, array $origins)
     {
         $this->field = $field;
         $this->origins = $origins;
