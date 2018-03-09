@@ -92,7 +92,7 @@ class NestedSorter implements SorterInterface
      */
     public function getMode()
     {
-        return $this->order;
+        return $this->mode;
     }
 
     /**
