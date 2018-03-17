@@ -42,4 +42,24 @@ class FieldCollapserTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $givenCollapser = new FieldCollapser('field1');
+
+        $this->assertEquals('field1', $givenCollapser->getField());
+        $this->assertEquals([], $givenCollapser->getInnerHits());
+
+        $givenCollapser->setInnerHits([
+            (new InnerHitsRequest())->setName('name1'),
+            (new InnerHitsRequest())->setName('name2'),
+        ]);
+        $givenCollapser->addInnerHits((new InnerHitsRequest())->setName('name3'));
+
+        $this->assertEquals([
+            (new InnerHitsRequest())->setName('name1'),
+            (new InnerHitsRequest())->setName('name2'),
+            (new InnerHitsRequest())->setName('name3'),
+        ], $givenCollapser->getInnerHits());
+    }
 }
