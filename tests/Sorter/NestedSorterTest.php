@@ -43,4 +43,22 @@ class NestedSorterTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $sorter = new NestedSorter('field1', 'path1');
+
+        $this->assertEquals('field1', $sorter->getField());
+        $this->assertEquals('path1', $sorter->getNestedPath());
+
+        $sorter->setOrder('order1');
+        $sorter->setMode('mode1');
+        $sorter->setNestedFilter(new MatchAllMatcher());
+        $sorter->setOption('key1', 'value1');
+
+        $this->assertEquals('order1', $sorter->getOrder());
+        $this->assertEquals('mode1', $sorter->getMode());
+        $this->assertEquals(new MatchAllMatcher(), $sorter->getNestedFilter());
+        $this->assertEquals('value1', $sorter->getOption('key1'));
+    }
 }

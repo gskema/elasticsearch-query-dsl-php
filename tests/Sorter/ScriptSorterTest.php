@@ -43,4 +43,18 @@ class ScriptSorterTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $sorter = new ScriptSorter('type1', new InlineScript('source1'));
+
+        $this->assertEquals('type1', $sorter->getType());
+        $this->assertEquals(new InlineScript('source1'), $sorter->getScript());
+
+        $sorter->setOrder('order1');
+        $sorter->setMode('mode1');
+
+        $this->assertEquals('order1', $sorter->getOrder());
+        $this->assertEquals('mode1', $sorter->getMode());
+    }
 }

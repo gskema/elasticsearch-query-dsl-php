@@ -3,6 +3,7 @@
 namespace Gskema\ElasticSearchQueryDSL\Sorter;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\Model\GeoHash;
 use Gskema\ElasticSearchQueryDSL\Model\GeoPoint;
 
 class GeoDistanceSorterTest extends AbstractJsonSerializeTest
@@ -45,5 +46,23 @@ class GeoDistanceSorterTest extends AbstractJsonSerializeTest
         ];
 
         return $dataSets;
+    }
+
+    public function testMethods()
+    {
+        $sorter = new GeoDistanceSorter('field1', [new GeoHash('abc123')]);
+
+        $this->assertEquals('field1', $sorter->getField());
+        $this->assertEquals([new GeoHash('abc123')], $sorter->getOrigins());
+
+        $sorter->setOrder('order1');
+        $sorter->setMode('mode1');
+        $sorter->setUnit('km');
+        $sorter->setOption('key1', 'value1');
+
+        $this->assertEquals('order1', $sorter->getOrder());
+        $this->assertEquals('mode1', $sorter->getMode());
+        $this->assertEquals('km', $sorter->getUnit());
+        $this->assertEquals('value1', $sorter->getOption('key1'));
     }
 }
