@@ -88,4 +88,56 @@ class TopHitsRequestTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+
+    public function testMethods()
+    {
+        $req = (new TopHitsRequest())
+            ->setOptions([
+                'explain' => true,
+            ])
+            ->setOption('version', true)
+            ->setSourceFields(new DisabledSourceFilter())
+            ->setScriptFields([
+                'scriptField1' => new InlineScript('script1'),
+                'scriptField2' => new InlineScript('script2'),
+            ])
+            ->setScriptField('scriptField3', new InlineScript('script3'))
+            ->setStoredFields(['storedField1', 'storedField2'])
+            ->setDocValueFields(['docValueField1', 'docValueField2'])
+            ->setFrom(10)
+            ->setSize(5)
+            ->setSorters([
+                new FieldSorter('field3', 'desc')
+            ])
+            ->addSorter(new RawSorter('field4'))
+            ->setHighlighter(
+                (new Highlighter())
+                    ->setField('field5', ['order' => 'score'])
+                    ->setField('field6')
+            );
+
+        $this->assertEquals(true, $req->getOption('explain'));
+        $this->assertEquals(true, $req->getOption('version'));
+        $this->assertEquals(new DisabledSourceFilter(), $req->getSourceFields());
+        $this->assertEquals([
+            'scriptField1' => new InlineScript('script1'),
+            'scriptField2' => new InlineScript('script2'),
+            'scriptField3' => new InlineScript('script3'),
+        ], $req->getScriptFields());
+        $this->assertEquals(['storedField1', 'storedField2'], $req->getStoredFields());
+        $this->assertEquals(['docValueField1', 'docValueField2'], $req->getDocValueFields());
+        $this->assertEquals(10, $req->getFrom());
+        $this->assertEquals(5, $req->getSize());
+        $this->assertEquals([
+            new FieldSorter('field3', 'desc'),
+            new RawSorter('field4')
+        ], $req->getSorters());
+        $this->assertEquals(
+            (new Highlighter())
+                ->setField('field5', ['order' => 'score'])
+                ->setField('field6'),
+            $req->getHighlighter()
+        );
+    }
 }

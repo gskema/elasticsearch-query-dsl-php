@@ -177,4 +177,92 @@ class SearchRequestTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $req = (new SearchRequest())
+            ->setOptions([
+                'explain' => true,
+            ])
+            ->setOption('version', true)
+            ->setSourceFields(new DisabledSourceFilter())
+            ->setStoredFields(['storedField1', 'storedField2'])
+            ->setScriptFields([
+                'scriptField1' => new InlineScript('script1'),
+                'scriptField2' => new InlineScript('script2'),
+            ])
+            ->setScriptField('scriptField3', new InlineScript('script3'))
+            ->setDocValueFields(['docValueField1', 'docValueField2'])
+            ->setFrom(10)
+            ->setSize(5)
+            ->setQuery(new TermMatcher('field1', 'value1'))
+            ->setPostFilter(new WildcardMatcher('field2', 'value*'))
+            ->setSorters([
+                new FieldSorter('field3', 'desc')
+            ])
+            ->addSorter(new RawSorter('field4'))
+            ->setRescorers([
+                (new QueryRescorer(new MatchAllMatcher()))->setScoreMode('avg')
+            ])
+            ->addRescorer(new QueryRescorer(new MatchNoneMatcher()))
+            ->setHighlighter(
+                (new Highlighter())
+                    ->setField('field5', ['order' => 'score'])
+                    ->setField('field6')
+            )
+            ->setSuggesters([
+                'suggesterKey1' => new TermSuggester('field7', 'text1')
+            ])
+            ->setSuggester('suggesterKey2', new PhraseSuggester('field8', 'text2'))
+            ->setStatGroups(['statGroup1', 'statGroup2'])
+            ->addStatGroup('statGroup3')
+            ->setFieldCollapser(
+                (new FieldCollapser('field9'))
+            )
+            ->setAggs([
+                'agg1' => (new FilterAggregation(new MatchAllMatcher()))
+                    ->setAgg('agg2', TermsAggregation::fromField('field10'))
+            ])
+            ->setAgg('agg3', MaxAggregation::fromField('field11'));
+
+        $this->assertEquals(true, $req->getOption('explain'));
+        $this->assertEquals(true, $req->getOption('version'));
+        $this->assertEquals(new DisabledSourceFilter(), $req->getSourceFields());
+        $this->assertEquals(['storedField1', 'storedField2'], $req->getStoredFields());
+        $this->assertEquals([
+            'scriptField1' => new InlineScript('script1'),
+            'scriptField2' => new InlineScript('script2'),
+            'scriptField3' => new InlineScript('script3'),
+        ], $req->getScriptFields());
+        $this->assertEquals(['docValueField1', 'docValueField2'], $req->getDocValueFields());
+        $this->assertEquals(10, $req->getFrom());
+        $this->assertEquals(5, $req->getSize());
+        $this->assertEquals(new TermMatcher('field1', 'value1'), $req->getQuery());
+        $this->assertEquals(new WildcardMatcher('field2', 'value*'), $req->getPostFilter());
+        $this->assertEquals([
+            new FieldSorter('field3', 'desc'),
+            new RawSorter('field4'),
+        ], $req->getSorters());
+        $this->assertEquals([
+            (new QueryRescorer(new MatchAllMatcher()))->setScoreMode('avg'),
+            new QueryRescorer(new MatchNoneMatcher()),
+        ], $req->getRescorers());
+        $this->assertEquals(
+            (new Highlighter())
+            ->setField('field5', ['order' => 'score'])
+            ->setField('field6'),
+            $req->getHighlighter()
+        );
+        $this->assertEquals([
+            'suggesterKey1' => new TermSuggester('field7', 'text1'),
+            'suggesterKey2' => new PhraseSuggester('field8', 'text2'),
+        ], $req->getSuggesters());
+        $this->assertEquals(['statGroup1', 'statGroup2', 'statGroup3'], $req->getStatGroups());
+        $this->assertEquals(new FieldCollapser('field9'), $req->getFieldCollapser());
+        $this->assertEquals([
+            'agg1' => (new FilterAggregation(new MatchAllMatcher()))
+                ->setAgg('agg2', TermsAggregation::fromField('field10')),
+            'agg3' => MaxAggregation::fromField('field11')
+        ], $req->getAggs());
+    }
 }
