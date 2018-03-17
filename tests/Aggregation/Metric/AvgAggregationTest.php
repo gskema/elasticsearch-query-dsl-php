@@ -51,7 +51,7 @@ class AvgAggregationTest extends AbstractJsonSerializeTest
 
     public function testMethods()
     {
-        $agg1 = AvgAggregation::fromField('field1');
+        $agg1 = AvgAggregation::fromField('field1', ['missing' => 0], new InlineScript('source1'));
         $this->assertInstanceOf(AvgAggregation::class, $agg1);
 
         $agg2 = AvgAggregation::fromScript(new InlineScript('source1'));

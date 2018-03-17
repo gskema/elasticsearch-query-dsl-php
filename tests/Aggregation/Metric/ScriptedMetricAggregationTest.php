@@ -4,6 +4,7 @@ namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
+use UnexpectedValueException;
 
 class ScriptedMetricAggregationTest extends AbstractJsonSerializeTest
 {
@@ -64,5 +65,10 @@ class ScriptedMetricAggregationTest extends AbstractJsonSerializeTest
             'param2' => 'value2',
             'param3' => 'value3',
         ], $agg->getParams());
+        $this->assertEquals(null, $agg->getParam('param1'));
+        $this->assertEquals('value2', $agg->getParam('param2'));
+
+        $this->expectException(UnexpectedValueException::class);
+        (new ScriptedMetricAggregation())->jsonSerialize();
     }
 }
