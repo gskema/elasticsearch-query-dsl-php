@@ -116,7 +116,7 @@ class PhraseSuggester implements SuggesterInterface
         }
 
         if (!empty($this->collate)) {
-            $body['collate'] = $this->collate;
+            $body['phrase']['collate'] = $this->collate;
         }
 
         return $body;
