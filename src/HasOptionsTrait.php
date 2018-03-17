@@ -3,7 +3,7 @@
 namespace Gskema\ElasticSearchQueryDSL;
 
 /**
- * @see HasOptionsTrait
+ * @see HasOptionsTraitTest
  */
 trait HasOptionsTrait
 {
