@@ -75,6 +75,13 @@ class ContextSuggesterTest extends AbstractJsonSerializeTest
             (new CategoryContextQuery())->addCategory('cat2'),
             $suggester1->getContext('ctx2')
         );
+        $this->assertEquals(
+            [
+                (new CategoryContextQuery())->addCategory('cat2'),
+                (new CategoryContextQuery())->addCategory('cat3'),
+            ],
+            $suggester1->getContexts()
+        );
 
         $suggester2 = ContextSuggester::fromRegex('field1', 'regex1');
         $this->assertInstanceOf(CompletionSuggester::class, $suggester2);
