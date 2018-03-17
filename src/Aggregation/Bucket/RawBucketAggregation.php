@@ -5,6 +5,9 @@ namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use Gskema\ElasticSearchQueryDSL\RawFragment;
 
+/**
+ * @see RawBucketAggregationTest
+ */
 class RawBucketAggregation extends RawFragment implements BucketAggregationInterface
 {
     use HasAggsTrait;

@@ -2,6 +2,9 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Model;
 
+/**
+ * @see GeoPointTest
+ */
 class GeoPoint implements GeoPointInterface
 {
     /** @var float */

@@ -2,6 +2,9 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Model;
 
+/**
+ * @see GeoHashTest
+ */
 class GeoHash implements GeoPointInterface
 {
     /** @var string */

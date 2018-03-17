@@ -2,6 +2,9 @@
 
 namespace Gskema\ElasticSearchQueryDSL;
 
+/**
+ * @see HasParametersTraitTest
+ */
 trait HasParametersTrait
 {
     /** @var array */
