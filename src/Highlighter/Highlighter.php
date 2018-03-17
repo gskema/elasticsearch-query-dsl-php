@@ -71,11 +71,11 @@ class Highlighter implements HighlighterInterface
         }
 
         foreach ($this->optionsByField as $field => $options) {
-            $query = $body['fields'][$field]['highlight_query'] ?? null;
+            $body['fields'][$field] = $options ?: new stdClass();
+            $query = $options['highlight_query'] ?? null;
             if ($query instanceof MatcherInterface) {
                 $body['fields'][$field]['highlight_query'] = $query->jsonSerialize();
             }
-            $body['fields'][$field] = $options ?: new stdClass();
         }
 
         return $body;

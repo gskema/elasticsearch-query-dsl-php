@@ -12,6 +12,7 @@ class HighlighterTest extends AbstractJsonSerializeTest
     {
         $dataSets = [];
 
+        // #0
         $dataSets[] = [
             // language=JSON
             '{
@@ -22,6 +23,7 @@ class HighlighterTest extends AbstractJsonSerializeTest
             (new Highlighter())->setField('field1'),
         ];
 
+        // #1
         $dataSets[] = [
             // language=JSON
             '{
@@ -33,6 +35,7 @@ class HighlighterTest extends AbstractJsonSerializeTest
             (new Highlighter(['type' => 'plain']))->setField('field1'),
         ];
 
+        //# 2
         $dataSets[] = [
             // language=JSON
             '{
@@ -46,6 +49,7 @@ class HighlighterTest extends AbstractJsonSerializeTest
             (new Highlighter(['type' => 'plain']))->setField('field1', ['order' => 'score']),
         ];
 
+        // #3
         $dataSets[] = [
             // language=JSON
             '{
