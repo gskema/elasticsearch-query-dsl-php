@@ -80,11 +80,6 @@ class SourceFilter implements SourceFilterInterface
         return $this;
     }
 
-    public function isEmpty(): bool
-    {
-        return empty($this->includes) && empty($this->excludes);
-    }
-
     /**
      * @inheritdoc
      */
