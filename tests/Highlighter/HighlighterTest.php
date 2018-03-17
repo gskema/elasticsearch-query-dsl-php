@@ -74,4 +74,14 @@ class HighlighterTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $highlighter = (new Highlighter([
+            'type' => 'plain',
+            'highlight_query' => new MatchAllMatcher(),
+        ]))->setField('field1', ['order' => 'score', 'highlight_query' => new MatchNoneMatcher()]);
+
+        $this->assertInstanceOf(Highlighter::class, $highlighter);
+    }
 }
