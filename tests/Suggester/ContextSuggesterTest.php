@@ -77,8 +77,8 @@ class ContextSuggesterTest extends AbstractJsonSerializeTest
         );
         $this->assertEquals(
             [
-                (new CategoryContextQuery())->addCategory('cat2'),
-                (new CategoryContextQuery())->addCategory('cat3'),
+                'ctx2' => (new CategoryContextQuery())->addCategory('cat2'),
+                'ctx3' => (new CategoryContextQuery())->addCategory('cat3'),
             ],
             $suggester1->getContexts()
         );
