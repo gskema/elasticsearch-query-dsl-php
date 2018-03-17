@@ -41,6 +41,10 @@ class ParentIdMatcher implements MatcherInterface
         ];
         $body += $this->options;
 
+        if ($this->hasInnerHits()) {
+            $body['inner_hits'] = $this->innerHits->jsonSerialize();
+        }
+
         return [
             'parent_id' => $body,
         ];
