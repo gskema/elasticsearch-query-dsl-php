@@ -6,6 +6,7 @@ use Gskema\ElasticSearchQueryDSL\Rescorer\RescorerInterface;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-rescore.html
+ * @see HasRescorersTraitTest
  */
 trait HasRescorersTrait
 {

@@ -6,6 +6,7 @@ use Gskema\ElasticSearchQueryDSL\SourceFilter\SourceFilterInterface;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-source-filtering.html
+ * @see HasSourceFieldsTraitTest
  */
 trait HasSourceFieldsTrait
 {

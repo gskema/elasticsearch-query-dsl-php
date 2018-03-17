@@ -6,6 +6,7 @@ use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-script-fields.html
+ * @see HasScriptFieldsTraitTest
  */
 trait HasScriptFieldsTrait
 {

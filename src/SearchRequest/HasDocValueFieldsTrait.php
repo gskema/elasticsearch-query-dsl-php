@@ -4,6 +4,7 @@ namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-docvalue-fields.html
+ * @see HasDocValueFieldsTraitTest
  */
 trait HasDocValueFieldsTrait
 {

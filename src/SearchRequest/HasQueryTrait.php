@@ -6,6 +6,7 @@ use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-query.html
+ * @see HasQueryTraitTest
  */
 trait HasQueryTrait
 {
