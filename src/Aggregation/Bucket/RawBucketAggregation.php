@@ -3,25 +3,18 @@
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
+use Gskema\ElasticSearchQueryDSL\RawFragment;
 
-class RawBucketAggregation implements BucketAggregationInterface
+class RawBucketAggregation extends RawFragment implements BucketAggregationInterface
 {
     use HasAggsTrait;
-
-    /** @var array */
-    protected $body;
-
-    public function __construct(array $body)
-    {
-        $this->body = $body;
-    }
 
     /**
      * @inheritdoc
      */
     public function jsonSerialize()
     {
-        $body = $this->body;
+        $body = parent::jsonSerialize();
 
         if ($this->hasAggs()) {
             $body['aggs'] = $this->jsonSerializeAggs();
