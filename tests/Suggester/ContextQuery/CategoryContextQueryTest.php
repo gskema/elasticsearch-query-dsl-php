@@ -40,4 +40,12 @@ class CategoryContextQueryTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $ctxQuery = (new CategoryContextQuery())
+            ->addCategory('category1', 1.1, 'prefix1');
+
+        $this->assertInstanceOf(CategoryContextQuery::class, $ctxQuery);
+    }
 }

@@ -37,4 +37,12 @@ class TermSuggesterTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $suggester = (new TermSuggester('field1', 'text1'))->setOption('shard_size', 5);
+
+        $this->assertInstanceOf(TermSuggester::class, $suggester);
+        $this->assertEquals(5, $suggester->getOption('shard_size'));
+    }
 }

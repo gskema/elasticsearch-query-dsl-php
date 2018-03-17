@@ -36,4 +36,13 @@ class CompletionSuggesterTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $suggester1 = CompletionSuggester::fromPrefix('field1', 'prefix1');
+        $this->assertInstanceOf(CompletionSuggester::class, $suggester1);
+
+        $suggester2 = CompletionSuggester::fromRegex('field1', 'regex1');
+        $this->assertInstanceOf(CompletionSuggester::class, $suggester2);
+    }
 }

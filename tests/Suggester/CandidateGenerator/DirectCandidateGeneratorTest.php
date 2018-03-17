@@ -31,4 +31,11 @@ class DirectCandidateGeneratorTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $generator = new DirectCandidateGenerator('field1', ['size' => 1]);
+
+        $this->assertInstanceOf(DirectCandidateGenerator::class, $generator);
+    }
 }

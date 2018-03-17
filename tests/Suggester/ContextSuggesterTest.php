@@ -58,4 +58,25 @@ class ContextSuggesterTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $suggester1 = ContextSuggester::fromPrefix('field1', 'prefix1')
+            ->setContexts([
+                'ctx1' => (new CategoryContextQuery())->addCategory('cat1'),
+                'ctx2' => (new CategoryContextQuery())->addCategory('cat2'),
+            ])
+            ->setContext('ctx3', (new CategoryContextQuery())->addCategory('cat3'))
+            ->removeContext('ctx1');
+
+        $this->assertInstanceOf(CompletionSuggester::class, $suggester1);
+        $this->assertEquals(null, $suggester1->getContext('ctx1'));
+        $this->assertEquals(
+            (new CategoryContextQuery())->addCategory('cat2'),
+            $suggester1->getContext('ctx2')
+        );
+
+        $suggester2 = ContextSuggester::fromRegex('field1', 'regex1');
+        $this->assertInstanceOf(CompletionSuggester::class, $suggester2);
+    }
 }

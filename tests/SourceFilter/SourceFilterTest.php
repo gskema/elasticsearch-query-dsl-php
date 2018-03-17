@@ -52,4 +52,16 @@ class SourceFilterTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $filter = (new SourceFilter())
+            ->setIncludes(['inc1', 'inc2'])
+            ->setExcludes(['exc1', 'exc2'])
+            ->addInclude('inc3')
+            ->addExclude('exc3');
+
+        $this->assertEquals(['inc1', 'inc2', 'inc3'], $filter->getIncludes());
+        $this->assertEquals(['exc1', 'exc2', 'exc3'], $filter->getExcludes());
+    }
 }
