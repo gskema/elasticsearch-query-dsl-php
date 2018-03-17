@@ -27,12 +27,24 @@ class ReverseNestedAggregationTest extends AbstractJsonSerializeTest
             ->setAgg('key1', new GlobalAggregation()),
         ];
 
+        // #1
+        $dataSets[] = [
+            // language=JSON
+            '{
+                "reverse_nested": {}
+            }',
+            (new ReverseNestedAggregation()),
+        ];
+
         return $dataSets;
     }
 
     public function testMethods()
     {
-        $agg = new ReverseNestedAggregation('path1');
-        $this->assertInstanceOf(ReverseNestedAggregation::class, $agg);
+        $agg1 = new ReverseNestedAggregation('path1');
+        $this->assertInstanceOf(ReverseNestedAggregation::class, $agg1);
+
+        $agg2 = new ReverseNestedAggregation();
+        $this->assertInstanceOf(ReverseNestedAggregation::class, $agg2);
     }
 }

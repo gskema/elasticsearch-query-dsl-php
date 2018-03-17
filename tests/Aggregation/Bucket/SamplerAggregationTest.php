@@ -24,6 +24,17 @@ class SamplerAggregationTest extends AbstractJsonSerializeTest
             (new SamplerAggregation())->setAgg('key1', new GlobalAggregation()),
         ];
 
+        // #0
+        $dataSets[] = [
+            // language=JSON
+            '{
+                "sampler": {
+                    "shard_size": 100
+                }
+            }',
+            (new SamplerAggregation())->setOption('shard_size', 100),
+        ];
+
         return $dataSets;
     }
 

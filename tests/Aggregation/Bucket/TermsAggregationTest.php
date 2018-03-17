@@ -31,12 +31,27 @@ class TermsAggregationTest extends AbstractJsonSerializeTest
                 ->setAgg('key1', new GlobalAggregation()),
         ];
 
+        // #1
+        $dataSets[] = [
+            // language=JSON
+            '{
+                "terms": {
+                    "field": "field1",
+                    "order": {
+                        "_count": "asc"
+                    },
+                    "script": "source1"
+                }
+            }',
+            TermsAggregation::fromField('field1', ['order' => ['_count' => 'asc']], new InlineScript('source1')),
+        ];
+
         return $dataSets;
     }
 
     public function testMethods()
     {
-        $agg1 = TermsAggregation::fromField('field1', ['order' => ['_count' => 'asc']]);
+        $agg1 = TermsAggregation::fromField('field1', ['order' => ['_count' => 'asc']], new InlineScript('source1'));
         $this->assertInstanceOf(TermsAggregation::class, $agg1);
 
         $agg2 = TermsAggregation::fromScript(new InlineScript('source1'), ['order' => ['_count' => 'asc']]);
