@@ -28,7 +28,7 @@ class GeoLocationContextQuery implements ContextQueryInterface
             $clause['boost'] = $boost;
         }
         if (!empty($neighbours)) {
-            $clause['$neighbours'] = $neighbours;
+            $clause['neighbours'] = $neighbours;
         }
 
         $this->clauses[] = $clause;
