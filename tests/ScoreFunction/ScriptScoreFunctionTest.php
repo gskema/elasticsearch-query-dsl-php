@@ -25,4 +25,11 @@ class ScriptScoreFunctionTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $function = (new ScriptScoreFunction(new InlineScript('script1')))->setOption('boost_mode', 'replace');
+
+        $this->assertInstanceOf(ScriptScoreFunction::class, $function);
+    }
 }

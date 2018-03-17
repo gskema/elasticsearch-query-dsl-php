@@ -21,4 +21,11 @@ class WeightScoreFunctionTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $function = (new WeightScoreFunction(5));
+
+        $this->assertInstanceOf(WeightScoreFunction::class, $function);
+    }
 }

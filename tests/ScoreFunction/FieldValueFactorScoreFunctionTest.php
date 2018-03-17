@@ -35,4 +35,11 @@ class FieldValueFactorScoreFunctionTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $function = (new FieldValueFactorScoreFunction('field1'))->setOption('factor', 1);
+
+        $this->assertInstanceOf(FieldValueFactorScoreFunction::class, $function);
+    }
 }

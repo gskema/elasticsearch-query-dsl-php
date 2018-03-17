@@ -32,4 +32,11 @@ class RandomScoreFunctionTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $function = (new RandomScoreFunction(1));
+
+        $this->assertInstanceOf(RandomScoreFunction::class, $function);
+    }
 }

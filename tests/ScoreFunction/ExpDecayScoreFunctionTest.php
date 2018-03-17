@@ -31,4 +31,14 @@ class ExpDecayScoreFunctionTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $function = (new ExpDecayScoreFunction('field1', 'origin1', 'scale1'))
+            ->setOption('offset', 'offset1')
+            ->setOption('decay', 'decay1')
+            ->setOption('multi_value_mode', 'mvm1');
+
+        $this->assertInstanceOf(ExpDecayScoreFunction::class, $function);
+    }
 }
