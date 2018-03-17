@@ -59,13 +59,22 @@ class PercolateMatcherTest extends AbstractJsonSerializeTest
 
     public function testMethods()
     {
-        $matcher1 = PercolateMatcher::fromIndexedDoc(
+        $matcher1 = PercolateMatcher::fromDocSource(
+            'queryField1',
+            'docType1',
+            [
+                'body' => 'body1'
+            ]
+        );
+        $this->assertInstanceOf(PercolateMatcher::class, $matcher1);
+
+        $matcher2 = PercolateMatcher::fromIndexedDoc(
             'queryField1',
             'docType1',
             'index1',
             'type1',
             'id1'
         );
-        $this->assertInstanceOf(PercolateMatcher::class, $matcher1);
+        $this->assertInstanceOf(PercolateMatcher::class, $matcher2);
     }
 }

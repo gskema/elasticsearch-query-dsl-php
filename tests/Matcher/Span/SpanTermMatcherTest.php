@@ -21,6 +21,22 @@ class SpanTermMatcherTest extends AbstractJsonSerializeTest
             new SpanTermMatcher('field1', 'value1'),
         ];
 
+        // #0
+        $dataSets[] = [
+            // language=JSON
+            '{
+                "span_term" : {
+                    "field1": {
+                      "value": "value1",
+                      "_name": "name1"
+                    }
+                }
+            }',
+            new SpanTermMatcher('field1', 'value1', [
+                '_name' => 'name1'
+            ]),
+        ];
+
         return $dataSets;
     }
 

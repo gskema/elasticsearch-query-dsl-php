@@ -79,5 +79,21 @@ class TemplateMatcherTest extends AbstractJsonSerializeTest
             ]
         );
         $this->assertInstanceOf(TemplateMatcher::class, $matcher1);
+
+        $matcher2 = TemplateMatcher::fromFile(
+            'file1',
+            [
+                'param1' => 'value1'
+            ]
+        );
+        $this->assertInstanceOf(TemplateMatcher::class, $matcher2);
+
+        $matcher3 = TemplateMatcher::fromSource(
+            'source1',
+            [
+                'param1' => 'value1'
+            ]
+        );
+        $this->assertInstanceOf(TemplateMatcher::class, $matcher3);
     }
 }

@@ -6,6 +6,7 @@ use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHitsRequest;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-inner-hits.html
+ * @see HasInnerHitsTraitTest
  */
 trait HasInnerHitsTrait
 {

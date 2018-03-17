@@ -21,6 +21,22 @@ class FuzzyMatcherTest extends AbstractJsonSerializeTest
             new FuzzyMatcher('field1', 'value1'),
         ];
 
+        // #1
+        $dataSets[] = [
+            // language=JSON
+            '{
+                "fuzzy": {
+                    "field1": {
+                        "value": "value1",
+                        "max_expansions": 65
+                    }
+                }
+            }',
+            new FuzzyMatcher('field1', 'value1', [
+                "max_expansions" => 65
+            ]),
+        ];
+
         return $dataSets;
     }
 

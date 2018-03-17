@@ -32,6 +32,30 @@ class LookupTermsMatcherTest extends AbstractJsonSerializeTest
             ),
         ];
 
+        // #1
+        $dataSets[] = [
+            // language=JSON
+            '{
+                "terms": {
+                    "field1": {
+                        "index": "index1",
+                        "type": "type1",
+                        "id": "id1",
+                        "path": "path1",
+                        "routing": "routing1"
+                    }
+                }
+            }',
+            new LookupTermsMatcher(
+                'field1',
+                'index1',
+                'type1',
+                'id1',
+                'path1',
+                'routing1'
+            ),
+        ];
+
         return $dataSets;
     }
 

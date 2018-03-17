@@ -3,6 +3,7 @@
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use InvalidArgumentException;
 
 class SpanNearMatcherTest extends AbstractJsonSerializeTest
 {
@@ -47,5 +48,8 @@ class SpanNearMatcherTest extends AbstractJsonSerializeTest
             false
         );
         $this->assertInstanceOf(SpanNearMatcher::class, $matcher1);
+
+        $this->expectException(InvalidArgumentException::class);
+        new SpanNearMatcher([], 5, false);
     }
 }

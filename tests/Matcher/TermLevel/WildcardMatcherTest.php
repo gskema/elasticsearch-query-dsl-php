@@ -21,6 +21,20 @@ class WildcardMatcherTest extends AbstractJsonSerializeTest
             new WildcardMatcher('field1', 'value1*'),
         ];
 
+        // #1
+        $dataSets[] = [
+            // language=JSON
+            '{
+                "wildcard": {
+                    "field1": {
+                        "value": "value1*",
+                        "boost": 2.0
+                    }
+                }
+            }',
+            new WildcardMatcher('field1', 'value1*', ['boost' => 2.0]),
+        ];
+
         return $dataSets;
     }
 

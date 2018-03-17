@@ -4,6 +4,7 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\Geo;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
 use Gskema\ElasticSearchQueryDSL\Model\GeoPoint;
+use InvalidArgumentException;
 
 class GeoPolygonMatcherTest extends AbstractJsonSerializeTest
 {
@@ -49,5 +50,14 @@ class GeoPolygonMatcherTest extends AbstractJsonSerializeTest
             ]
         );
         $this->assertInstanceOf(GeoPolygonMatcher::class, $matcher1);
+
+        $this->expectException(InvalidArgumentException::class);
+        new GeoPolygonMatcher(
+            'field1',
+            [
+                new GeoPoint(1, 1),
+                new GeoPoint(2, 2),
+            ]
+        );
     }
 }

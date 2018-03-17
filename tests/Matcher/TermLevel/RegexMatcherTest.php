@@ -24,6 +24,17 @@ class RegexMatcherTest extends AbstractJsonSerializeTest
             new RegexMatcher('field1', 'regexp1', ['flags' => 'COMPLEMENT']),
         ];
 
+        // #1
+        $dataSets[] = [
+            // language=JSON
+            '{
+                "regexp": {
+                    "field1": "regexp1"
+                }
+            }',
+            new RegexMatcher('field1', 'regexp1'),
+        ];
+
         return $dataSets;
     }
 

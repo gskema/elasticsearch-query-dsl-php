@@ -3,6 +3,7 @@
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use InvalidArgumentException;
 
 class SpanOrMatcherTest extends AbstractJsonSerializeTest
 {
@@ -37,5 +38,8 @@ class SpanOrMatcherTest extends AbstractJsonSerializeTest
             new SpanTermMatcher('field2', 'value2'),
         ]);
         $this->assertInstanceOf(SpanOrMatcher::class, $matcher1);
+
+        $this->expectException(InvalidArgumentException::class);
+        new SpanOrMatcher([]);
     }
 }
