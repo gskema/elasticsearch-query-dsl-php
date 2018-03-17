@@ -24,4 +24,11 @@ class IndexedGeoShapeTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $shape = new IndexedGeoShape('index1', 'type1', 'id1', 'path1');
+
+        $this->assertInstanceOf(IndexedGeoShape::class, $shape);
+    }
 }

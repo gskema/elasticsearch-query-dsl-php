@@ -49,4 +49,13 @@ class IndexedScriptTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $script = new IndexedScript('id1', [
+            'param1' => 'value1',
+        ]);
+
+        $this->assertInstanceOf(IndexedScript::class, $script);
+    }
 }

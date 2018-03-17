@@ -48,4 +48,13 @@ class InlineScriptTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $script = new InlineScript('source1', [
+            'param1' => 'value1',
+        ], 'painless');
+
+        $this->assertInstanceOf(InlineScript::class, $script);
+    }
 }
