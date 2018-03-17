@@ -69,4 +69,15 @@ class TemplateMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = TemplateMatcher::fromId(
+            'templateId1',
+            [
+                'param1' => 'value1'
+            ]
+        );
+        $this->assertInstanceOf(TemplateMatcher::class, $matcher1);
+    }
 }

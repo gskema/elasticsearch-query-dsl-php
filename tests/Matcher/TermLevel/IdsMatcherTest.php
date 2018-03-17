@@ -35,4 +35,10 @@ class IdsMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new IdsMatcher(['id1', 'id2'], 'type1');
+        $this->assertInstanceOf(IdsMatcher::class, $matcher1);
+    }
 }

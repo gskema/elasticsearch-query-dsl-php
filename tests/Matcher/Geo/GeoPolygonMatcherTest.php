@@ -37,4 +37,17 @@ class GeoPolygonMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new GeoPolygonMatcher(
+            'field1',
+            [
+                new GeoPoint(1, 1),
+                new GeoPoint(2, 2),
+                new GeoPoint(3, 3),
+            ]
+        );
+        $this->assertInstanceOf(GeoPolygonMatcher::class, $matcher1);
+    }
 }

@@ -23,4 +23,10 @@ class TypeMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new TypeMatcher('docType1');
+        $this->assertInstanceOf(TypeMatcher::class, $matcher1);
+    }
 }

@@ -23,4 +23,10 @@ class FuzzyMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new FuzzyMatcher('field1', 'value1');
+        $this->assertInstanceOf(FuzzyMatcher::class, $matcher1);
+    }
 }

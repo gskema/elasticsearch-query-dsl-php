@@ -29,4 +29,13 @@ class SpanOrMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new SpanOrMatcher([
+            new SpanTermMatcher('field1', 'value1'),
+            new SpanTermMatcher('field2', 'value2'),
+        ]);
+        $this->assertInstanceOf(SpanOrMatcher::class, $matcher1);
+    }
 }

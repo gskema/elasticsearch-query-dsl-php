@@ -53,4 +53,23 @@ class GeoBoundingBoxMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = GeoBoundingBoxMatcher::fromTopLeft(
+            'field1',
+            new GeoPoint(1, 1),
+            new GeoPoint(2, 2),
+            ['type' => 'indexed']
+        );
+        $this->assertInstanceOf(GeoBoundingBoxMatcher::class, $matcher1);
+
+        $matcher2 = GeoBoundingBoxMatcher::fromTopRight(
+            'field1',
+            new GeoPoint(1, 1),
+            new GeoPoint(2, 2),
+            ['type' => 'indexed']
+        );
+        $this->assertInstanceOf(GeoBoundingBoxMatcher::class, $matcher2);
+    }
 }

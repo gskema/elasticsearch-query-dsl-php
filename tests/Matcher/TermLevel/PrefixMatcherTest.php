@@ -23,4 +23,10 @@ class PrefixMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new PrefixMatcher('field1', 'prefix1');
+        $this->assertInstanceOf(PrefixMatcher::class, $matcher1);
+    }
 }

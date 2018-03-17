@@ -65,4 +65,14 @@ class FunctionScoreMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = (new FunctionScoreMatcher(
+            new TermMatcher('field1', 'term1'),
+            ['score_mode' => 'avg']
+        ))
+            ->addScoreFunction(new RandomScoreFunction(99), new MatchAllMatcher(), 5);
+        $this->assertInstanceOf(FunctionScoreMatcher::class, $matcher1);
+    }
 }

@@ -31,4 +31,15 @@ class GeoDistanceMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new GeoDistanceMatcher(
+            'field1',
+            new GeoPoint(1, 1),
+            '50km',
+            ['validation_method' => 'IGNORE_MALFORMED']
+        );
+        $this->assertInstanceOf(GeoDistanceMatcher::class, $matcher1);
+    }
 }

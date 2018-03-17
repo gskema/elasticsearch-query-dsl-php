@@ -23,4 +23,10 @@ class WildcardMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new WildcardMatcher('field1', 'value1*');
+        $this->assertInstanceOf(WildcardMatcher::class, $matcher1);
+    }
 }

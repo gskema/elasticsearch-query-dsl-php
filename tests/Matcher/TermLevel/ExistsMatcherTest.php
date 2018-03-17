@@ -23,4 +23,10 @@ class ExistsMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new ExistsMatcher('field1');
+        $this->assertInstanceOf(ExistsMatcher::class, $matcher1);
+    }
 }

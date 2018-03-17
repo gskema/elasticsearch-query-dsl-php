@@ -26,4 +26,12 @@ class SpanMultiMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new SpanMultiMatcher(
+            new PrefixMatcher('field1', 'prefix1')
+        );
+        $this->assertInstanceOf(SpanMultiMatcher::class, $matcher1);
+    }
 }

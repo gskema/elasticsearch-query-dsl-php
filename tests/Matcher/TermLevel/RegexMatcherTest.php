@@ -26,4 +26,10 @@ class RegexMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new RegexMatcher('field1', 'regexp1', ['flags' => 'COMPLEMENT']);
+        $this->assertInstanceOf(RegexMatcher::class, $matcher1);
+    }
 }

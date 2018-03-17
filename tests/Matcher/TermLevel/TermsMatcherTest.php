@@ -23,4 +23,10 @@ class TermsMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new TermsMatcher('field1', ['value1', 'value2']);
+        $this->assertInstanceOf(TermsMatcher::class, $matcher1);
+    }
 }

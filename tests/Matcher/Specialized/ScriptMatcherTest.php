@@ -33,4 +33,16 @@ class ScriptMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new ScriptMatcher(
+            new InlineScript(
+                'doc[\'num1\'].value > 1',
+                [],
+                'painless'
+            )
+        );
+        $this->assertInstanceOf(ScriptMatcher::class, $matcher1);
+    }
 }

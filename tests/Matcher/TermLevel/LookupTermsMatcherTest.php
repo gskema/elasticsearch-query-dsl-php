@@ -34,4 +34,16 @@ class LookupTermsMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new LookupTermsMatcher(
+            'field1',
+            'index1',
+            'type1',
+            'id1',
+            'path1'
+        );
+        $this->assertInstanceOf(LookupTermsMatcher::class, $matcher1);
+    }
 }

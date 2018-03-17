@@ -28,4 +28,13 @@ class ConstantScoreMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new ConstantScoreMatcher(
+            new MatchAllMatcher(),
+            5
+        );
+        $this->assertInstanceOf(ConstantScoreMatcher::class, $matcher1);
+    }
 }

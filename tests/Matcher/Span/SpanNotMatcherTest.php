@@ -29,4 +29,14 @@ class SpanNotMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new SpanNotMatcher(
+            new SpanTermMatcher('field1', 'value1'),
+            new SpanTermMatcher('field2', 'value2'),
+            ['pre' => 1]
+        );
+        $this->assertInstanceOf(SpanNotMatcher::class, $matcher1);
+    }
 }

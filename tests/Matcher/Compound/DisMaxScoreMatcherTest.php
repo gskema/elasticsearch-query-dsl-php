@@ -5,6 +5,7 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
 use Gskema\ElasticSearchQueryDSL\Matcher\TermLevel\TermMatcher;
 use Gskema\ElasticSearchQueryDSL\Matcher\TermLevel\TermsMatcher;
+use InvalidArgumentException;
 
 class DisMaxScoreMatcherTest extends AbstractJsonSerializeTest
 {
@@ -38,5 +39,23 @@ class DisMaxScoreMatcherTest extends AbstractJsonSerializeTest
         ];
 
         return $dataSets;
+    }
+
+    public function testMethods()
+    {
+        $matcher1 = new DisMaxScoreMatcher(
+            [
+                new TermMatcher('field1', 'value1'),
+                new TermsMatcher('field2', ['value2', 'value3'])
+            ],
+            [
+                'boost' => 1.0,
+                'tie_breaker' => 5
+            ]
+        );
+        $this->assertInstanceOf(DisMaxScoreMatcher::class, $matcher1);
+
+        $this->expectException(InvalidArgumentException::class);
+        new DisMaxScoreMatcher([]);
     }
 }

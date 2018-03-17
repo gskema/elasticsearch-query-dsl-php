@@ -29,4 +29,13 @@ class SpanFieldMaskingMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new SpanFieldMaskingMatcher(
+            'field1',
+            new SpanTermMatcher('field2', 'value2')
+        );
+        $this->assertInstanceOf(SpanFieldMaskingMatcher::class, $matcher1);
+    }
 }

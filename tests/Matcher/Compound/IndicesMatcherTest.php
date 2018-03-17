@@ -31,4 +31,14 @@ class IndicesMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new IndicesMatcher(
+            ['index1', 'index2'],
+            new MatchAllMatcher(),
+            new MatchNoneMatcher()
+        );
+        $this->assertInstanceOf(IndicesMatcher::class, $matcher1);
+    }
 }

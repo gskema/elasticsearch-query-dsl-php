@@ -26,4 +26,10 @@ class NotMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new NotMatcher(new MatchAllMatcher());
+        $this->assertInstanceOf(NotMatcher::class, $matcher1);
+    }
 }

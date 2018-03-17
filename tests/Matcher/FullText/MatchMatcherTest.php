@@ -25,4 +25,10 @@ class MatchMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new MatchMatcher('field1', 'query1');
+        $this->assertInstanceOf(MatchMatcher::class, $matcher1);
+    }
 }

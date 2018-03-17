@@ -25,4 +25,10 @@ class MultiMatchMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new MultiMatchMatcher(['field1', 'field2'], 'query1', ['minimum_should_match' => 2]);
+        $this->assertInstanceOf(MultiMatchMatcher::class, $matcher1);
+    }
 }

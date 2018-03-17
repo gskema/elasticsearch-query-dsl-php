@@ -35,4 +35,17 @@ class SpanNearMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new SpanNearMatcher(
+            [
+                new SpanTermMatcher('field1', 'value1'),
+                new SpanTermMatcher('field2', 'value2'),
+            ],
+            5,
+            false
+        );
+        $this->assertInstanceOf(SpanNearMatcher::class, $matcher1);
+    }
 }

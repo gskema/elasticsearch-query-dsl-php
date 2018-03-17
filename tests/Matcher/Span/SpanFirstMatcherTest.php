@@ -27,4 +27,13 @@ class SpanFirstMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new SpanFirstMatcher(
+            new SpanTermMatcher('field1', 'value1'),
+            3
+        );
+        $this->assertInstanceOf(SpanFirstMatcher::class, $matcher1);
+    }
 }

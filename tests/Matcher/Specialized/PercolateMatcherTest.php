@@ -56,4 +56,16 @@ class PercolateMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = PercolateMatcher::fromIndexedDoc(
+            'queryField1',
+            'docType1',
+            'index1',
+            'type1',
+            'id1'
+        );
+        $this->assertInstanceOf(PercolateMatcher::class, $matcher1);
+    }
 }

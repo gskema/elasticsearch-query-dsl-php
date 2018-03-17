@@ -26,4 +26,10 @@ class MatchPhrasePrefixMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new MatchPhrasePrefixMatcher('field1', 'query1', ['max_expansions' => 10]);
+        $this->assertInstanceOf(MatchPhrasePrefixMatcher::class, $matcher1);
+    }
 }

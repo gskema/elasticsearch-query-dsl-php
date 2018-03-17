@@ -26,4 +26,10 @@ class CommonTermsMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new CommonTermsMatcher('field1', 'query1', 0.1);
+        $this->assertInstanceOf(CommonTermsMatcher::class, $matcher1);
+    }
 }

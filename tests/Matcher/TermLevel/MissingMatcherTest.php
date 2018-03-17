@@ -27,4 +27,10 @@ class MissingMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new MissingMatcher('field1');
+        $this->assertInstanceOf(MissingMatcher::class, $matcher1);
+    }
 }

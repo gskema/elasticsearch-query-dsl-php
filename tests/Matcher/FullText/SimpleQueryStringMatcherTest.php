@@ -24,4 +24,10 @@ class SimpleQueryStringMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new SimpleQueryStringMatcher('this AND that OR thus', ['all_fields' => true]);
+        $this->assertInstanceOf(SimpleQueryStringMatcher::class, $matcher1);
+    }
 }

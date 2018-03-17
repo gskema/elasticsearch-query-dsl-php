@@ -65,4 +65,20 @@ class GeoShapeMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new GeoShapeMatcher(
+            'field1',
+            new RawGeoShape([
+                'type' => 'polygon',
+                'coordinates' => [
+                    [[1, 1], [2, 2], [3, 3]]
+                ],
+            ]),
+            'INTERSECTS',
+            ['ignore_unmapped' => true]
+        );
+        $this->assertInstanceOf(GeoShapeMatcher::class, $matcher1);
+    }
 }

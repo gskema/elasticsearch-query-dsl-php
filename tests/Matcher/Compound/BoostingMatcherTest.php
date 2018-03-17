@@ -31,4 +31,14 @@ class BoostingMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new BoostingMatcher(
+            new WildcardMatcher('field1', 'value1*'),
+            new TermMatcher('field1', "value1"),
+            0.5
+        );
+        $this->assertInstanceOf(BoostingMatcher::class, $matcher1);
+    }
 }

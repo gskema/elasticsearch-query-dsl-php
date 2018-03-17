@@ -32,4 +32,16 @@ class RangeMatcherTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $matcher1 = new RangeMatcher(
+            'field1',
+            [
+                'gt' => 5,
+                'lte' => 10
+            ]
+        );
+        $this->assertInstanceOf(RangeMatcher::class, $matcher1);
+    }
 }
