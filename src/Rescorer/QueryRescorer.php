@@ -105,7 +105,7 @@ class QueryRescorer implements RescorerInterface
 
     /**
      * @param int|null $windowSize
-
+     *
      * @return $this
      */
     public function setWindowSize(int $windowSize = null): QueryRescorer
