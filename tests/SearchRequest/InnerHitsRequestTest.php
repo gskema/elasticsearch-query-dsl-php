@@ -35,6 +35,7 @@ class InnerHitsRequestTest extends AbstractJsonSerializeTest
         $dataSets[] = [
             // language=JSON
             '{
+                "name": "name1",
                 "explain": true,
                 "version": true,
                 "_source": false,
@@ -60,6 +61,7 @@ class InnerHitsRequestTest extends AbstractJsonSerializeTest
                 }
             }',
             (new InnerHitsRequest())
+                ->setName('name1')
                 ->setOptions([
                     'explain' => true,
                 ])
