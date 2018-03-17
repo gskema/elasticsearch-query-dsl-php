@@ -30,6 +30,21 @@ class InnerHitsRequest implements JsonSerializable
     protected $name;
 
     /**
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): InnerHitsRequest
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
      * @inheritdoc
      */
     public function jsonSerialize()
