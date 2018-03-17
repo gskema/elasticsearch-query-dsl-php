@@ -34,11 +34,14 @@ class ScriptSorterTest extends AbstractJsonSerializeTest
                     "script": {
                         "file": "file1"
                     },
-                    "order": "asc"
+                    "order": "asc",
+                    "mode": "avg"
                 }
                 
             }',
-            (new ScriptSorter('number', new FileScript('file1')))->setOrder('asc'),
+            (new ScriptSorter('number', new FileScript('file1')))
+                ->setOrder('asc')
+                ->setMode('avg'),
         ];
 
         return $dataSets;

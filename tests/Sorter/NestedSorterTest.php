@@ -32,12 +32,14 @@ class NestedSorterTest extends AbstractJsonSerializeTest
                     "nested_filter": {
                         "match_all": {}
                     },
-                    "mode": "max"
+                    "mode": "max",
+                    "order": "desc"
                 }
             }',
             (new NestedSorter('field1', 'path1'))
                 ->setMode('max')
-                ->setNestedFilter(new MatchAllMatcher()),
+                ->setNestedFilter(new MatchAllMatcher())
+                ->setOrder('desc'),
             new \stdClass(),
         ];
 

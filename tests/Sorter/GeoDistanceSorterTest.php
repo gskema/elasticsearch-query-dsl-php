@@ -45,6 +45,28 @@ class GeoDistanceSorterTest extends AbstractJsonSerializeTest
                 ->setOption('distance_type', 'arc'),
         ];
 
+        // #2
+        $dataSets[] = [
+            // language=JSON
+            '{
+                "_geo_distance": {
+                    "field1" : {
+                      "lat": 1,
+                      "lon": 2
+                    },
+                    "mode": "avg",
+                    "distance_type": "arc",
+                    "order": "desc",
+                    "unit": "km"
+                }
+            }',
+            (new GeoDistanceSorter('field1', [new GeoPoint(1, 2)]))
+                ->setMode('avg')
+                ->setOption('distance_type', 'arc')
+                ->setOrder('desc')
+                ->setUnit('km'),
+        ];
+
         return $dataSets;
     }
 
