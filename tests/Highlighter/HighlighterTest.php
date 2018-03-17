@@ -3,6 +3,8 @@
 namespace Gskema\ElasticSearchQueryDSL\Highlighter;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\Matcher\MatchAllMatcher;
+use Gskema\ElasticSearchQueryDSL\Matcher\MatchNoneMatcher;
 
 class HighlighterTest extends AbstractJsonSerializeTest
 {
@@ -42,6 +44,28 @@ class HighlighterTest extends AbstractJsonSerializeTest
                 }
             }',
             (new Highlighter(['type' => 'plain']))->setField('field1', ['order' => 'score']),
+        ];
+
+        $dataSets[] = [
+            // language=JSON
+            '{
+                "type": "plain",
+                "highlight_query": {
+                    "match_all" : {}
+                },
+                "fields": {
+                    "field1": {
+                        "order": "score",
+                        "highlight_query": {
+                            "match_none" : {}
+                        }
+                    }
+                }
+            }',
+            (new Highlighter([
+                'type' => 'plain',
+                'highlight_query' => new MatchAllMatcher(),
+            ]))->setField('field1', ['order' => 'score', 'highlight_query' => new MatchNoneMatcher()]),
         ];
 
         return $dataSets;
