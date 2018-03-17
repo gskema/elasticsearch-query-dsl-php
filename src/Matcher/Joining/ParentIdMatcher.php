@@ -15,6 +15,7 @@ use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 class ParentIdMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
+    use HasInnerHitsTrait;
 
     /** @var string */
     protected $childType;
