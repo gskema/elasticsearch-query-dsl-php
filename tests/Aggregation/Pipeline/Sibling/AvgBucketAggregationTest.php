@@ -23,4 +23,12 @@ class AvgBucketAggregationTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $agg = (new AvgBucketAggregation('path1'))
+            ->setOption('key1', 'value1');
+
+        $this->assertInstanceOf(AvgBucketAggregation::class, $agg);
+    }
 }

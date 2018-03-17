@@ -25,9 +25,15 @@ class FilterAggregationTest extends AbstractJsonSerializeTest
                 }
             }',
             (new FilterAggregation(new MatchAllMatcher()))
-            ->setAgg('key1', new ChildrenAggregation('childrenType1')),
+                ->setAgg('key1', new ChildrenAggregation('childrenType1')),
         ];
 
         return $dataSets;
+    }
+
+    public function testMethods()
+    {
+        $agg = new FilterAggregation(new MatchAllMatcher());
+        $this->assertInstanceOf(FilterAggregation::class, $agg);
     }
 }

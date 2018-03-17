@@ -16,11 +16,22 @@ class MissingAggregationTest extends AbstractJsonSerializeTest
             '{
                 "missing": {
                     "field": "field1"
+                },
+                "aggs": {
+                    "key1": {
+                        "global": {}
+                    }
                 }
             }',
-            new MissingAggregation('field1'),
+            (new MissingAggregation('field1'))->setAgg('key1', new GlobalAggregation()),
         ];
 
         return $dataSets;
+    }
+
+    public function testMethods()
+    {
+        $agg = new MissingAggregation('field1');
+        $this->assertInstanceOf(MissingAggregation::class, $agg);
     }
 }

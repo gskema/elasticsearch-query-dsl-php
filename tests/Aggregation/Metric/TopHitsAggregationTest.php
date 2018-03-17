@@ -24,6 +24,24 @@ class TopHitsAggregationTest extends AbstractJsonSerializeTest
             ),
         ];
 
+        // #1
+        $dataSets[] = [
+            // language=JSON
+            '{
+                "top_hits": {}
+            }',
+            new TopHitsAggregation(),
+        ];
+
         return $dataSets;
+    }
+
+    public function testMethods()
+    {
+        $req = new TopHitsAggregation(
+            (new TopHitsRequest())->setSize(1)
+        );
+
+        $this->assertInstanceOf(TopHitsAggregation::class, $req);
     }
 }

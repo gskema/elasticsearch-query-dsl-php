@@ -16,11 +16,23 @@ class ChildrenAggregationTest extends AbstractJsonSerializeTest
             '{
                 "children": {
                     "type": "childrenType1"
+                },
+                "aggs": {
+                    "key1": {
+                        "global": {}
+                    }
                 }
             }',
-            new ChildrenAggregation('childrenType1'),
+            (new ChildrenAggregation('childrenType1'))
+                ->setAgg('key1', new GlobalAggregation()),
         ];
 
         return $dataSets;
+    }
+
+    public function testMethods()
+    {
+        $agg = new ChildrenAggregation('childrenType1');
+        $this->assertInstanceOf(ChildrenAggregation::class, $agg);
     }
 }

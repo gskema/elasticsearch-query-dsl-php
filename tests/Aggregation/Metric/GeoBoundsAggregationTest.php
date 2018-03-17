@@ -23,4 +23,11 @@ class GeoBoundsAggregationTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $agg = new GeoBoundsAggregation('field1');
+
+        $this->assertInstanceOf(GeoBoundsAggregation::class, $agg);
+    }
 }

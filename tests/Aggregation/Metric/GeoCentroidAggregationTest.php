@@ -23,4 +23,11 @@ class GeoCentroidAggregationTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $agg = new GeoCentroidAggregation('field1');
+
+        $this->assertInstanceOf(GeoCentroidAggregation::class, $agg);
+    }
 }

@@ -34,4 +34,17 @@ class BucketSelectorAggregationTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $agg = new BucketSelectorAggregation(
+            [
+                'var1' => 'path1',
+                'var2' => 'path2'
+            ],
+            new InlineScript('params.var1 > params.var2')
+        );
+
+        $this->assertInstanceOf(BucketSelectorAggregation::class, $agg);
+    }
 }

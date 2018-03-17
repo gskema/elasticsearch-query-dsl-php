@@ -26,4 +26,10 @@ class RawBucketAggregationTest extends RawFragmentTest
 
         $this->assertJsonStringEqualsJsonString($expectedJson, $actualJson);
     }
+
+    public function testMethods()
+    {
+        $agg = new RawBucketAggregation(['agg_type_1' => new \stdClass()]);
+        $this->assertInstanceOf(RawBucketAggregation::class, $agg);
+    }
 }

@@ -34,4 +34,17 @@ class BucketScriptAggregationTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $agg = new BucketScriptAggregation(
+            [
+                'var1' => 'path1',
+                'var2' => 'path2'
+            ],
+            new InlineScript('params.var1 / params.var2')
+        );
+
+        $this->assertInstanceOf(BucketScriptAggregation::class, $agg);
+    }
 }

@@ -14,11 +14,23 @@ class GlobalAggregationTest extends AbstractJsonSerializeTest
         $dataSets[] = [
             // language=JSON
             '{
-                "global": { }
+                "global": { },
+                "aggs": {
+                    "key1": {
+                        "global": {}
+                    }
+                }
             }',
-            new GlobalAggregation(),
+            (new GlobalAggregation())
+                ->setAgg('key1', new GlobalAggregation()),
         ];
 
         return $dataSets;
+    }
+
+    public function testMethods()
+    {
+        $agg = new GlobalAggregation();
+        $this->assertInstanceOf(GlobalAggregation::class, $agg);
     }
 }

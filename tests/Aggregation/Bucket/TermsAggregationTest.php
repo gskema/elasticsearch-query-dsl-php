@@ -3,6 +3,7 @@
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 
 class TermsAggregationTest extends AbstractJsonSerializeTest
 {
@@ -19,11 +20,26 @@ class TermsAggregationTest extends AbstractJsonSerializeTest
                     "order": {
                         "_count": "asc"
                     }
+                },
+                "aggs": {
+                    "key1": {
+                        "global": {}
+                    }
                 }
             }',
-            TermsAggregation::fromField('field1', ['order' => ['_count' => 'asc']]),
+            TermsAggregation::fromField('field1', ['order' => ['_count' => 'asc']])
+                ->setAgg('key1', new GlobalAggregation()),
         ];
 
         return $dataSets;
+    }
+
+    public function testMethods()
+    {
+        $agg1 = TermsAggregation::fromField('field1', ['order' => ['_count' => 'asc']]);
+        $this->assertInstanceOf(TermsAggregation::class, $agg1);
+
+        $agg2 = TermsAggregation::fromScript(new InlineScript('source1'), ['order' => ['_count' => 'asc']]);
+        $this->assertInstanceOf(TermsAggregation::class, $agg2);
     }
 }

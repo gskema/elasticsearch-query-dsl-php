@@ -14,11 +14,22 @@ class SamplerAggregationTest extends AbstractJsonSerializeTest
         $dataSets[] = [
             // language=JSON
             '{
-                "sampler": {}
+                "sampler": {},
+                "aggs": {
+                    "key1": {
+                        "global": {}
+                    }
+                }
             }',
-            new SamplerAggregation(),
+            (new SamplerAggregation())->setAgg('key1', new GlobalAggregation()),
         ];
 
         return $dataSets;
+    }
+
+    public function testMethods()
+    {
+        $agg = new SamplerAggregation();
+        $this->assertInstanceOf(SamplerAggregation::class, $agg);
     }
 }

@@ -21,17 +21,34 @@ class GeoDistanceAggregationTest extends AbstractJsonSerializeTest
                     "ranges": {
                         "from": 10
                     }
+                },
+                "aggs": {
+                    "key1": {
+                        "global": {}
+                    }
                 }
             }',
-            new GeoDistanceAggregation(
+            (new GeoDistanceAggregation(
                 'field1',
                 new GeoPoint(1, 1),
                 [
                     'from' => 10,
                 ]
-            ),
+            ))->setAgg('key1', new GlobalAggregation()),
         ];
 
         return $dataSets;
+    }
+
+    public function testMethods()
+    {
+        $agg = new GeoDistanceAggregation(
+            'field1',
+            new GeoPoint(1, 1),
+            [
+                'from' => 10,
+            ]
+        );
+        $this->assertInstanceOf(GeoDistanceAggregation::class, $agg);
     }
 }

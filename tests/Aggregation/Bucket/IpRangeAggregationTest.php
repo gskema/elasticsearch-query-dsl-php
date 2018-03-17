@@ -20,14 +20,28 @@ class IpRangeAggregationTest extends AbstractJsonSerializeTest
                         { "from": "10.0.0.5", "to": "10.0.0.5", "key": "custom_bucket_key" },
                         { "mask": "10.0.0.0/25", "key": "custom_bucket_key" }
                     ]
+                },
+                "aggs": {
+                    "key1": {
+                        "global": {}
+                    }
                 }
             }',
-            new IpRangeAggregation('field1', [
+            (new IpRangeAggregation('field1', [
                 ['from' => '10.0.0.5', 'to' => '10.0.0.5', 'key' => 'custom_bucket_key'],
                 ['mask' => '10.0.0.0/25', 'key' => 'custom_bucket_key'],
-            ]),
+            ]))->setAgg('key1', new GlobalAggregation()),
         ];
 
         return $dataSets;
+    }
+
+    public function testMethods()
+    {
+        $agg = new IpRangeAggregation('field1', [
+            ['from' => '10.0.0.5', 'to' => '10.0.0.5', 'key' => 'custom_bucket_key'],
+            ['mask' => '10.0.0.0/25', 'key' => 'custom_bucket_key'],
+        ]);
+        $this->assertInstanceOf(IpRangeAggregation::class, $agg);
     }
 }

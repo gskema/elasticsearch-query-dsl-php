@@ -27,9 +27,15 @@ class NestedAggregationTest extends AbstractJsonSerializeTest
                
             }',
             (new NestedAggregation('path1'))
-            ->setAgg('key1', TermsAggregation::fromField('path1.field1')),
+                ->setAgg('key1', TermsAggregation::fromField('path1.field1')),
         ];
 
         return $dataSets;
+    }
+
+    public function testMethods()
+    {
+        $agg = new NestedAggregation('path1');
+        $this->assertInstanceOf(NestedAggregation::class, $agg);
     }
 }

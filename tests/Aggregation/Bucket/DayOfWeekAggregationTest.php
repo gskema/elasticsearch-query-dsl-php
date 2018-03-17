@@ -19,11 +19,23 @@ class DayOfWeekAggregationTest extends AbstractJsonSerializeTest
                         "source": "doc[\'field1\'].date.dayOfWeek",
                         "lang": "expression"
                     }
+                },
+                "aggs": {
+                    "key1": {
+                        "global": {}
+                    }
                 }
             }',
-            new DayOfWeekAggregation('field1'),
+            (new DayOfWeekAggregation('field1'))
+                ->setAgg('key1', new GlobalAggregation()),
         ];
 
         return $dataSets;
+    }
+
+    public function testMethods()
+    {
+        $agg = new DayOfWeekAggregation('field1');
+        $this->assertInstanceOf(DayOfWeekAggregation::class, $agg);
     }
 }

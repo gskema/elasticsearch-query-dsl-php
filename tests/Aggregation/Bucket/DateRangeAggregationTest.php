@@ -21,18 +21,36 @@ class DateRangeAggregationTest extends AbstractJsonSerializeTest
                         "to": "now/d",
                         "key": "custom_bucket_key"
                     }
+                },
+                "aggs": {
+                    "key1": {
+                        "global": {}
+                    }
                 }
             }',
-            new DateRangeAggregation(
+            (new DateRangeAggregation(
                 'field1',
                 [
                     'from' => '2016/02/01',
                     'to' => 'now/d',
                     'key' => 'custom_bucket_key'
                 ]
-            ),
+            ))->setAgg('key1', new GlobalAggregation()),
         ];
 
         return $dataSets;
+    }
+
+    public function testMethods()
+    {
+        $agg = new DateRangeAggregation(
+            'field1',
+            [
+                'from' => '2016/02/01',
+                'to' => 'now/d',
+                'key' => 'custom_bucket_key'
+            ]
+        );
+        $this->assertInstanceOf(DateRangeAggregation::class, $agg);
     }
 }

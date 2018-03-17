@@ -29,4 +29,10 @@ class ReverseNestedAggregationTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $agg = new ReverseNestedAggregation('path1');
+        $this->assertInstanceOf(ReverseNestedAggregation::class, $agg);
+    }
 }

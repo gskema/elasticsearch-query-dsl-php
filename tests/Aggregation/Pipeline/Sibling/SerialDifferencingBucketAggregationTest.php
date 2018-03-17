@@ -26,4 +26,13 @@ class SerialDifferencingBucketAggregationTest extends AbstractJsonSerializeTest
 
         return $dataSets;
     }
+
+    public function testMethods()
+    {
+        $agg = new SerialDifferencingBucketAggregation('bucketsPath1', [
+            'gap_policy' => 'insert_zeros',
+        ]);
+
+        $this->assertInstanceOf(SerialDifferencingBucketAggregation::class, $agg);
+    }
 }

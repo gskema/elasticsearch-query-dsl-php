@@ -16,11 +16,23 @@ class GeoHashGridAggregationTest extends AbstractJsonSerializeTest
             '{
                 "geohash_grid": {
                     "field": "field1"
+                },
+                "aggs": {
+                    "key1": {
+                        "global": {}
+                    }
                 }
             }',
-            new GeoHashGridAggregation('field1'),
+            (new GeoHashGridAggregation('field1'))
+                ->setAgg('key1', new GlobalAggregation()),
         ];
 
         return $dataSets;
+    }
+
+    public function testMethods()
+    {
+        $agg = new GeoHashGridAggregation('field1');
+        $this->assertInstanceOf(GeoHashGridAggregation::class, $agg);
     }
 }
