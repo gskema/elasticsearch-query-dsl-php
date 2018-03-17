@@ -2,33 +2,36 @@
 
 namespace Gskema\ElasticSearchQueryDSL;
 
+use ReflectionClass;
 use stdClass;
 
-class AbstractRawFragmentTest extends AbstractJsonSerializeTest
+abstract class AbstractRawFragmentTest extends AbstractJsonSerializeTest
 {
     public function dataTestJsonSerialize(): array
     {
+        $className = substr((new ReflectionClass($this))->getName(), 0, -4);
+
         $dataSets = [];
 
         // #0
         $dataSets[] = [
             // language=JSON
             '{ }',
-            new RawFragment(new stdClass()),
+            new $className(new stdClass()),
         ];
 
         // #1
         $dataSets[] = [
             // language=JSON
             'null',
-            new RawFragment(null),
+            new $className(null),
         ];
 
         // #2
         $dataSets[] = [
             // language=JSON
             'false',
-            new RawFragment(false),
+            new $className(false),
         ];
 
         // #3
@@ -39,7 +42,7 @@ class AbstractRawFragmentTest extends AbstractJsonSerializeTest
                     "user": "Jonas"
                 }
             }',
-            new RawFragment([
+            new $className([
                 'term' => [
                     'user' => 'Jonas',
                 ],
@@ -50,21 +53,21 @@ class AbstractRawFragmentTest extends AbstractJsonSerializeTest
         $dataSets[] = [
             // language=JSON
             '1',
-            new RawFragment(1),
+            new $className(1),
         ];
 
         // #5
         $dataSets[] = [
             // language=JSON
             '"string"',
-            new RawFragment('string'),
+            new $className('string'),
         ];
 
         // #6
         $dataSets[] = [
             // language=JSON
             '[1, 2, 3]',
-            new RawFragment([1, 2, 3]),
+            new $className([1, 2, 3]),
         ];
 
         return $dataSets;
