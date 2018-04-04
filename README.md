@@ -12,24 +12,45 @@ Feature complete, object oriented, composable, extendable ElasticSearch query DS
 
 - Dependency free
 - Can be used with any PHP ElasticSearch client
-- Fully extendable and composable classes
-- All configuration options are listed inside classes
-- Explicit naming
+- Fully interfaced, ready for custom classes
+- Explicit class and property naming, fully matches produced JSON
+- All configuration options are listed inside classes, links to documentation
+- Classes can be easily composed, extended
+- Design that is easy to test and maintain
+- Chainable methods
+
+## Versions
+
+Most of the classes should be compatible with any ElasticSearch versions.
+If something is not compatible or not supported, `Raw*` or custom classes can be used.
+
+| Package version | ElasticSearch version |
+| ----------------| ----------------------|
+| >=5.0.0 <6.0.0  | >=5.0.0 <6.0.0        |
+
+Because major version number follows ElasticSearch major version number, second number is reserved for breaking changes.
 
 ## Install
 
-Via Composer
-
 ``` bash
-composer require gskema/elasticsearch-query-dsl-php
+composer require gskema/elasticsearch-query-dsl-php 5.*
 ```
 
 ## Usage
 
 ``` php
-$searchRequest = new Gskema\ElasticSearchQueryDSL\SearchRequest();
-$searchRequest->setQuery(new MatchAllMatcher());
+$searchRequest = new SearchRequest();
+$searchRequest->setOption('min_score', 3.5);
+$searchRequest->setSize(10);
+$searchRequest->setQuery(
+    (new BoolMatcher())->addMustNot(new TermMatcher('field1', 'value1'))
+);
 $searchRequest->addStatGroup('stat_group_1');
+$searchRequest->setAgg(
+    'agg1',
+    (new FilterAggregation(new MatchAllMatcher()))
+        ->setAgg('agg2', TermsAggregation::fromField('field2', 'value2'))
+);
 
 (new ElasticSearchClient())->search($searchRequest->jsonSerialize());
 ```
