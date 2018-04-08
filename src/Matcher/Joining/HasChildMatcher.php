@@ -13,6 +13,7 @@ use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
  *          'min_children' => 2,
  *          'max_children' => 10,
  *          'min_children' => true,
+ *          'ignore_unmapped' => true,
  *          '_name' => '?',
  */
 class HasChildMatcher implements MatcherInterface
