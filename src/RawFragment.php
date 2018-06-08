@@ -20,6 +20,13 @@ class RawFragment implements JsonSerializable
         $this->body = $body;
     }
 
+    public function __clone()
+    {
+        if (is_object($this->body)) {
+            $this->body = clone $this->body;
+        }
+    }
+
     /**
      * @inheritdoc
      */

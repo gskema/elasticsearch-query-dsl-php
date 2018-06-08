@@ -34,6 +34,11 @@ class BucketSelectorAggregation implements PipelineAggregationInterface
         $this->options = $options;
     }
 
+    public function __clone()
+    {
+        $this->script = clone $this->script;
+    }
+
     /**
      * @inheritdoc
      */

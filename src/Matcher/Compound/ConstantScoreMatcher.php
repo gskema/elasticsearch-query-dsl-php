@@ -28,6 +28,11 @@ class ConstantScoreMatcher implements MatcherInterface
         $this->options = $options;
     }
 
+    public function __clone()
+    {
+        $this->filter = clone $this->filter;
+    }
+
     /**
      * @inheritdoc
      */

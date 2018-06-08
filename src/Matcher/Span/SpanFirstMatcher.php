@@ -26,6 +26,11 @@ class SpanFirstMatcher implements SpanMatcherInterface
         $this->end = $end;
     }
 
+    public function __clone()
+    {
+        $this->matcher = clone $this->matcher;
+    }
+
     /**
      * @inheritdoc
      */

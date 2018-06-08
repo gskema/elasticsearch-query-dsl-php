@@ -31,6 +31,12 @@ class IndicesMatcher implements MatcherInterface
         $this->noMatchQuery = $noMatchQuery;
     }
 
+    public function __clone()
+    {
+        $this->query = clone $this->query;
+        $this->noMatchQuery = clone $this->noMatchQuery;
+    }
+
     /**
      * @inheritdoc
      */

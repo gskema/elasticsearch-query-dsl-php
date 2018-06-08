@@ -33,6 +33,11 @@ class FunctionScoreMatcher implements MatcherInterface
         $this->options = $options;
     }
 
+    public function __clone()
+    {
+        $this->query = $this->query ? clone $this->query : null;
+    }
+
     /**
      * @param ScoreFunctionInterface $function
      * @param MatcherInterface|null  $filter

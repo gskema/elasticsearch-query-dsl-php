@@ -23,6 +23,11 @@ class NotMatcher implements MatcherInterface
         $this->matcher = $matcher;
     }
 
+    public function __clone()
+    {
+        $this->matcher = clone $this->matcher;
+    }
+
     /**
      * @inheritdoc
      */

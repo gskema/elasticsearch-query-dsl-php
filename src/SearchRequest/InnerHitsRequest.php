@@ -29,6 +29,12 @@ class InnerHitsRequest implements JsonSerializable
     /** @var string|null */
     protected $name;
 
+    public function __clone()
+    {
+        $this->highlighter = $this->highlighter ? clone $this->highlighter : null;
+        $this->sourceFields = $this->sourceFields ? clone $this->sourceFields : null;
+    }
+
     /**
      * @return string|null
      */

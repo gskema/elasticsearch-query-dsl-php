@@ -28,6 +28,11 @@ class ScriptSorter implements SorterInterface
         $this->script = $script;
     }
 
+    public function __clone()
+    {
+        $this->script = clone $this->script;
+    }
+
     public function getType(): string
     {
         return $this->type;

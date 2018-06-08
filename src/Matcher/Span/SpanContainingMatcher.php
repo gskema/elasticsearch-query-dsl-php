@@ -26,6 +26,12 @@ class SpanContainingMatcher implements SpanMatcherInterface
         $this->big = $big;
     }
 
+    public function __clone()
+    {
+        $this->little = clone $this->little;
+        $this->big = clone $this->big;
+    }
+
     /**
      * @inheritdoc
      */

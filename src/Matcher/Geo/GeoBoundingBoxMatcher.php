@@ -50,6 +50,14 @@ class GeoBoundingBoxMatcher implements MatcherInterface
         $this->options = $options;
     }
 
+    public function __clone()
+    {
+        $this->topLeft = $this->topLeft ? clone $this->topLeft : null;
+        $this->topRight = $this->topRight ? clone $this->topRight : null;
+        $this->bottomLeft = $this->bottomLeft ? clone $this->bottomLeft : null;
+        $this->bottomRight = $this->bottomRight ? clone $this->bottomRight : null;
+    }
+
     public static function fromTopLeft(
         string $field,
         GeoPointInterface $topLeft,

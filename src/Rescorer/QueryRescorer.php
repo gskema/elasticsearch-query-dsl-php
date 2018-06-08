@@ -30,6 +30,11 @@ class QueryRescorer implements RescorerInterface
         $this->query = $query;
     }
 
+    public function __clone()
+    {
+        $this->query = clone $this->query;
+    }
+
     public function getQuery(): MatcherInterface
     {
         return $this->query;

@@ -27,6 +27,12 @@ class TopHitsRequest implements JsonSerializable
     use HasDocValueFieldsTrait;
     use HasOptionsTrait;
 
+    public function __clone()
+    {
+        $this->highlighter = $this->highlighter ? clone $this->highlighter : null;
+        $this->sourceFields = $this->sourceFields ? clone $this->sourceFields : null;
+    }
+
     /**
      * @inheritdoc
      */

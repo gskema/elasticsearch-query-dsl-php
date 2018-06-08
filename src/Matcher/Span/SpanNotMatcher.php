@@ -30,6 +30,12 @@ class SpanNotMatcher implements SpanMatcherInterface
         $this->options = $options;
     }
 
+    public function __clone()
+    {
+        $this->include = clone $this->include;
+        $this->exclude = clone $this->exclude;
+    }
+
     /**
      * @inheritdoc
      */

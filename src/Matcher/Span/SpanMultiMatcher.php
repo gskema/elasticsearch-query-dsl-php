@@ -23,6 +23,11 @@ class SpanMultiMatcher implements SpanMatcherInterface
         $this->matcher = $matcher;
     }
 
+    public function __clone()
+    {
+        $this->matcher = clone $this->matcher;
+    }
+
     /**
      * @inheritdoc
      */

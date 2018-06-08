@@ -43,6 +43,11 @@ class GeoShapeMatcher implements MatcherInterface
         $this->options = $options;
     }
 
+    public function __clone()
+    {
+        $this->geoShape = clone $this->geoShape;
+    }
+
     /**
      * @inheritdoc
      */

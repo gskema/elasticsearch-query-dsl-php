@@ -24,6 +24,11 @@ class ScriptScoreFunction implements ScoreFunctionInterface
         $this->options = $options;
     }
 
+    public function __clone()
+    {
+        $this->script = clone $this->script;
+    }
+
     /**
      * @inheritdoc
      */

@@ -19,6 +19,11 @@ class TopHitsAggregation implements MetricAggregationInterface
         $this->request = $request;
     }
 
+    public function __clone()
+    {
+        $this->request = $this->request ? clone $this->request : null;
+    }
+
     /**
      * @inheritdoc
      */

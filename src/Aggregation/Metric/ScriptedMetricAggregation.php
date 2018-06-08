@@ -26,6 +26,14 @@ class ScriptedMetricAggregation implements MetricAggregationInterface
     /** @var array */
     protected $params = [];
 
+    public function __clone()
+    {
+        $this->initScript = $this->initScript ? clone $this->initScript : null;
+        $this->mapScript = $this->mapScript ? clone $this->mapScript : null;
+        $this->combineScript = $this->combineScript ? clone $this->combineScript : null;
+        $this->reduceScript = $this->reduceScript ? clone $this->reduceScript : null;
+    }
+
     /**
      * @return ScriptInterface|null
      */

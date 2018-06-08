@@ -37,6 +37,11 @@ class NestedSorter implements SorterInterface
         $this->nestedPath = $nestedPath;
     }
 
+    public function __clone()
+    {
+        $this->nestedFilter = $this->nestedFilter ? clone $this->nestedFilter : null;
+    }
+
     public function getField(): string
     {
         return $this->field;

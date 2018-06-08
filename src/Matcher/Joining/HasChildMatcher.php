@@ -34,6 +34,12 @@ class HasChildMatcher implements MatcherInterface
         $this->options = $options;
     }
 
+    public function __clone()
+    {
+        $this->query = clone $this->query;
+        $this->innerHits = $this->innerHits ? clone $this->innerHits : null;
+    }
+
     /**
      * @inheritdoc
      */

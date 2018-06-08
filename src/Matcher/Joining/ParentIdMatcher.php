@@ -30,6 +30,11 @@ class ParentIdMatcher implements MatcherInterface
         $this->options = $options;
     }
 
+    public function __clone()
+    {
+        $this->innerHits = $this->innerHits ? clone $this->innerHits : null;
+    }
+
     /**
      * @inheritdoc
      */

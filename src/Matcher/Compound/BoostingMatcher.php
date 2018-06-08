@@ -31,6 +31,12 @@ class BoostingMatcher implements MatcherInterface
         $this->negativeBoost = $negativeBoost;
     }
 
+    public function __clone()
+    {
+        $this->positiveQuery = clone $this->positiveQuery;
+        $this->negativeQuery = clone $this->negativeQuery;
+    }
+
     /**
      * @inheritdoc
      */

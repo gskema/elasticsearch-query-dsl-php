@@ -24,6 +24,11 @@ class ScriptMatcher implements MatcherInterface
         $this->script = $script;
     }
 
+    public function __clone()
+    {
+        $this->script = clone $this->script;
+    }
+
     /**
      * @inheritdoc
      */

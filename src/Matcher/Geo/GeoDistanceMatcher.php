@@ -38,6 +38,11 @@ class GeoDistanceMatcher implements MatcherInterface
         $this->options = $options;
     }
 
+    public function __clone()
+    {
+        $this->origin = clone $this->origin;
+    }
+
     /**
      * @inheritdoc
      */

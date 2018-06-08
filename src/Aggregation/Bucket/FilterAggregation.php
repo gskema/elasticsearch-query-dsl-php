@@ -21,6 +21,11 @@ class FilterAggregation implements BucketAggregationInterface
         $this->filter = $filter;
     }
 
+    public function __clone()
+    {
+        $this->filter = clone $this->filter;
+    }
+
     /**
      * @inheritdoc
      */
