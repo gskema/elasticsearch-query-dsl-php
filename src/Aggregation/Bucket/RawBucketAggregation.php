@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use Gskema\ElasticSearchQueryDSL\RawFragment;
 
@@ -11,6 +12,12 @@ use Gskema\ElasticSearchQueryDSL\RawFragment;
 class RawBucketAggregation extends RawFragment implements BucketAggregationInterface
 {
     use HasAggsTrait;
+
+    public function __clone()
+    {
+        parent::__clone();
+        $this->aggs = array_clone($this->aggs);
+    }
 
     /**
      * @inheritdoc

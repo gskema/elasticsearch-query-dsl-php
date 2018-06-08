@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\FieldCollapser;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHitsRequest;
 
@@ -24,6 +25,11 @@ class FieldCollapser implements FieldCollapserInterface
     public function __construct(string $field)
     {
         $this->field = $field;
+    }
+
+    public function __clone()
+    {
+        $this->innerHits = array_clone($this->innerHits);
     }
 
     public function getField(): string

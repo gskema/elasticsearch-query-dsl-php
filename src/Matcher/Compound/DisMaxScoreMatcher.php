@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 use InvalidArgumentException;
@@ -32,6 +33,11 @@ class DisMaxScoreMatcher implements MatcherInterface
         }
         $this->queries = $queries;
         $this->options = $options;
+    }
+
+    public function __clone()
+    {
+        $this->queries = array_clone($this->queries);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use stdClass;
 
@@ -12,6 +13,11 @@ use stdClass;
 class GlobalAggregation implements BucketAggregationInterface
 {
     use HasAggsTrait;
+
+    public function __clone()
+    {
+        $this->aggs = array_clone($this->aggs);
+    }
 
     /**
      * @inheritdoc

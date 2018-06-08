@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 
@@ -24,6 +25,7 @@ class FilterAggregation implements BucketAggregationInterface
     public function __clone()
     {
         $this->filter = clone $this->filter;
+        $this->aggs = array_clone($this->aggs);
     }
 
     /**

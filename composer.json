@@ -25,7 +25,8 @@
     "autoload": {
         "psr-4": {
             "Gskema\\ElasticSearchQueryDSL\\": "src/"
-        }
+        },
+        "files": ["src/functions.php"]
     },
     "autoload-dev": {
         "psr-4": { "Gskema\\ElasticSearchQueryDSL\\": "tests/" }

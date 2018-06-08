@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
@@ -34,6 +35,11 @@ class HistogramAggregation implements BucketAggregationInterface
         $this->body = $body;
         $this->interval = $interval;
         $this->options = $options;
+    }
+
+    public function __clone()
+    {
+        $this->aggs = array_clone($this->aggs);
     }
 
     public static function fromField(

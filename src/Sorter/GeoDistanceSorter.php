@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Sorter;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Model\GeoPointInterface;
 
@@ -38,6 +39,11 @@ class GeoDistanceSorter implements SorterInterface
     {
         $this->field = $field;
         $this->origins = $origins;
+    }
+
+    public function __clone()
+    {
+        $this->origins = array_clone($this->origins);
     }
 
     public function getField(): string

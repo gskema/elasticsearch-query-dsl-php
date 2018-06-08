@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 use InvalidArgumentException;
@@ -26,6 +27,12 @@ class AdjacencyMatrixAggregation implements BucketAggregationInterface
             throw new InvalidArgumentException('Expected at least one filter, got none');
         }
         $this->filters = $filtersByName;
+    }
+
+    public function __clone()
+    {
+        $this->filters = array_clone($this->filters);
+        $this->aggs = array_clone($this->aggs);
     }
 
     /**

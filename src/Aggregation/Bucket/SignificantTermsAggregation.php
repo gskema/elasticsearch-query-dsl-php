@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
@@ -38,6 +39,12 @@ class SignificantTermsAggregation implements BucketAggregationInterface
     {
         $this->field = $field;
         $this->options = $options;
+    }
+
+    public function __clone()
+    {
+        $this->options = array_clone($this->options);
+        $this->aggs = array_clone($this->aggs);
     }
 
     /**

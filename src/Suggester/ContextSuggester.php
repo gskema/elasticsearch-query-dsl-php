@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Suggester;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\Suggester\ContextQuery\ContextQueryInterface;
 
 /**
@@ -25,6 +26,11 @@ class ContextSuggester extends CompletionSuggester
 {
     /** @var ContextQueryInterface[] */
     protected $contexts = [];
+
+    public function __clone()
+    {
+        $this->contexts = array_clone($this->contexts);
+    }
 
     /**
      * @return ContextQueryInterface[]

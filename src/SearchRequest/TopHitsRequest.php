@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
 use Gskema\ElasticSearchQueryDSL\Sorter\SorterInterface;
@@ -29,8 +30,10 @@ class TopHitsRequest implements JsonSerializable
 
     public function __clone()
     {
+        $this->sorters = array_clone($this->sorters);
         $this->highlighter = $this->highlighter ? clone $this->highlighter : null;
         $this->sourceFields = $this->sourceFields ? clone $this->sourceFields : null;
+        $this->scriptFields = array_clone($this->scriptFields);
     }
 
     /**

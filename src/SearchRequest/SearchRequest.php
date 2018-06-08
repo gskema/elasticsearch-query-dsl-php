@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\HasParametersTrait;
@@ -57,11 +58,16 @@ class SearchRequest implements SearchRequestInterface
 
     public function __clone()
     {
+        $this->aggs = array_clone($this->aggs);
         $this->fieldCollapser = $this->fieldCollapser ? clone $this->fieldCollapser : null;
         $this->postFilter = $this->postFilter ? clone $this->postFilter : null;
         $this->query = $this->query ? clone $this->query : null;
         $this->highlighter = $this->highlighter ? clone $this->highlighter : null;
+        $this->rescorers = array_clone($this->rescorers);
+        $this->scriptFields = array_clone($this->scriptFields);
+        $this->sorters = array_clone($this->sorters);
         $this->sourceFields = $this->sourceFields ? clone $this->sourceFields : null;
+        $this->suggesters = array_clone($this->suggesters);
     }
 
     /**

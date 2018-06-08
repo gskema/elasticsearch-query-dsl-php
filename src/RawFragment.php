@@ -24,6 +24,8 @@ class RawFragment implements JsonSerializable
     {
         if (is_object($this->body)) {
             $this->body = clone $this->body;
+        } elseif (is_array($this->body)) {
+            $this->body = array_clone($this->body);
         }
     }
 

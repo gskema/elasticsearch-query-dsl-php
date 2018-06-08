@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
 use Gskema\ElasticSearchQueryDSL\Sorter\SorterInterface;
@@ -20,8 +21,8 @@ class InnerHitsRequest implements JsonSerializable
     use HasOptionsTrait;
     use HasSizeTrait;
     use HasFromTrait;
-    use HasSortersTrait;
     use HasHighlighterTrait;
+    use HasSortersTrait;
     use HasSourceFieldsTrait;
     use HasScriptFieldsTrait;
     use HasDocValueFieldsTrait;
@@ -32,6 +33,8 @@ class InnerHitsRequest implements JsonSerializable
     public function __clone()
     {
         $this->highlighter = $this->highlighter ? clone $this->highlighter : null;
+        $this->scriptFields = array_clone($this->scriptFields);
+        $this->sorters = array_clone($this->sorters);
         $this->sourceFields = $this->sourceFields ? clone $this->sourceFields : null;
     }
 

@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Model\GeoPointInterface;
@@ -43,6 +44,7 @@ class GeoDistanceAggregation implements BucketAggregationInterface
     public function __clone()
     {
         $this->origin = clone $this->origin;
+        $this->aggs = array_clone($this->aggs);
     }
 
     /**

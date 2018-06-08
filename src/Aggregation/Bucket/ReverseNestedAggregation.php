@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use stdClass;
 
@@ -19,6 +20,11 @@ class ReverseNestedAggregation implements BucketAggregationInterface
     public function __construct(string $path = null)
     {
         $this->path = $path;
+    }
+
+    public function __clone()
+    {
+        $this->aggs = array_clone($this->aggs);
     }
 
     /**

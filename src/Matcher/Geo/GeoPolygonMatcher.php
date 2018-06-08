@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Geo;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 use Gskema\ElasticSearchQueryDSL\Model\GeoPointInterface;
@@ -40,6 +41,11 @@ class GeoPolygonMatcher implements MatcherInterface
         $this->field = $field;
         $this->points = $points;
         $this->options = $options;
+    }
+
+    public function __clone()
+    {
+        $this->points = array_clone($this->points);
     }
 
     /**

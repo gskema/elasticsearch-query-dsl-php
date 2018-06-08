@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Highlighter;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 use stdClass;
@@ -44,6 +45,12 @@ class Highlighter implements HighlighterInterface
     public function __construct(array $options = [])
     {
         $this->options = $options;
+    }
+
+    public function __clone()
+    {
+        $this->optionsByField = array_clone($this->optionsByField);
+        $this->options = array_clone($this->options);
     }
 
     /**

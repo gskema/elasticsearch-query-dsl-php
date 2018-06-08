@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 use stdClass;
@@ -31,6 +32,14 @@ class BoolMatcher implements MatcherInterface
 
     /** @var string|int|null */
     protected $minimumShouldMatch;
+
+    public function __clone()
+    {
+        $this->filters = array_clone($this->filters);
+        $this->musts = array_clone($this->musts);
+        $this->mustNots = array_clone($this->mustNots);
+        $this->shoulds = array_clone($this->shoulds);
+    }
 
     /**
      * @return MatcherInterface[]

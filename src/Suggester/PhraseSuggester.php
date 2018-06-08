@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Suggester;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 use Gskema\ElasticSearchQueryDSL\Suggester\CandidateGenerator\CandidateGeneratorInterface;
@@ -44,6 +45,12 @@ class PhraseSuggester implements SuggesterInterface
         $this->field = $field;
         $this->text = $text;
         $this->options = $options;
+    }
+
+    public function __clone()
+    {
+        $this->directGenerators = array_clone($this->directGenerators);
+        $this->collate = $this->collate ? array_clone($this->collate) : null;
     }
 
     /**

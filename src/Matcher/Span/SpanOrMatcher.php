@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use InvalidArgumentException;
 
@@ -27,6 +28,11 @@ class SpanOrMatcher implements SpanMatcherInterface
             throw new InvalidArgumentException('Expected at least one span matcher, got none');
         }
         $this->spanMatchers = $spanMatchers;
+    }
+
+    public function __clone()
+    {
+        $this->spanMatchers = array_clone($this->spanMatchers);
     }
 
     /**

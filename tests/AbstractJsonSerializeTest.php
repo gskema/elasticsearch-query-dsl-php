@@ -34,8 +34,10 @@ abstract class AbstractJsonSerializeTest extends TestCase
         $obj0 = $givenJsonObj;
         $obj1 = clone $givenJsonObj;
 
-        $className = get_class($obj0);
-        $properties = (new ReflectionClass($className))->getProperties();
+        $ref = (new ReflectionClass($obj0));
+        $className = $ref->getName();
+        $shortClassName = $ref->getShortName();
+        $properties = $ref->getProperties();
 
         if (empty($properties)) {
             $this->assertTrue(true);
@@ -43,26 +45,46 @@ abstract class AbstractJsonSerializeTest extends TestCase
 
         foreach ($properties as $property) {
             $property->setAccessible(true);
+            $propName = $property->getName();
 
             $val0 = $property->getValue($obj0);
             $val1 = $property->getValue($obj1);
 
-            $hash0 = is_object($val0) ? md5(spl_object_hash($val0)) : null;
-            $hash1 = is_object($val1) ? md5(spl_object_hash($val1)) : null;
-
-            if ($hash0 && $hash1) {
-                $this->assertNotEquals($hash0, $hash1, sprintf(
-                    'Expected spl_object_hash() of property "%s::$%s" to be different after cloning',
-                    $className,
-                    $property->getName()
-                ));
-            }
-
             $this->assertEquals($val0, $val1, sprintf(
                 'Expected %s:$%s to be equal after cloning',
                 $className,
-                $property->getName()
+                $propName
             ));
+            $this->assertNotHashEquals($val0, $val1, sprintf('property "%s"', $propName));
+            if (is_array($val0) && is_array($val1)) {
+                $this->assertNotArrayHashEquals($val0, $val1, $shortClassName.'::$'.$propName);
+            }
+        }
+    }
+
+    protected function assertNotHashEquals($value1, $value2, string $propertyText)
+    {
+        $hash0 = is_object($value1) ? md5(spl_object_hash($value1)) : null;
+        $hash1 = is_object($value2) ? md5(spl_object_hash($value2)) : null;
+
+        if ($hash0 && $hash1) {
+            $this->assertNotEquals($hash0, $hash1, sprintf(
+                'Expected %s to have different spl_object_hash()',
+                $propertyText
+            ));
+        }
+    }
+
+    protected function assertNotArrayHashEquals(array $array1, array $array2, string $path)
+    {
+        foreach ($array1 as $key => $val1) {
+            $subPath = $path ? $path.'['.$key.']' : null;
+            $val2 = $array2[$key] ?? null;
+            if (is_array($val1) && is_array($val2)) {
+                $this->assertNotArrayHashEquals($val1, $val2, $subPath);
+            } elseif (is_object($val1) && is_object($val2)) {
+                $this->assertNotHashEquals($val1, $val2, sprintf('array property "%s"', $subPath));
+            }
         }
     }
 }

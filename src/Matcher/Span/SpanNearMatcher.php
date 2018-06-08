@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use InvalidArgumentException;
 
@@ -37,6 +38,11 @@ class SpanNearMatcher implements SpanMatcherInterface
         $this->spanMatchers = $spanMatchers;
         $this->slop = $slop;
         $this->inOrder = $inOrder;
+    }
+
+    public function __clone()
+    {
+        $this->spanMatchers = array_clone($this->spanMatchers);
     }
 
     /**

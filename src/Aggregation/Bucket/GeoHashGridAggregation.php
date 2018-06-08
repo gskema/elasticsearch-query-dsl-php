@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 
@@ -25,6 +26,11 @@ class GeoHashGridAggregation implements BucketAggregationInterface
     {
         $this->field = $field;
         $this->options = $options;
+    }
+
+    public function __clone()
+    {
+        $this->aggs = array_clone($this->aggs);
     }
 
     /**

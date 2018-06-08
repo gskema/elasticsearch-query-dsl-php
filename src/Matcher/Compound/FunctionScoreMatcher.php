@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\ScoreFunction\ScoreFunctionInterface;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
@@ -36,6 +37,7 @@ class FunctionScoreMatcher implements MatcherInterface
     public function __clone()
     {
         $this->query = $this->query ? clone $this->query : null;
+        $this->functions = array_clone($this->functions);
     }
 
     /**

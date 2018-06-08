@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 
 /**
@@ -18,6 +19,11 @@ class MissingAggregation implements BucketAggregationInterface
     public function __construct(string $field)
     {
         $this->field = $field;
+    }
+
+    public function __clone()
+    {
+        $this->aggs = array_clone($this->aggs);
     }
 
     /**

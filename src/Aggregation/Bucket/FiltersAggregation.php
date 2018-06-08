@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
@@ -25,6 +26,12 @@ class FiltersAggregation implements BucketAggregationInterface
     {
         $this->filters = $filtersByName;
         $this->options = $options;
+    }
+
+    public function __clone()
+    {
+        $this->filters = array_clone($this->filters);
+        $this->aggs = array_clone($this->aggs);
     }
 
     /**
