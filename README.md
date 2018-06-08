@@ -18,6 +18,7 @@ Feature complete, object oriented, composable, extendable ElasticSearch query DS
 - Classes can be easily composed, extended
 - Design that is easy to test and maintain
 - Chainable methods
+- Fully working `::__clone()` methods
 
 ## Versions
 
