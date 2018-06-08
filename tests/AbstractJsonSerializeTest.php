@@ -47,12 +47,12 @@ abstract class AbstractJsonSerializeTest extends TestCase
             $val0 = $property->getValue($obj0);
             $val1 = $property->getValue($obj1);
 
-            $hash0 = is_object($val0) ? spl_object_id($val0) : null;
-            $hash1 = is_object($val1) ? spl_object_id($val1) : null;
+            $hash0 = is_object($val0) ? md5(spl_object_hash($val0)) : null;
+            $hash1 = is_object($val1) ? md5(spl_object_hash($val1)) : null;
 
             if ($hash0 && $hash1) {
                 $this->assertNotEquals($hash0, $hash1, sprintf(
-                    'Expected spl_object_id() of property "%s::$%s" to be different after cloning',
+                    'Expected spl_object_hash() of property "%s::$%s" to be different after cloning',
                     $className,
                     $property->getName()
                 ));
