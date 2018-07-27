@@ -15,6 +15,10 @@ cache:
   directories:
     - $HOME/.composer/cache
 
+env:
+  global:
+    - CC_TEST_REPORTER_ID=960e534c3f9c13c7c212e62cc6275e240554dd86945bbb7c18756c4a5b8dfd5a
+
 matrix:
   include:
     - php: 7.0
@@ -22,6 +26,9 @@ matrix:
 
 before_script:
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script:
   - vendor/bin/phpcs --standard=psr2 src/ --exclude=Generic.Files.LineLength
@@ -30,6 +37,7 @@ script:
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 notifications:
   email: false
