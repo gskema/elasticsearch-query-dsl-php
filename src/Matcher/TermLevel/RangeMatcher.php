@@ -7,11 +7,13 @@ use Gskema\ElasticSearchQueryDSL\Matcher\MultiTermMatcherInterface;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-range-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/range.html
  * @see RangeMatcherTest
  *
  * @options 'boost' => 2.0,
  *          'format' => 'dd/MM/yyyy||yyyy'
  *          'time_zone' => '+01:00',
+ *          'relation' => 'WITHIN', 'INTERSECTS', 'CONTAINS',
  *          '_name' => '?',
  */
 class RangeMatcher implements MultiTermMatcherInterface
