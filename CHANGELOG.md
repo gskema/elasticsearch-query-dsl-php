@@ -4,9 +4,13 @@ All notable changes to `elasticsearch-query-dsl-php` will be documented in this 
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## [Unreleased]
+## [5.0.1] - 2018-11-04
+### Added
+- Documentation for using RangeMatcher with range mapping type
+- Missing option doc for HasChildMatcher
+
 ### Fixed
-- Class docs for HasChildMatcher
+- All properties (including arrays) are now deep cloned
 
 ## [5.0.0] - 2018-04-04
 ### Added
