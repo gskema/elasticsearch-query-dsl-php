@@ -17,7 +17,7 @@ use stdClass;
  * @see SearchRequestTest
  *
  * @options 'track_scores' => true,
- *          'slice' => ['field' => 'date', 'id': 0, 'max' => 10],
+ *          'slice' => ['field' => 'date', 'id' => 0, 'max' => 10],
  *          'explain' => true,
  *          'version' => true,
  *          'indices_boost' => [['alias1' => 1.4], ['index*' => 1.3]],

@@ -16,7 +16,7 @@ use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
  *          'time_zone' => '-01:00'
  *          'offset' => '+6h'
  *          'keyed' => true,
- *          'order' => ['_key': 'desc'],
+ *          'order' => ['_key' => 'desc'],
  *          'min_doc_count' => 1,
  *          'missing' => '2000/01/01',
  *          'extended_bounds' => ['min' => '2000/01/01', 'max' => '2030/01/01'],

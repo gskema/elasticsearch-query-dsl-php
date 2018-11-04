@@ -10,7 +10,7 @@ use Gskema\ElasticSearchQueryDSL\Matcher\MultiTermMatcherInterface;
  * @see RangeMatcherTest
  *
  * @options 'boost' => 2.0,
- *          'format': 'dd/MM/yyyy||yyyy'
+ *          'format' => 'dd/MM/yyyy||yyyy'
  *          'time_zone' => '+01:00',
  *          '_name' => '?',
  */
