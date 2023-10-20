@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Model\Script;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class FileScriptTest extends AbstractJsonSerializeTest
+final class FileScriptTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -51,12 +51,12 @@ class FileScriptTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $script = new FileScript('file1', [
             'param1' => 'value1',
         ], 'painless');
 
-        $this->assertInstanceOf(FileScript::class, $script);
+        self::assertInstanceOf(FileScript::class, $script);
     }
 }

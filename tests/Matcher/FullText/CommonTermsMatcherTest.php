@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\FullText;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class CommonTermsMatcherTest extends AbstractJsonSerializeTest
+final class CommonTermsMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -27,9 +27,9 @@ class CommonTermsMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new CommonTermsMatcher('field1', 'query1', 0.1);
-        $this->assertInstanceOf(CommonTermsMatcher::class, $matcher1);
+        self::assertInstanceOf(CommonTermsMatcher::class, $matcher1);
     }
 }

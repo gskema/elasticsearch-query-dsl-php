@@ -3,13 +3,13 @@
 namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-docvalue-fields.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-docvalue-fields.html
  * @see HasDocValueFieldsTraitTest
  */
 trait HasDocValueFieldsTrait
 {
     /** @var string[] */
-    protected $docValueFields = [];
+    protected array $docValueFields = [];
 
     /**
      * @return string[]
@@ -21,13 +21,10 @@ trait HasDocValueFieldsTrait
 
     /**
      * @param string[] $docValueFields
-     *
-     * @return $this
      */
-    public function setDocValueFields(array $docValueFields)
+    public function setDocValueFields(array $docValueFields): static
     {
         $this->docValueFields = $docValueFields;
-
         return $this;
     }
 }

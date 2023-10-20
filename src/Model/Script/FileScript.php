@@ -3,31 +3,23 @@
 namespace Gskema\ElasticSearchQueryDSL\Model\Script;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/modules-scripting-using.html#modules-scripting-file-scripts
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/modules-scripting-using.html#modules-scripting-file-scripts
  * @see FileScriptTest
  */
 class FileScript implements ScriptInterface
 {
-    /** @var string */
-    protected $file;
-
-    /** @var array */
-    protected $params;
-
-    /** @var string|null */
-    protected $lang;
-
-    public function __construct(string $file, array $params = [], string $lang = null)
-    {
-        $this->file = $file;
-        $this->params = $params;
-        $this->lang = $lang;
+    public function __construct(
+        protected string $file,
+        /** @var array<string, mixed> */
+        protected array $params = [],
+        protected ?string $lang = null,
+    ) {
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['file'] = $this->file;

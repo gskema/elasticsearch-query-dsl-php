@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\ScoreFunction;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class RandomScoreFunctionTest extends AbstractJsonSerializeTest
+final class RandomScoreFunctionTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -33,10 +33,10 @@ class RandomScoreFunctionTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $function = (new RandomScoreFunction(1));
 
-        $this->assertInstanceOf(RandomScoreFunction::class, $function);
+        self::assertInstanceOf(RandomScoreFunction::class, $function);
     }
 }

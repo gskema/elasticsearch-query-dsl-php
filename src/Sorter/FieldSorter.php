@@ -3,32 +3,25 @@
 namespace Gskema\ElasticSearchQueryDSL\Sorter;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-sort.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-sort.html
  * @see FieldSorterTest
- *
- * @options 'missing' => '_first', '_last',
- *          'unmapped_type' => 'long',
  */
+#[Options([
+    'missing' => '_first', // '_last',
+    'unmapped_type' => 'long',
+])]
 class FieldSorter implements SorterInterface
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $field;
-
-    /** @var string|null 'asc', 'desc' */
-    protected $order;
-
-    /** @var string|null 'min', 'max', 'sum', 'avg', 'median' */
-    protected $mode;
-
-    public function __construct(string $field, string $order = null, string $mode = null)
-    {
-        $this->field = $field;
-        $this->order = $order;
-        $this->mode = $mode;
+    public function __construct(
+        protected string $field,
+        protected ?string $order = null, // 'asc', 'desc'
+        protected ?string $mode = null, // 'min', 'max', 'sum', 'avg', 'median'
+    ) {
     }
 
     public function getField(): string
@@ -36,50 +29,32 @@ class FieldSorter implements SorterInterface
         return $this->field;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getOrder()
+    public function getOrder(): ?string
     {
         return $this->order;
     }
 
-    /**
-     * @param string|null $order
-     *
-     * @return $this
-     */
-    public function setOrder(string $order = null): FieldSorter
+    public function setOrder(?string $order): static
     {
         $this->order = $order;
-
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getMode()
+    public function getMode(): ?string
     {
         return $this->mode;
     }
 
-    /**
-     * @param string|null $mode
-     *
-     * @return $this
-     */
-    public function setMode(string $mode = null): FieldSorter
+    public function setMode(?string $mode): static
     {
         $this->mode = $mode;
-
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         if (null !== $this->order) {

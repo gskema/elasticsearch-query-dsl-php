@@ -4,37 +4,37 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\FullText;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-match-query-phrase-prefix.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-match-query-phrase-prefix.html
  * @see MatchPhrasePrefixMatcherTest
- *
- * @options 'slop' => 2,
- *          'analyzer' => 'standard',
- *          'max_expansions' => 50,
- *          '_name' => '?',
  */
+#[Options([
+    'slop' => 2,
+    'analyzer' => 'standard',
+    'max_expansions' => 50,
+    '_name' => '?',
+])]
 class MatchPhrasePrefixMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $field;
-
-    /** @var string */
-    protected $query;
-
-    public function __construct(string $field, string $query, array $options = [])
-    {
-        $this->field = $field;
-        $this->query = $query;
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(
+        protected string $field,
+        protected string $query,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['query'] = $this->query;

@@ -5,58 +5,29 @@ namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 use Gskema\ElasticSearchQueryDSL\Aggregation\AggregationInterface;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-bucket.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-bucket.html
  */
 interface BucketAggregationInterface extends AggregationInterface
 {
     /**
-     * @return AggregationInterface[]
+     * @return array<string, AggregationInterface>
      */
     public function getAggs(): array;
 
-    /**
-     * @param string $key
-     *
-     * @return AggregationInterface|null
-     */
-    public function getAgg(string $key);
+    public function getAgg(string $key): ?AggregationInterface;
 
     /**
-     * @param AggregationInterface[] $aggs
-     *
-     * @return $this
+     * @param array<string, AggregationInterface> $keyAggMap
      */
-    public function setAggs(array $aggs);
+    public function setAggs(array $keyAggMap): static;
 
-    /**
-     * @param string               $key
-     * @param AggregationInterface $agg
-     *
-     * @return $this
-     */
-    public function setAgg(string $key, AggregationInterface $agg);
+    public function setAgg(string $key, AggregationInterface $agg): static;
 
-    /**
-     * @return $this
-     */
-    public function removeAggs();
+    public function removeAggs(): static;
 
-    /**
-     * @param string $key
-     *
-     * @return $this
-     */
-    public function removeAgg(string $key);
+    public function removeAgg(string $key): static;
 
-    /**
-     * @return bool
-     */
     public function hasAggs(): bool;
 
-    /**
-     * @param string $key
-     *
-     * @return bool
-     */
     public function hasAgg(string $key): bool;
 }

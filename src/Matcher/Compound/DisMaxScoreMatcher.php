@@ -2,36 +2,38 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 use InvalidArgumentException;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-dis-max-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-dis-max-query.html
  * @see DisMaxScoreMatcherTest
- *
- * @options 'boost' => 1.0,
- *          'tie_breaker' => 0.0,
- *          '_name' => '?',
  */
+#[Options([
+    'boost' => 1.0,
+    'tie_breaker' => 0.0,
+    '_name' => '?',
+])]
 class DisMaxScoreMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var MatcherInterface[] */
-    protected $queries;
-
     /**
-     * @param MatcherInterface[] $queries
-     * @param array              $options
+     * @param array<string, mixed> $options
      */
-    public function __construct(array $queries, array $options = [])
-    {
+    public function __construct(
+        /** @var MatcherInterface[] */
+        protected array $queries,
+        array $options = [],
+    ) {
         if (empty($queries)) {
             throw new InvalidArgumentException('Expected at least one query, got none');
         }
-        $this->queries = $queries;
         $this->options = $options;
     }
 
@@ -41,14 +43,12 @@ class DisMaxScoreMatcher implements MatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
-        $body['queries'] = array_map(function (MatcherInterface $query) {
-            return $query->jsonSerialize();
-        }, $this->queries);
+        $body['queries'] = obj_array_json_serialize($this->queries);
         $body += $this->options;
 
         return [

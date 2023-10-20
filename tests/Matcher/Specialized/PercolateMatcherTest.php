@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Specialized;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class PercolateMatcherTest extends AbstractJsonSerializeTest
+final class PercolateMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -16,16 +16,14 @@ class PercolateMatcherTest extends AbstractJsonSerializeTest
             '{
                 "percolate": {
                     "field": "queryField1",
-                    "document_type": "docType1",
                     "document": {
                         "body": "body1"
                     }
                 }
-            
+
             }',
             PercolateMatcher::fromDocSource(
                 'queryField1',
-                'docType1',
                 [
                     'body' => 'body1'
                 ]
@@ -38,43 +36,61 @@ class PercolateMatcherTest extends AbstractJsonSerializeTest
             '{
                 "percolate": {
                     "field": "queryField1",
-                    "document_type": "docType1",
                     "index": "index1",
                     "type": "type1",
                     "id": "id1"
                 }
-            
+
             }',
             PercolateMatcher::fromIndexedDoc(
                 'queryField1',
-                'docType1',
                 'index1',
                 'type1',
                 'id1'
             ),
         ];
 
+        // #2
+        $dataSets[] = [
+            // language=JSON
+            '{
+                "percolate": {
+                    "field": "queryField1",
+                    "documents": [
+                        { "body": "body1" },
+                        { "body": "body2" }
+                    ]
+                }
+
+            }',
+            PercolateMatcher::fromDocSources(
+                'queryField1',
+                [
+                    ['body' => 'body1'],
+                    ['body' => 'body2'],
+                ]
+            ),
+        ];
+
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = PercolateMatcher::fromDocSource(
             'queryField1',
-            'docType1',
             [
                 'body' => 'body1'
             ]
         );
-        $this->assertInstanceOf(PercolateMatcher::class, $matcher1);
+        self::assertInstanceOf(PercolateMatcher::class, $matcher1);
 
         $matcher2 = PercolateMatcher::fromIndexedDoc(
             'queryField1',
-            'docType1',
             'index1',
             'type1',
             'id1'
         );
-        $this->assertInstanceOf(PercolateMatcher::class, $matcher2);
+        self::assertInstanceOf(PercolateMatcher::class, $matcher2);
     }
 }

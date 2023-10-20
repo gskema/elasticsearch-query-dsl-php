@@ -4,15 +4,17 @@ namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 
 use PHPUnit\Framework\TestCase;
 
-class HasStoredFieldsTraitTest extends TestCase
+final class HasStoredFieldsTraitTest extends TestCase
 {
-    public function testMethods()
+    public function testMethods(): void
     {
         /** @var HasStoredFieldsTrait $object */
-        $object = $this->getMockBuilder(HasStoredFieldsTrait::class)->getMockForTrait();
+        $object = new class {
+            use HasStoredFieldsTrait;
+        };
 
         $object->setStoredFields(['field1', 'field2']);
 
-        $this->assertEquals(['field1', 'field2'], $object->getStoredFields());
+        self::assertEquals(['field1', 'field2'], $object->getStoredFields());
     }
 }

@@ -3,31 +3,21 @@
 namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-from-size.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-from-size.html
  * @see HasSizeTraitTest
  */
 trait HasSizeTrait
 {
-    /** @var int|null */
-    protected $size;
+    protected ?int $size = null;
 
-    /**
-     * @return int|null
-     */
-    public function getSize()
+    public function getSize(): ?int
     {
         return $this->size;
     }
 
-    /**
-     * @param int|null $size
-     *
-     * @return $this
-     */
-    public function setSize(int $size = null)
+    public function setSize(?int $size): static
     {
         $this->size = $size;
-
         return $this;
     }
 }

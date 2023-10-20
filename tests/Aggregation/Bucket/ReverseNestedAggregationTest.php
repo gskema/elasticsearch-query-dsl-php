@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class ReverseNestedAggregationTest extends AbstractJsonSerializeTest
+final class ReverseNestedAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -39,12 +39,12 @@ class ReverseNestedAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg1 = new ReverseNestedAggregation('path1');
-        $this->assertInstanceOf(ReverseNestedAggregation::class, $agg1);
+        self::assertInstanceOf(ReverseNestedAggregation::class, $agg1);
 
         $agg2 = new ReverseNestedAggregation();
-        $this->assertInstanceOf(ReverseNestedAggregation::class, $agg2);
+        self::assertInstanceOf(ReverseNestedAggregation::class, $agg2);
     }
 }

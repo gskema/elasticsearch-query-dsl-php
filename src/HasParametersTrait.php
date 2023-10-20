@@ -7,68 +7,46 @@ namespace Gskema\ElasticSearchQueryDSL;
  */
 trait HasParametersTrait
 {
-    /** @var array */
-    protected $parameters = [];
+    /** @var array<string, mixed> */
+    protected array $parameters = [];
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getParameters(): array
     {
         return $this->parameters;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return mixed|null
-     */
-    public function getParameter(string $key)
+    public function getParameter(string $key): mixed
     {
         return $this->parameters[$key] ?? null;
     }
 
     /**
-     * @param array $parameters
-     *
-     * @return $this
+     * @param array<string, mixed> $parameters
      */
-    public function setParameters(array $parameters)
+    public function setParameters(array $parameters): static
     {
         $this->parameters = $parameters;
-
         return $this;
     }
 
-    /**
-     * @param string $key
-     * @param mixed  $value
-     *
-     * @return $this
-     */
-    public function setParameter(string $key, $value)
+    public function setParameter(string $key, mixed $value): static
     {
         $this->parameters[$key] = $value;
-
         return $this;
     }
 
-    /**
-     * @return $this
-     */
-    public function removeParameters()
+    public function removeParameters(): static
     {
         $this->parameters = [];
-
         return $this;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return $this
-     */
-    public function removeParameter(string $key)
+    public function removeParameter(string $key): static
     {
         unset($this->parameters[$key]);
-
         return $this;
     }
 

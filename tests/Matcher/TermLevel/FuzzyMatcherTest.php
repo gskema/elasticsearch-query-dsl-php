@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\TermLevel;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class FuzzyMatcherTest extends AbstractJsonSerializeTest
+final class FuzzyMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -40,9 +40,9 @@ class FuzzyMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new FuzzyMatcher('field1', 'value1');
-        $this->assertInstanceOf(FuzzyMatcher::class, $matcher1);
+        self::assertInstanceOf(FuzzyMatcher::class, $matcher1);
     }
 }

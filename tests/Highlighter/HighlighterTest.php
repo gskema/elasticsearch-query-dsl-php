@@ -2,13 +2,13 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Highlighter;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatchAllMatcher;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatchNoneMatcher;
 
-class HighlighterTest extends AbstractJsonSerializeTest
+final class HighlighterTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -32,7 +32,7 @@ class HighlighterTest extends AbstractJsonSerializeTest
                     "field1": {}
                 }
             }',
-            (new Highlighter(['type' => 'plain']))->setField('field1'),
+            (new Highlighter(options: ['type' => 'plain']))->setField('field1'),
         ];
 
         //# 2
@@ -46,7 +46,7 @@ class HighlighterTest extends AbstractJsonSerializeTest
                     }
                 }
             }',
-            (new Highlighter(['type' => 'plain']))->setField('field1', ['order' => 'score']),
+            (new Highlighter(options: ['type' => 'plain']))->setField('field1', ['order' => 'score']),
         ];
 
         // #3
@@ -66,7 +66,7 @@ class HighlighterTest extends AbstractJsonSerializeTest
                     }
                 }
             }',
-            (new Highlighter([
+            (new Highlighter(options: [
                 'type' => 'plain',
                 'highlight_query' => new MatchAllMatcher(),
             ]))->setField('field1', ['order' => 'score', 'highlight_query' => new MatchNoneMatcher()]),
@@ -75,13 +75,13 @@ class HighlighterTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $highlighter = (new Highlighter([
             'type' => 'plain',
             'highlight_query' => new MatchAllMatcher(),
         ]))->setField('field1', ['order' => 'score', 'highlight_query' => new MatchNoneMatcher()]);
 
-        $this->assertInstanceOf(Highlighter::class, $highlighter);
+        self::assertInstanceOf(Highlighter::class, $highlighter);
     }
 }

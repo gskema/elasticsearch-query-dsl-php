@@ -5,31 +5,21 @@ namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-post-filter.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-post-filter.html
  * @see HasPostFilterTraitTest
  */
 trait HasPostFilterTrait
 {
-    /** @var MatcherInterface|null */
-    protected $postFilter;
+    protected ?MatcherInterface $postFilter = null;
 
-    /**
-     * @return MatcherInterface|null
-     */
-    public function getPostFilter()
+    public function getPostFilter(): ?MatcherInterface
     {
         return $this->postFilter;
     }
 
-    /**
-     * @param MatcherInterface|null $filter
-     *
-     * @return $this
-     */
-    public function setPostFilter(MatcherInterface $filter = null)
+    public function setPostFilter(?MatcherInterface $filter): static
     {
         $this->postFilter = $filter;
-
         return $this;
     }
 }

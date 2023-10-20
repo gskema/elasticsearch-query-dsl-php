@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline\Sibling;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class SerialDifferencingBucketAggregationTest extends AbstractJsonSerializeTest
+final class SerialDifferencingBucketAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -27,12 +27,12 @@ class SerialDifferencingBucketAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg = new SerialDifferencingBucketAggregation('bucketsPath1', [
             'gap_policy' => 'insert_zeros',
         ]);
 
-        $this->assertInstanceOf(SerialDifferencingBucketAggregation::class, $agg);
+        self::assertInstanceOf(SerialDifferencingBucketAggregation::class, $agg);
     }
 }

@@ -2,16 +2,19 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
+use Gskema\ElasticSearchQueryDSL\Options;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-metrics-min-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-metrics-min-aggregation.html
  * @see MinAggregationTest
- *
- * @options 'missing' => 0,
  */
+#[Options([
+    'missing' => 0,
+])]
 class MinAggregation extends AbstractNumericMetricAggregation
 {
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function getType(): string
     {

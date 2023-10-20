@@ -4,15 +4,15 @@ namespace Gskema\ElasticSearchQueryDSL\Model;
 
 use PHPUnit\Framework\TestCase;
 
-class GeoHashTest extends TestCase
+final class GeoHashTest extends TestCase
 {
-    public function testMethods()
+    public function testMethods(): void
     {
         $geoHash = new GeoHash('abc123');
 
-        $this->assertEquals('abc123', $geoHash->getValue());
-        $this->assertEquals('abc123', $geoHash->__toString());
-        $this->assertEquals('abc123', (string)$geoHash);
-        $this->assertEquals('abc123', $geoHash->jsonSerialize());
+        self::assertEquals('abc123', $geoHash->getValue());
+        self::assertEquals('abc123', $geoHash->__toString());
+        self::assertEquals('abc123', (string)$geoHash);
+        self::assertEquals('abc123', $geoHash->jsonSerialize());
     }
 }

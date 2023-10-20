@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Matrix;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class MatrixStatsAggregationTest extends AbstractJsonSerializeTest
+final class MatrixStatsAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -40,13 +40,13 @@ class MatrixStatsAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg = new MatrixStatsAggregation(
             'field1',
             'field2'
         );
 
-        $this->assertInstanceOf(MatrixStatsAggregation::class, $agg);
+        self::assertInstanceOf(MatrixStatsAggregation::class, $agg);
     }
 }

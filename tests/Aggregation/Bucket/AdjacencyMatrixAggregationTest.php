@@ -2,13 +2,13 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Matcher\TermLevel\TermMatcher;
 use InvalidArgumentException;
 
-class AdjacencyMatrixAggregationTest extends AbstractJsonSerializeTest
+final class AdjacencyMatrixAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -54,13 +54,13 @@ class AdjacencyMatrixAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg = new AdjacencyMatrixAggregation([
             new TermMatcher('field1', 'value1'),
             new TermMatcher('field2', 'value2'),
         ]);
-        $this->assertInstanceOf(AdjacencyMatrixAggregation::class, $agg);
+        self::assertInstanceOf(AdjacencyMatrixAggregation::class, $agg);
 
         $this->expectException(InvalidArgumentException::class);
         new AdjacencyMatrixAggregation([]);

@@ -2,13 +2,13 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Matcher\TermLevel\TermMatcher;
 use Gskema\ElasticSearchQueryDSL\Matcher\TermLevel\WildcardMatcher;
 
-class BoostingMatcherTest extends AbstractJsonSerializeTest
+final class BoostingMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -32,13 +32,13 @@ class BoostingMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new BoostingMatcher(
             new WildcardMatcher('field1', 'value1*'),
             new TermMatcher('field1', "value1"),
             0.5
         );
-        $this->assertInstanceOf(BoostingMatcher::class, $matcher1);
+        self::assertInstanceOf(BoostingMatcher::class, $matcher1);
     }
 }

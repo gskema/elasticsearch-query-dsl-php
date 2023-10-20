@@ -4,29 +4,33 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\TermLevel;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-type-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-type-query.html
  * @see TypeMatcherTest
- *
- * @options '_name' => '?',
  */
+#[Options([
+    '_name' => '?',
+])]
 class TypeMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $docType;
-
-    public function __construct(string $docType)
-    {
-        $this->docType = $docType;
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(
+        protected string $docType,
+        array $options = [],
+    ) {
+        $this->options = $options;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['value'] = $this->docType;

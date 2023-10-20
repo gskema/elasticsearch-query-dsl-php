@@ -7,68 +7,46 @@ namespace Gskema\ElasticSearchQueryDSL;
  */
 trait HasOptionsTrait
 {
-    /** @var array */
-    protected $options = [];
+    /** @var array<string, mixed> */
+    protected array $options = [];
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getOptions(): array
     {
         return $this->options;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return mixed|null
-     */
-    public function getOption(string $key)
+    public function getOption(string $key): mixed
     {
         return $this->options[$key] ?? null;
     }
 
     /**
-     * @param array $optionsByKey
-     *
-     * @return $this
+     * @param array<string, mixed> $optionsByKey
      */
-    public function setOptions(array $optionsByKey)
+    public function setOptions(array $optionsByKey): static
     {
         $this->options = $optionsByKey;
-
         return $this;
     }
 
-    /**
-     * @param string $key
-     * @param mixed  $value
-     *
-     * @return $this
-     */
-    public function setOption(string $key, $value)
+    public function setOption(string $key, mixed $value): static
     {
         $this->options[$key] = $value;
-
         return $this;
     }
 
-    /**
-     * @return $this
-     */
-    public function removeOptions()
+    public function removeOptions(): static
     {
         $this->options = [];
-
         return $this;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return $this
-     */
-    public function removeOption(string $key)
+    public function removeOption(string $key): static
     {
         unset($this->options[$key]);
-
         return $this;
     }
 

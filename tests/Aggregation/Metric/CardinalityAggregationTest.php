@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 
-class CardinalityAggregationTest extends AbstractJsonSerializeTest
+final class CardinalityAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -36,12 +36,12 @@ class CardinalityAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg1 = CardinalityAggregation::fromField('field1', ['precision_threshold' => 3000]);
-        $this->assertInstanceOf(CardinalityAggregation::class, $agg1);
+        self::assertInstanceOf(CardinalityAggregation::class, $agg1);
 
         $agg2 = CardinalityAggregation::fromScript(new InlineScript('source1'));
-        $this->assertInstanceOf(CardinalityAggregation::class, $agg2);
+        self::assertInstanceOf(CardinalityAggregation::class, $agg2);
     }
 }

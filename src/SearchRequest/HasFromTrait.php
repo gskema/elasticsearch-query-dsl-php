@@ -3,31 +3,21 @@
 namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-from-size.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-from-size.html
  * @see HasFromTraitTest
  */
 trait HasFromTrait
 {
-    /** @var int|null */
-    protected $from;
+    protected ?int $from = null;
 
-    /**
-     * @return int|null
-     */
-    public function getFrom()
+    public function getFrom(): ?int
     {
         return $this->from;
     }
 
-    /**
-     * @param int|null $from
-     *
-     * @return $this
-     */
-    public function setFrom(int $from = null)
+    public function setFrom(?int $from): static
     {
         $this->from = $from;
-
         return $this;
     }
 }

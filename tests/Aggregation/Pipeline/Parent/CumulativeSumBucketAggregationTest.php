@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline\Parent;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class CumulativeSumBucketAggregationTest extends AbstractJsonSerializeTest
+final class CumulativeSumBucketAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 

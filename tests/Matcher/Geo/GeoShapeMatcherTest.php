@@ -2,13 +2,13 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Geo;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\GeoShape\IndexedGeoShape;
 use Gskema\ElasticSearchQueryDSL\Model\GeoShape\RawGeoShape;
 
-class GeoShapeMatcherTest extends AbstractJsonSerializeTest
+final class GeoShapeMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -66,7 +66,7 @@ class GeoShapeMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new GeoShapeMatcher(
             'field1',
@@ -79,6 +79,6 @@ class GeoShapeMatcherTest extends AbstractJsonSerializeTest
             'INTERSECTS',
             ['ignore_unmapped' => true]
         );
-        $this->assertInstanceOf(GeoShapeMatcher::class, $matcher1);
+        self::assertInstanceOf(GeoShapeMatcher::class, $matcher1);
     }
 }

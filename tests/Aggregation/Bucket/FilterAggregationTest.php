@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatchAllMatcher;
 
-class FilterAggregationTest extends AbstractJsonSerializeTest
+final class FilterAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -31,9 +31,9 @@ class FilterAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg = new FilterAggregation(new MatchAllMatcher());
-        $this->assertInstanceOf(FilterAggregation::class, $agg);
+        self::assertInstanceOf(FilterAggregation::class, $agg);
     }
 }

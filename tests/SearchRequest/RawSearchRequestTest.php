@@ -4,6 +4,6 @@ namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 
 use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
 
-class RawSearchRequestTest extends RawFragmentTest
+final class RawSearchRequestTest extends RawFragmentTest
 {
 }

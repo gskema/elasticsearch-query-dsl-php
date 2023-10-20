@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 
-class DiversifiedSamplerAggregationTest extends AbstractJsonSerializeTest
+final class DiversifiedSamplerAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -31,12 +31,12 @@ class DiversifiedSamplerAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg1 = DiversifiedSamplerAggregation::fromField('field1');
-        $this->assertInstanceOf(DiversifiedSamplerAggregation::class, $agg1);
+        self::assertInstanceOf(DiversifiedSamplerAggregation::class, $agg1);
 
         $agg2 = DiversifiedSamplerAggregation::fromScript(new InlineScript('source1'));
-        $this->assertInstanceOf(DiversifiedSamplerAggregation::class, $agg2);
+        self::assertInstanceOf(DiversifiedSamplerAggregation::class, $agg2);
     }
 }

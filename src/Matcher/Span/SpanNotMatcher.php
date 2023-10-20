@@ -3,30 +3,30 @@
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-span-not-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-span-not-query.html
  * @see SpanNotMatcherTest
- *
- * @options 'pre' => 1,
- *          'post' => 2,
- *          'dist' => 2,
- *          '_name' => '?',
  */
+#[Options([
+    'pre' => 1,
+    'post' => 2,
+    'dist' => 2,
+    '_name' => '?',
+])]
 class SpanNotMatcher implements SpanMatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var SpanMatcherInterface */
-    protected $include;
-
-    /** @var SpanMatcherInterface */
-    protected $exclude;
-
-    public function __construct(SpanMatcherInterface $include, SpanMatcherInterface $exclude, array $options = [])
-    {
-        $this->include = $include;
-        $this->exclude = $exclude;
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(
+        protected SpanMatcherInterface $include,
+        protected SpanMatcherInterface $exclude,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
@@ -37,9 +37,9 @@ class SpanNotMatcher implements SpanMatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [
             'include' => $this->include->jsonSerialize(),

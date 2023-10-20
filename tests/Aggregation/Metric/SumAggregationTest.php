@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class SumAggregationTest extends AbstractJsonSerializeTest
+final class SumAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 

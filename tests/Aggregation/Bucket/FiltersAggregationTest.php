@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Matcher\TermLevel\TermMatcher;
 
-class FiltersAggregationTest extends AbstractJsonSerializeTest
+final class FiltersAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -36,12 +36,12 @@ class FiltersAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg = new FiltersAggregation([
             'filter1' => new TermMatcher('field1', 'value1'),
             'filter2' => new TermMatcher('field2', 'value2'),
         ]);
-        $this->assertInstanceOf(FiltersAggregation::class, $agg);
+        self::assertInstanceOf(FiltersAggregation::class, $agg);
     }
 }

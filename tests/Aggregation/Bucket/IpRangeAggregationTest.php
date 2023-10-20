@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class IpRangeAggregationTest extends AbstractJsonSerializeTest
+final class IpRangeAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -36,12 +36,12 @@ class IpRangeAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg = new IpRangeAggregation('field1', [
             ['from' => '10.0.0.5', 'to' => '10.0.0.5', 'key' => 'custom_bucket_key'],
             ['mask' => '10.0.0.0/25', 'key' => 'custom_bucket_key'],
         ]);
-        $this->assertInstanceOf(IpRangeAggregation::class, $agg);
+        self::assertInstanceOf(IpRangeAggregation::class, $agg);
     }
 }

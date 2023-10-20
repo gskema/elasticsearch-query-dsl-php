@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\GeoPoint;
 
-class GeoDistanceAggregationTest extends AbstractJsonSerializeTest
+final class GeoDistanceAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -18,9 +18,11 @@ class GeoDistanceAggregationTest extends AbstractJsonSerializeTest
                 "geo_distance": {
                     "field": "field1",
                     "origin": { "lat": 1, "lon": 1 },
-                    "ranges": {
+                    "ranges": [
+                      {
                         "from": 10
-                    }
+                      }
+                    ]
                 },
                 "aggs": {
                     "key1": {
@@ -32,7 +34,9 @@ class GeoDistanceAggregationTest extends AbstractJsonSerializeTest
                 'field1',
                 new GeoPoint(1, 1),
                 [
-                    'from' => 10,
+                    [
+                        'from' => 10,
+                    ]
                 ]
             ))->setAgg('key1', new GlobalAggregation()),
         ];
@@ -40,15 +44,17 @@ class GeoDistanceAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg = new GeoDistanceAggregation(
             'field1',
             new GeoPoint(1, 1),
             [
-                'from' => 10,
+                [
+                    'from' => 10,
+                ]
             ]
         );
-        $this->assertInstanceOf(GeoDistanceAggregation::class, $agg);
+        self::assertInstanceOf(GeoDistanceAggregation::class, $agg);
     }
 }

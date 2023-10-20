@@ -3,27 +3,23 @@
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-span-first-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-span-first-query.html
  * @see SpanFirstMatcherTest
- *
- * @options '_name' => '?',
  */
+#[Options([
+    '_name' => '?',
+])]
 class SpanFirstMatcher implements SpanMatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var SpanMatcherInterface */
-    protected $matcher;
-
-    /** @var int */
-    protected $end;
-
-    public function __construct(SpanMatcherInterface $matcher, int $end)
-    {
-        $this->matcher = $matcher;
-        $this->end = $end;
+    public function __construct(
+        protected SpanMatcherInterface $matcher,
+        protected int $end,
+    ) {
     }
 
     public function __clone()
@@ -32,9 +28,9 @@ class SpanFirstMatcher implements SpanMatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [
             'match' => $this->matcher->jsonSerialize(),

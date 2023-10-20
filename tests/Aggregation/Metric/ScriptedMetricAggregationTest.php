@@ -2,13 +2,13 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 use UnexpectedValueException;
 
-class ScriptedMetricAggregationTest extends AbstractJsonSerializeTest
+final class ScriptedMetricAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -43,7 +43,7 @@ class ScriptedMetricAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg = (new ScriptedMetricAggregation())
             ->setInitScript(new InlineScript('source1'))
@@ -57,16 +57,16 @@ class ScriptedMetricAggregationTest extends AbstractJsonSerializeTest
             ->setParam('param3', 'value3')
             ->removeParam('param1');
 
-        $this->assertEquals(new InlineScript('source1'), $agg->getInitScript());
-        $this->assertEquals(new InlineScript('source2'), $agg->getMapScript());
-        $this->assertEquals(new InlineScript('source3'), $agg->getCombineScript());
-        $this->assertEquals(new InlineScript('source4'), $agg->getReduceScript());
-        $this->assertEquals([
+        self::assertEquals(new InlineScript('source1'), $agg->getInitScript());
+        self::assertEquals(new InlineScript('source2'), $agg->getMapScript());
+        self::assertEquals(new InlineScript('source3'), $agg->getCombineScript());
+        self::assertEquals(new InlineScript('source4'), $agg->getReduceScript());
+        self::assertEquals([
             'param2' => 'value2',
             'param3' => 'value3',
         ], $agg->getParams());
-        $this->assertEquals(null, $agg->getParam('param1'));
-        $this->assertEquals('value2', $agg->getParam('param2'));
+        self::assertEquals(null, $agg->getParam('param1'));
+        self::assertEquals('value2', $agg->getParam('param2'));
 
         $this->expectException(UnexpectedValueException::class);
         (new ScriptedMetricAggregation())->jsonSerialize();

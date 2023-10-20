@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\TermLevel;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class RangeMatcherTest extends AbstractJsonSerializeTest
+final class RangeMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -33,7 +33,7 @@ class RangeMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new RangeMatcher(
             'field1',
@@ -42,6 +42,6 @@ class RangeMatcherTest extends AbstractJsonSerializeTest
                 'lte' => 10
             ]
         );
-        $this->assertInstanceOf(RangeMatcher::class, $matcher1);
+        self::assertInstanceOf(RangeMatcher::class, $matcher1);
     }
 }

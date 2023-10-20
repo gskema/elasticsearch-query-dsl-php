@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class GeoCentroidAggregationTest extends AbstractJsonSerializeTest
+final class GeoCentroidAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -24,10 +24,10 @@ class GeoCentroidAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg = new GeoCentroidAggregation('field1');
 
-        $this->assertInstanceOf(GeoCentroidAggregation::class, $agg);
+        self::assertInstanceOf(GeoCentroidAggregation::class, $agg);
     }
 }

@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class DayOfWeekAggregationTest extends AbstractJsonSerializeTest
+final class DayOfWeekAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -16,8 +16,8 @@ class DayOfWeekAggregationTest extends AbstractJsonSerializeTest
             '{
                 "terms": {
                     "script": {
-                        "source": "doc[\'field1\'].date.dayOfWeek",
-                        "lang": "expression"
+                        "source": "doc[\'field1\'].value.dayOfWeekEnum.value",
+                        "lang": "painless"
                     }
                 },
                 "aggs": {
@@ -33,9 +33,9 @@ class DayOfWeekAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg = new DayOfWeekAggregation('field1');
-        $this->assertInstanceOf(DayOfWeekAggregation::class, $agg);
+        self::assertInstanceOf(DayOfWeekAggregation::class, $agg);
     }
 }

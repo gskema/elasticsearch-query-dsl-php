@@ -4,15 +4,17 @@ namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 
 use PHPUnit\Framework\TestCase;
 
-class HasSizeTraitTest extends TestCase
+final class HasSizeTraitTest extends TestCase
 {
-    public function testMethods()
+    public function testMethods(): void
     {
         /** @var HasSizeTrait $object */
-        $object = $this->getMockBuilder(HasSizeTrait::class)->getMockForTrait();
+        $object = new class {
+            use HasSizeTrait;
+        };
 
         $object->setSize(7);
 
-        $this->assertEquals(7, $object->getSize());
+        self::assertEquals(7, $object->getSize());
     }
 }

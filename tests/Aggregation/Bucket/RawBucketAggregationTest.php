@@ -4,13 +4,14 @@ namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
 use Gskema\ElasticSearchQueryDSL\Aggregation\RawAggregation;
 use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
+use stdClass;
 
-class RawBucketAggregationTest extends RawFragmentTest
+final class RawBucketAggregationTest extends RawFragmentTest
 {
-    public function testJsonSerializeWithAggs()
+    public function testJsonSerializeWithAggs(): void
     {
-        $agg = new RawBucketAggregation(['agg_type_1' => new \stdClass()]);
-        $agg->setAgg('agg1', new RawAggregation(['agg_type_2' => new \stdClass()]));
+        $agg = new RawBucketAggregation(['agg_type_1' => new stdClass()]);
+        $agg->setAgg('agg1', new RawAggregation(['agg_type_2' => new stdClass()]));
 
         $actualJson = json_encode($agg->jsonSerialize());
 
@@ -24,14 +25,14 @@ class RawBucketAggregationTest extends RawFragmentTest
             }
         }';
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, $actualJson);
+        self::assertJsonStringEqualsJsonString($expectedJson, $actualJson);
 
         $this->testClone('', $agg);
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
-        $agg = new RawBucketAggregation(['agg_type_1' => new \stdClass()]);
-        $this->assertInstanceOf(RawBucketAggregation::class, $agg);
+        $agg = new RawBucketAggregation(['agg_type_1' => new stdClass()]);
+        self::assertInstanceOf(RawBucketAggregation::class, $agg);
     }
 }

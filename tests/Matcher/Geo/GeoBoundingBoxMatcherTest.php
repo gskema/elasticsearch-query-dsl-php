@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Geo;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\GeoPoint;
 
-class GeoBoundingBoxMatcherTest extends AbstractJsonSerializeTest
+final class GeoBoundingBoxMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -54,7 +54,7 @@ class GeoBoundingBoxMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = GeoBoundingBoxMatcher::fromTopLeft(
             'field1',
@@ -62,7 +62,7 @@ class GeoBoundingBoxMatcherTest extends AbstractJsonSerializeTest
             new GeoPoint(2, 2),
             ['type' => 'indexed']
         );
-        $this->assertInstanceOf(GeoBoundingBoxMatcher::class, $matcher1);
+        self::assertInstanceOf(GeoBoundingBoxMatcher::class, $matcher1);
 
         $matcher2 = GeoBoundingBoxMatcher::fromTopRight(
             'field1',
@@ -70,6 +70,6 @@ class GeoBoundingBoxMatcherTest extends AbstractJsonSerializeTest
             new GeoPoint(2, 2),
             ['type' => 'indexed']
         );
-        $this->assertInstanceOf(GeoBoundingBoxMatcher::class, $matcher2);
+        self::assertInstanceOf(GeoBoundingBoxMatcher::class, $matcher2);
     }
 }

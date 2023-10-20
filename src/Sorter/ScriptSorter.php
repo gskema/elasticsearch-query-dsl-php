@@ -5,27 +5,17 @@ namespace Gskema\ElasticSearchQueryDSL\Sorter;
 use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-sort.html#_script_based_sorting
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-sort.html#_script_based_sorting
  * @see ScriptSorterTest
  */
 class ScriptSorter implements SorterInterface
 {
-    /** @var string */
-    protected $type;
-
-    /** @var ScriptInterface */
-    protected $script;
-
-    /** @var string|null 'asc', 'desc' */
-    protected $order;
-
-    /** @var string|null 'min', 'max', 'sum', 'avg', 'median' */
-    protected $mode;
-
-    public function __construct(string $type, ScriptInterface $script)
-    {
-        $this->type = $type;
-        $this->script = $script;
+    public function __construct(
+        protected string $type,
+        protected ScriptInterface $script, // 'asc', 'desc'
+        protected ?string $order = null,
+        protected ?string $mode = null, // 'min', 'max', 'sum', 'avg', 'median'
+    ) {
     }
 
     public function __clone()
@@ -43,50 +33,32 @@ class ScriptSorter implements SorterInterface
         return $this->script;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getOrder()
+    public function getOrder(): ?string
     {
         return $this->order;
     }
 
-    /**
-     * @param string|null $order
-     *
-     * @return $this
-     */
-    public function setOrder(string $order = null): ScriptSorter
+    public function setOrder(?string $order): static
     {
         $this->order = $order;
-
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getMode()
+    public function getMode(): ?string
     {
         return $this->mode;
     }
 
-    /**
-     * @param string|null $mode
-     *
-     * @return $this
-     */
-    public function setMode(string $mode = null): ScriptSorter
+    public function setMode(?string $mode): static
     {
         $this->mode = $mode;
-
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['type'] = $this->type;

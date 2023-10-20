@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\SourceFilter;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class SourceFilterTest extends AbstractJsonSerializeTest
+final class SourceFilterTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -53,7 +53,7 @@ class SourceFilterTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $filter = (new SourceFilter())
             ->setIncludes(['inc1', 'inc2'])
@@ -61,7 +61,7 @@ class SourceFilterTest extends AbstractJsonSerializeTest
             ->addInclude('inc3')
             ->addExclude('exc3');
 
-        $this->assertEquals(['inc1', 'inc2', 'inc3'], $filter->getIncludes());
-        $this->assertEquals(['exc1', 'exc2', 'exc3'], $filter->getExcludes());
+        self::assertEquals(['inc1', 'inc2', 'inc3'], $filter->getIncludes());
+        self::assertEquals(['exc1', 'exc2', 'exc3'], $filter->getExcludes());
     }
 }

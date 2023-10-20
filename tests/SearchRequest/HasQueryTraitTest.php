@@ -5,15 +5,17 @@ namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatchNoneMatcher;
 use PHPUnit\Framework\TestCase;
 
-class HasQueryTraitTest extends TestCase
+final class HasQueryTraitTest extends TestCase
 {
-    public function testMethods()
+    public function testMethods(): void
     {
         /** @var HasQueryTrait $object */
-        $object = $this->getMockBuilder(HasQueryTrait::class)->getMockForTrait();
+        $object = new class {
+            use HasQueryTrait;
+        };
 
         $object->setQuery(new MatchNoneMatcher());
 
-        $this->assertEquals(new MatchNoneMatcher(), $object->getQuery());
+        self::assertEquals(new MatchNoneMatcher(), $object->getQuery());
     }
 }

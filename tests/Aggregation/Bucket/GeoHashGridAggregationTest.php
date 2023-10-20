@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class GeoHashGridAggregationTest extends AbstractJsonSerializeTest
+final class GeoHashGridAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -30,9 +30,9 @@ class GeoHashGridAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg = new GeoHashGridAggregation('field1');
-        $this->assertInstanceOf(GeoHashGridAggregation::class, $agg);
+        self::assertInstanceOf(GeoHashGridAggregation::class, $agg);
     }
 }

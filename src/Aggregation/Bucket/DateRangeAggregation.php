@@ -2,37 +2,37 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticSearchQueryDSL\Options;
+
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-bucket-daterange-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-bucket-daterange-aggregation.html
  * @see DateRangeAggregationTest
- *
- * @options 'format' => 'MM-yyy'
- *          'time_zone' => 'CET',
- *          'keyed' => true,
  */
+#[Options([
+    'format' => 'MM-yyy',
+    'time_zone' => 'CET',
+    'keyed' => true,
+    'missing' => '1976/11/30',
+])]
 class DateRangeAggregation implements BucketAggregationInterface
 {
     use HasOptionsTrait;
     use HasAggsTrait;
 
-    /** @var string */
-    protected $field;
-
     /**
-     * ['from' => '2016/02/01', 'to' => 'now/d', 'key' => 'custom_bucket_key'],
-     *
-     * @var array[]
+     * @param array<string, mixed> $options
      */
-    protected $ranges;
-
-    public function __construct(string $field, array $ranges, array $options = [])
-    {
-        $this->field = $field;
-        $this->ranges = $ranges;
+    public function __construct(
+        protected string $field,
+        /** @var array<string, string>[] ['from' => '2016/02/01', 'to' => 'now/d', 'key' => 'custom_bucket_key'], */
+        protected array $ranges,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
@@ -42,17 +42,17 @@ class DateRangeAggregation implements BucketAggregationInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['date_range']['field'] = $this->field;
         $body['date_range']['ranges'] = $this->ranges;
         $body['date_range'] += $this->options;
 
-        if ($this->hasAggs()) {
-            $body['aggs'] = $this->jsonSerializeAggs();
+        if (!empty($this->aggs)) {
+            $body['aggs'] = obj_array_json_serialize($this->aggs);
         }
 
         return $body;

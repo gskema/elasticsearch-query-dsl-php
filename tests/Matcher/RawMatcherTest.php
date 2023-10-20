@@ -4,6 +4,6 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher;
 
 use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
 
-class RawMatcherTest extends RawFragmentTest
+final class RawMatcherTest extends RawFragmentTest
 {
 }

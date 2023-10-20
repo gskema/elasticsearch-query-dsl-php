@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\FullText;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class QueryStringMatcherTest extends AbstractJsonSerializeTest
+final class QueryStringMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -25,9 +25,9 @@ class QueryStringMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new QueryStringMatcher('this AND that OR thus', ['default_field' => 'body']);
-        $this->assertInstanceOf(QueryStringMatcher::class, $matcher1);
+        self::assertInstanceOf(QueryStringMatcher::class, $matcher1);
     }
 }

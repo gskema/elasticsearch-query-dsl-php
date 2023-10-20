@@ -7,32 +7,26 @@ namespace Gskema\ElasticSearchQueryDSL\Model;
  */
 class GeoPoint implements GeoPointInterface
 {
-    /** @var float */
-    protected $lat;
-
-    /** @var float */
-    protected $lon;
-
-    public function __construct(float $lat, float $lon)
-    {
-        $this->lat = $lat;
-        $this->lon = $lon;
+    public function __construct(
+        protected float|string $lat,
+        protected float|string $lon,
+    ) {
     }
 
-    public function getLat(): float
+    public function getLat(): float|string
     {
         return $this->lat;
     }
 
-    public function getLon(): float
+    public function getLon(): float|string
     {
         return $this->lon;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'lat' => $this->lat,

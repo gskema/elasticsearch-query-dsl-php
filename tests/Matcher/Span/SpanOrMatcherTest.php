@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use InvalidArgumentException;
 
-class SpanOrMatcherTest extends AbstractJsonSerializeTest
+final class SpanOrMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -31,13 +31,13 @@ class SpanOrMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new SpanOrMatcher([
             new SpanTermMatcher('field1', 'value1'),
             new SpanTermMatcher('field2', 'value2'),
         ]);
-        $this->assertInstanceOf(SpanOrMatcher::class, $matcher1);
+        self::assertInstanceOf(SpanOrMatcher::class, $matcher1);
 
         $this->expectException(InvalidArgumentException::class);
         new SpanOrMatcher([]);

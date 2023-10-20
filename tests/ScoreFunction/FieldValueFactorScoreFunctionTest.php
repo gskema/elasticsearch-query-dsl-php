@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\ScoreFunction;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class FieldValueFactorScoreFunctionTest extends AbstractJsonSerializeTest
+final class FieldValueFactorScoreFunctionTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -18,7 +18,7 @@ class FieldValueFactorScoreFunctionTest extends AbstractJsonSerializeTest
                     "field" : "field1"
                 }
             }',
-            (new FieldValueFactorScoreFunction('field1')),
+            new FieldValueFactorScoreFunction('field1'),
         ];
 
         // #1
@@ -30,16 +30,16 @@ class FieldValueFactorScoreFunctionTest extends AbstractJsonSerializeTest
                     "factor": 1
                 }
             }',
-            (new FieldValueFactorScoreFunction('field1'))->setOption('factor', 1),
+            new FieldValueFactorScoreFunction('field1', 1)
         ];
 
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
-        $function = (new FieldValueFactorScoreFunction('field1'))->setOption('factor', 1);
+        $function = new FieldValueFactorScoreFunction('field1', 1);
 
-        $this->assertInstanceOf(FieldValueFactorScoreFunction::class, $function);
+        self::assertInstanceOf(FieldValueFactorScoreFunction::class, $function);
     }
 }

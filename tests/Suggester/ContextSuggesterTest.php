@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Suggester;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Suggester\ContextQuery\CategoryContextQuery;
 
-class ContextSuggesterTest extends AbstractJsonSerializeTest
+final class ContextSuggesterTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -59,7 +59,7 @@ class ContextSuggesterTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $suggester1 = ContextSuggester::fromPrefix('field1', 'prefix1')
             ->setContexts([
@@ -69,13 +69,13 @@ class ContextSuggesterTest extends AbstractJsonSerializeTest
             ->setContext('ctx3', (new CategoryContextQuery())->addCategory('cat3'))
             ->removeContext('ctx1');
 
-        $this->assertInstanceOf(CompletionSuggester::class, $suggester1);
-        $this->assertEquals(null, $suggester1->getContext('ctx1'));
-        $this->assertEquals(
+        self::assertInstanceOf(CompletionSuggester::class, $suggester1);
+        self::assertEquals(null, $suggester1->getContext('ctx1'));
+        self::assertEquals(
             (new CategoryContextQuery())->addCategory('cat2'),
             $suggester1->getContext('ctx2')
         );
-        $this->assertEquals(
+        self::assertEquals(
             [
                 'ctx2' => (new CategoryContextQuery())->addCategory('cat2'),
                 'ctx3' => (new CategoryContextQuery())->addCategory('cat3'),
@@ -84,6 +84,6 @@ class ContextSuggesterTest extends AbstractJsonSerializeTest
         );
 
         $suggester2 = ContextSuggester::fromRegex('field1', 'regex1');
-        $this->assertInstanceOf(CompletionSuggester::class, $suggester2);
+        self::assertInstanceOf(CompletionSuggester::class, $suggester2);
     }
 }

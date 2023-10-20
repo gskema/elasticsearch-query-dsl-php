@@ -5,20 +5,23 @@ namespace Gskema\ElasticSearchQueryDSL\Suggester\ContextQuery;
 use Gskema\ElasticSearchQueryDSL\Model\GeoPointInterface;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/suggester-context.html#_category_query
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/suggester-context.html#_category_query
  * @see GeoLocationContextQueryTest
  */
 class GeoLocationContextQuery implements ContextQueryInterface
 {
-    /** @var array[] */
-    protected $clauses = [];
+    /** @var mixed[][] */
+    protected array $clauses = [];
 
+    /**
+     * @param mixed[] $neighbours
+     */
     public function addGeoPoint(
         GeoPointInterface $point,
-        int $precision = null,
-        float $boost = null,
-        array $neighbours = []
-    ): GeoLocationContextQuery {
+        ?int $precision = null,
+        ?float $boost = null,
+        array $neighbours = [],
+    ): static {
         $clause = [];
         $clause['context'] = $point->jsonSerialize();
         if (null !== $precision) {
@@ -37,9 +40,9 @@ class GeoLocationContextQuery implements ContextQueryInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $hasParameters = false;
         foreach ($this->clauses as $clause) {

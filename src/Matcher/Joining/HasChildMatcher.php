@@ -4,33 +4,32 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\Joining;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-has-child-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-has-child-query.html
  * @see HasChildMatcherTest
- *
- * @options 'score_mode' => 'min', 'max', 'sum', 'avg', 'none',
- *          'min_children' => 2,
- *          'max_children' => 10,
- *          'min_children' => true,
- *          'ignore_unmapped' => true,
- *          '_name' => '?',
  */
+#[Options([
+    'score_mode' => 'min', // 'max', 'sum', 'avg', 'none',
+    'min_children' => 2,
+    'max_children' => 10,
+    'ignore_unmapped' => true,
+    '_name' => '?',
+])]
 class HasChildMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
     use HasInnerHitsTrait;
 
-    /** @var string */
-    protected $childType;
-
-    /** @var MatcherInterface */
-    protected $query;
-
-    public function __construct(string $childType, MatcherInterface $query, array $options = [])
-    {
-        $this->childType = $childType;
-        $this->query = $query;
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(
+        protected string $childType,
+        protected MatcherInterface $query,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
@@ -41,9 +40,9 @@ class HasChildMatcher implements MatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['type'] = $this->childType;

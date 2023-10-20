@@ -2,24 +2,22 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use stdClass;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-bucket-reverse-nested-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-bucket-reverse-nested-aggregation.html
  * @see ReverseNestedAggregationTest
  */
 class ReverseNestedAggregation implements BucketAggregationInterface
 {
     use HasAggsTrait;
 
-    /** @var string|null */
-    protected $path;
-
-    public function __construct(string $path = null)
+    public function __construct(protected ?string $path = null)
     {
-        $this->path = $path;
     }
 
     public function __clone()
@@ -28,9 +26,9 @@ class ReverseNestedAggregation implements BucketAggregationInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         if (null !== $this->path) {
@@ -39,8 +37,8 @@ class ReverseNestedAggregation implements BucketAggregationInterface
             $body['reverse_nested'] = new stdClass();
         }
 
-        if ($this->hasAggs()) {
-            $body['aggs'] = $this->jsonSerializeAggs();
+        if (!empty($this->aggs)) {
+            $body['aggs'] = obj_array_json_serialize($this->aggs);
         }
 
         return $body;

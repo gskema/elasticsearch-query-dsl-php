@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Suggester;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class TermSuggesterTest extends AbstractJsonSerializeTest
+final class TermSuggesterTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -38,11 +38,11 @@ class TermSuggesterTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $suggester = (new TermSuggester('field1', 'text1'))->setOption('shard_size', 5);
 
-        $this->assertInstanceOf(TermSuggester::class, $suggester);
-        $this->assertEquals(5, $suggester->getOption('shard_size'));
+        self::assertInstanceOf(TermSuggester::class, $suggester);
+        self::assertEquals(5, $suggester->getOption('shard_size'));
     }
 }

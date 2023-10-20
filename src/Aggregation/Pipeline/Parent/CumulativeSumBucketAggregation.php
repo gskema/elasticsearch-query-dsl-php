@@ -3,17 +3,19 @@
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline\Parent;
 
 use Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline\AbstractNumericPipelineAggregation;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-pipeline-cumulative-sum-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-pipeline-cumulative-sum-aggregation.html
  * @see CumulativeSumBucketAggregationTest
- *
- * @options 'format' => ?,
  */
+#[Options([
+    'format' => '?',
+])]
 class CumulativeSumBucketAggregation extends AbstractNumericPipelineAggregation
 {
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function getType(): string
     {

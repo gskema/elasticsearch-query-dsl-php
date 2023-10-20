@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class GeoBoundsAggregationTest extends AbstractJsonSerializeTest
+final class GeoBoundsAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -24,10 +24,10 @@ class GeoBoundsAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg = new GeoBoundsAggregation('field1');
 
-        $this->assertInstanceOf(GeoBoundsAggregation::class, $agg);
+        self::assertInstanceOf(GeoBoundsAggregation::class, $agg);
     }
 }

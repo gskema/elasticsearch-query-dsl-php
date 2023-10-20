@@ -5,31 +5,21 @@ namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 use Gskema\ElasticSearchQueryDSL\FieldCollapser\FieldCollapserInterface;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-collapse.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-collapse.html
  * @see HasFieldCollapserTraitTest
  */
 trait HasFieldCollapserTrait
 {
-    /** @var FieldCollapserInterface|null */
-    protected $fieldCollapser;
+    protected ?FieldCollapserInterface $fieldCollapser = null;
 
-    /**
-     * @return FieldCollapserInterface|null
-     */
-    public function getFieldCollapser()
+    public function getFieldCollapser(): ?FieldCollapserInterface
     {
         return $this->fieldCollapser;
     }
 
-    /**
-     * @param FieldCollapserInterface|null $fieldCollapser
-     *
-     * @return $this
-     */
-    public function setFieldCollapser(FieldCollapserInterface $fieldCollapser = null)
+    public function setFieldCollapser(?FieldCollapserInterface $fieldCollapser): static
     {
         $this->fieldCollapser = $fieldCollapser;
-
         return $this;
     }
 }

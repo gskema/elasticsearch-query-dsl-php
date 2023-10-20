@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Model\GeoShape;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class IndexedGeoShapeTest extends AbstractJsonSerializeTest
+final class IndexedGeoShapeTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -25,10 +25,10 @@ class IndexedGeoShapeTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $shape = new IndexedGeoShape('index1', 'type1', 'id1', 'path1');
 
-        $this->assertInstanceOf(IndexedGeoShape::class, $shape);
+        self::assertInstanceOf(IndexedGeoShape::class, $shape);
     }
 }

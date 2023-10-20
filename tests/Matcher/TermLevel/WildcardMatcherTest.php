@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\TermLevel;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class WildcardMatcherTest extends AbstractJsonSerializeTest
+final class WildcardMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -38,9 +38,9 @@ class WildcardMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new WildcardMatcher('field1', 'value1*');
-        $this->assertInstanceOf(WildcardMatcher::class, $matcher1);
+        self::assertInstanceOf(WildcardMatcher::class, $matcher1);
     }
 }

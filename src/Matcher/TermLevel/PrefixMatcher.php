@@ -4,35 +4,35 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\TermLevel;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MultiTermMatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-prefix-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-prefix-query.html
  * @see PrefixMatcherTest
- *
- * @options 'boost' => 1.0,
- *          '_name' => '?',
  */
+#[Options([
+    'boost' => 1.0,
+    '_name' => '?',
+])]
 class PrefixMatcher implements MultiTermMatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $field;
-
-    /** @var string */
-    protected $prefix;
-
-    public function __construct(string $field, string $prefix, array $options = [])
-    {
-        $this->field = $field;
-        $this->prefix = $prefix;
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(
+        protected string $field,
+        protected string $prefix,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         if (!empty($this->options)) {
             $body = [];

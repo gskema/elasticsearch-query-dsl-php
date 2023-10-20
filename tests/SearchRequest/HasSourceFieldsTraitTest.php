@@ -5,15 +5,17 @@ namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 use Gskema\ElasticSearchQueryDSL\SourceFilter\DisabledSourceFilter;
 use PHPUnit\Framework\TestCase;
 
-class HasSourceFieldsTraitTest extends TestCase
+final class HasSourceFieldsTraitTest extends TestCase
 {
-    public function testMethods()
+    public function testMethods(): void
     {
         /** @var HasSourceFieldsTrait $object */
-        $object = $this->getMockBuilder(HasSourceFieldsTrait::class)->getMockForTrait();
+        $object = new class {
+            use HasSourceFieldsTrait;
+        };
 
         $object->setSourceFields(new DisabledSourceFilter());
 
-        $this->assertEquals(new DisabledSourceFilter(), $object->getSourceFields());
+        self::assertEquals(new DisabledSourceFilter(), $object->getSourceFields());
     }
 }

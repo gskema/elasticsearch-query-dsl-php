@@ -2,15 +2,15 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatchAllMatcher;
 use Gskema\ElasticSearchQueryDSL\Matcher\TermLevel\TermMatcher;
 use Gskema\ElasticSearchQueryDSL\ScoreFunction\LinearDecayScoreFunction;
 use Gskema\ElasticSearchQueryDSL\ScoreFunction\RandomScoreFunction;
 
-class FunctionScoreMatcherTest extends AbstractJsonSerializeTest
+final class FunctionScoreMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -33,7 +33,7 @@ class FunctionScoreMatcherTest extends AbstractJsonSerializeTest
                     "query": {
                         "term": {
                             "field1": "term1"
-                        } 
+                        }
                     },
                     "score_mode": "avg",
                     "functions": [
@@ -66,13 +66,13 @@ class FunctionScoreMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = (new FunctionScoreMatcher(
             new TermMatcher('field1', 'term1'),
             ['score_mode' => 'avg']
         ))
             ->addScoreFunction(new RandomScoreFunction(99), new MatchAllMatcher(), 5);
-        $this->assertInstanceOf(FunctionScoreMatcher::class, $matcher1);
+        self::assertInstanceOf(FunctionScoreMatcher::class, $matcher1);
     }
 }

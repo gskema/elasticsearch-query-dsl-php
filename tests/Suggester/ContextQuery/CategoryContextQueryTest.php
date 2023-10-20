@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Suggester\ContextQuery;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class CategoryContextQueryTest extends AbstractJsonSerializeTest
+final class CategoryContextQueryTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -41,11 +41,11 @@ class CategoryContextQueryTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $ctxQuery = (new CategoryContextQuery())
             ->addCategory('category1', 1.1, 'prefix1');
 
-        $this->assertInstanceOf(CategoryContextQuery::class, $ctxQuery);
+        self::assertInstanceOf(CategoryContextQuery::class, $ctxQuery);
     }
 }

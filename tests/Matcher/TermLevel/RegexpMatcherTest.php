@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\TermLevel;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class RegexMatcherTest extends AbstractJsonSerializeTest
+final class RegexpMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -21,7 +21,7 @@ class RegexMatcherTest extends AbstractJsonSerializeTest
                     }
                 }
             }',
-            new RegexMatcher('field1', 'regexp1', ['flags' => 'COMPLEMENT']),
+            new RegexpMatcher('field1', 'regexp1', ['flags' => 'COMPLEMENT']),
         ];
 
         // #1
@@ -32,15 +32,15 @@ class RegexMatcherTest extends AbstractJsonSerializeTest
                     "field1": "regexp1"
                 }
             }',
-            new RegexMatcher('field1', 'regexp1'),
+            new RegexpMatcher('field1', 'regexp1'),
         ];
 
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
-        $matcher1 = new RegexMatcher('field1', 'regexp1', ['flags' => 'COMPLEMENT']);
-        $this->assertInstanceOf(RegexMatcher::class, $matcher1);
+        $matcher1 = new RegexpMatcher('field1', 'regexp1', ['flags' => 'COMPLEMENT']);
+        self::assertInstanceOf(RegexpMatcher::class, $matcher1);
     }
 }

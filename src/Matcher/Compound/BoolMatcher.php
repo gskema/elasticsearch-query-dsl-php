@@ -2,36 +2,38 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 use stdClass;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-bool-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-bool-query.html
  * @see BoolMatcherTest
- *
- * @options 'boost' => 1.0,
- *          '_name' => '?',
  */
+#[Options([
+    'boost' => 1.0,
+    '_name' => '?',
+])]
 class BoolMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var MatcherInterface[] */
-    protected $filters = [];
-
-    /** @var MatcherInterface[] */
-    protected $musts = [];
-
-    /** @var MatcherInterface[] */
-    protected $mustNots = [];
-
-    /** @var MatcherInterface[] */
-    protected $shoulds = [];
-
-    /** @var string|int|null */
-    protected $minimumShouldMatch;
+    public function __construct(
+        /** @var MatcherInterface[] */
+        protected array $filters = [],
+        /** @var MatcherInterface[] */
+        protected array $musts = [],
+        /** @var MatcherInterface[] */
+        protected array $mustNots = [],
+        /** @var MatcherInterface[] */
+        protected array $shoulds = [],
+        protected string|int|null $minimumShouldMatch = null,
+    ) {
+    }
 
     public function __clone()
     {
@@ -51,25 +53,16 @@ class BoolMatcher implements MatcherInterface
 
     /**
      * @param MatcherInterface[] $filters
-     *
-     * @return $this
      */
-    public function setFilters(array $filters): BoolMatcher
+    public function setFilters(array $filters): static
     {
         $this->filters = $filters;
-
         return $this;
     }
 
-    /**
-     * @param MatcherInterface $filter
-     *
-     * @return $this
-     */
-    public function addFilter(MatcherInterface $filter): BoolMatcher
+    public function addFilter(MatcherInterface $filter): static
     {
         $this->filters[] = $filter;
-
         return $this;
     }
 
@@ -83,25 +76,16 @@ class BoolMatcher implements MatcherInterface
 
     /**
      * @param MatcherInterface[] $matchers
-     *
-     * @return $this
      */
-    public function setMusts(array $matchers): BoolMatcher
+    public function setMusts(array $matchers): static
     {
         $this->musts = $matchers;
-
         return $this;
     }
 
-    /**
-     * @param MatcherInterface $matcher
-     *
-     * @return $this
-     */
-    public function addMust(MatcherInterface $matcher): BoolMatcher
+    public function addMust(MatcherInterface $matcher): static
     {
         $this->musts[] = $matcher;
-
         return $this;
     }
 
@@ -115,25 +99,16 @@ class BoolMatcher implements MatcherInterface
 
     /**
      * @param MatcherInterface[] $matchers
-     *
-     * @return $this
      */
-    public function setMustNots(array $matchers): BoolMatcher
+    public function setMustNots(array $matchers): static
     {
         $this->mustNots = $matchers;
-
         return $this;
     }
 
-    /**
-     * @param MatcherInterface $matcher
-     *
-     * @return $this
-     */
-    public function addMustNot(MatcherInterface $matcher): BoolMatcher
+    public function addMustNot(MatcherInterface $matcher): static
     {
         $this->mustNots[] = $matcher;
-
         return $this;
     }
 
@@ -147,80 +122,54 @@ class BoolMatcher implements MatcherInterface
 
     /**
      * @param MatcherInterface[] $matchers
-     *
-     * @return $this
      */
-    public function setShoulds(array $matchers): BoolMatcher
+    public function setShoulds(array $matchers): static
     {
         $this->shoulds = $matchers;
-
         return $this;
     }
 
-    /**
-     * @param MatcherInterface $matcher
-     *
-     * @return $this
-     */
-    public function addShould(MatcherInterface $matcher): BoolMatcher
+    public function addShould(MatcherInterface $matcher): static
     {
         $this->shoulds[] = $matcher;
-
         return $this;
     }
 
-    /**
-     * @return string|int|null
-     */
-    public function getMinimumShouldMatch()
+    public function getMinimumShouldMatch(): string|int|null
     {
         return $this->minimumShouldMatch;
     }
 
-    /**
-     * @param string|int|null $minimumShouldMatch
-     *
-     * @return $this
-     */
-    public function setMinimumShouldMatch($minimumShouldMatch = null): BoolMatcher
+    public function setMinimumShouldMatch(string|int|null $minimumShouldMatch): static
     {
         $this->minimumShouldMatch = $minimumShouldMatch;
-
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
 
         if (!empty($this->filters)) {
-            $rawFilters = array_map(function (MatcherInterface $filterMatcher) {
-                return $filterMatcher->jsonSerialize();
-            }, $this->filters);
+            $rawFilters = obj_array_json_serialize($this->filters);
             $body['filter'] = 1 === count($this->filters) ? $rawFilters[0] : $rawFilters;
         }
 
         if (!empty($this->musts)) {
-            $rawMusts = array_map(function (MatcherInterface $mustMatcher) {
-                return $mustMatcher->jsonSerialize();
-            }, $this->musts);
+            $rawMusts = obj_array_json_serialize($this->musts);
             $body['must'] = 1 === count($this->musts) ? $rawMusts[0] : $rawMusts;
         }
 
         if (!empty($this->mustNots)) {
-            $rawMustNots = array_map(function (MatcherInterface $mustNotMatcher) {
-                return $mustNotMatcher->jsonSerialize();
-            }, $this->mustNots);
+            $rawMustNots = obj_array_json_serialize($this->mustNots);
             $body['must_not'] = 1 === count($this->mustNots) ? $rawMustNots[0] : $rawMustNots;
         }
 
         if (!empty($this->shoulds)) {
-            $rawShoulds = array_map(function (MatcherInterface $shouldMatcher) {
-                return $shouldMatcher->jsonSerialize();
-            }, $this->shoulds);
+            $rawShoulds = obj_array_json_serialize($this->shoulds);
             $body['should'] = 1 === count($this->shoulds) ? $rawShoulds[0] : $rawShoulds;
         }
 

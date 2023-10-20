@@ -3,38 +3,55 @@
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
 use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
+use InvalidArgumentException;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-metrics-valuecount-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-metrics-valuecount-aggregation.html
  * @see ValueCountAggregationTest
  */
 class ValueCountAggregation implements MetricAggregationInterface
 {
-    /** @var array */
-    protected $body;
-
-    protected function __construct(array $body)
-    {
-        $this->body = $body;
+    protected function __construct(
+        protected ?string $field,
+        protected ?ScriptInterface $script,
+    ) {
+        if (null === $field && null === $script) {
+            throw new InvalidArgumentException('Expected at least one to be not null: field or script.');
+        }
     }
 
-    public static function fromField(string $field): ValueCountAggregation
+    public function __clone()
     {
-        return new static(['field' => $field]);
+        if (null !== $this->script) {
+            $this->script = clone $this->script;
+        }
     }
 
-    public static function fromScript(ScriptInterface $script): ValueCountAggregation
+    public static function fromField(string $field): static
     {
-        return new static(['script' => $script->jsonSerialize()]);
+        return new static($field, null);
+    }
+
+    public static function fromScript(ScriptInterface $script): static
+    {
+        return new static(null, $script);
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
+        $body = [];
+        if (null !== $this->field) {
+            $body['field'] = $this->field;
+        }
+        if (null !== $this->script) {
+            $body['script'] = $this->script;
+        }
+
         return [
-            'value_count' => $this->body,
+            'value_count' => $body,
         ];
     }
 }

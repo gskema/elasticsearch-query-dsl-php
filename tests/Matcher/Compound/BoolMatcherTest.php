@@ -2,13 +2,13 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatchAllMatcher;
 use Gskema\ElasticSearchQueryDSL\Matcher\TermLevel\TermMatcher;
 
-class BoolMatcherTest extends AbstractJsonSerializeTest
+final class BoolMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -63,7 +63,7 @@ class BoolMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher = (new BoolMatcher())
             ->setFilters([new TermMatcher('field1', 'value1')])
@@ -76,26 +76,26 @@ class BoolMatcherTest extends AbstractJsonSerializeTest
             ->addShould(new TermMatcher('field8', 'value8'))
             ->setMinimumShouldMatch(1);
 
-        $this->assertEquals([
+        self::assertEquals([
             new TermMatcher('field1', 'value1'),
             new TermMatcher('field2', 'value2'),
         ], $matcher->getFilters());
 
-        $this->assertEquals([
+        self::assertEquals([
             new TermMatcher('field3', 'value3'),
             new TermMatcher('field4', 'value4'),
         ], $matcher->getMusts());
 
-        $this->assertEquals([
+        self::assertEquals([
             new TermMatcher('field5', 'value5'),
             new TermMatcher('field6', 'value6'),
         ], $matcher->getMustNots());
 
-        $this->assertEquals([
+        self::assertEquals([
             new TermMatcher('field7', 'value7'),
             new TermMatcher('field8', 'value8'),
         ], $matcher->getShoulds());
 
-        $this->assertEquals(1, $matcher->getMinimumShouldMatch());
+        self::assertEquals(1, $matcher->getMinimumShouldMatch());
     }
 }

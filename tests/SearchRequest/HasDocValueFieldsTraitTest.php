@@ -4,15 +4,17 @@ namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 
 use PHPUnit\Framework\TestCase;
 
-class HasDocValueFieldsTraitTest extends TestCase
+final class HasDocValueFieldsTraitTest extends TestCase
 {
-    public function testMethods()
+    public function testMethods(): void
     {
         /** @var HasDocValueFieldsTrait $object */
-        $object = $this->getMockBuilder(HasDocValueFieldsTrait::class)->getMockForTrait();
+        $object = new class {
+            use HasDocValueFieldsTrait;
+        };
 
         $object->setDocValueFields(['field1', 'field2']);
 
-        $this->assertEquals(['field1', 'field2'], $object->getDocValueFields());
+        self::assertEquals(['field1', 'field2'], $object->getDocValueFields());
     }
 }

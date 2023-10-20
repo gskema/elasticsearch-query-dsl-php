@@ -2,32 +2,31 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticSearchQueryDSL\Options;
 use InvalidArgumentException;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-span-or-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-span-or-query.html
  * @see SpanOrMatcherTest
- *
- * @options '_name' => '?',
  */
+#[Options([
+    '_name' => '?',
+])]
 class SpanOrMatcher implements SpanMatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var SpanMatcherInterface[] */
-    protected $spanMatchers;
-
-    /**
-     * @param SpanMatcherInterface[] $spanMatchers
-     */
-    public function __construct(array $spanMatchers)
-    {
+    public function __construct(
+        /** @var SpanMatcherInterface[] */
+        protected array $spanMatchers,
+    ) {
         if (empty($spanMatchers)) {
             throw new InvalidArgumentException('Expected at least one span matcher, got none');
         }
-        $this->spanMatchers = $spanMatchers;
     }
 
     public function __clone()
@@ -36,14 +35,12 @@ class SpanOrMatcher implements SpanMatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
-        $body['clauses'] =array_map(function (SpanMatcherInterface $matcher) {
-            return $matcher->jsonSerialize();
-        }, $this->spanMatchers);
+        $body['clauses'] = obj_array_json_serialize($this->spanMatchers);
         $body += $this->options;
 
         return [

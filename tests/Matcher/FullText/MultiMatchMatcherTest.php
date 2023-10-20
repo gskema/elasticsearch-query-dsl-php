@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\FullText;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class MultiMatchMatcherTest extends AbstractJsonSerializeTest
+final class MultiMatchMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -26,9 +26,9 @@ class MultiMatchMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new MultiMatchMatcher(['field1', 'field2'], 'query1', ['minimum_should_match' => 2]);
-        $this->assertInstanceOf(MultiMatchMatcher::class, $matcher1);
+        self::assertInstanceOf(MultiMatchMatcher::class, $matcher1);
     }
 }

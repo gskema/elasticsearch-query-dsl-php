@@ -2,48 +2,48 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Suggester;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 use Gskema\ElasticSearchQueryDSL\Suggester\CandidateGenerator\CandidateGeneratorInterface;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-suggesters-phrase.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-suggesters-phrase.html
  * @see PhraseSuggesterTest
- *
- * @options 'gram_size' => 3,
- *          'real_word_error_likelihood' => 0.95,
- *          'confidence' => 1.0,
- *          'max_errors' => 1.0,
- *          'separator' => ' ',
- *          'size' => 5,
- *          'analyzer' => 'standard',
- *          'shard_size' => 5,
- *          'highlight' => ['pre_tag' => '<em>', 'post_tag' => '</em>'],
- *          'smoothing' => ['stupid_backoff' => ['discount' => 0.4]],
- *                         ['laplace' => ['alpha ' => 0.5]],
- *                         ['linear_interpolation' => ['trigram_lambda' => ?, 'bigram_lambda' => ?, 'unigram_lambda' => ?]],
  */
+#[Options([
+    'gram_size' => 3,
+    'real_word_error_likelihood' => 0.95,
+    'confidence' => 1.0,
+    'max_errors' => 1.0,
+    'separator' => ' ',
+    'size' => 5,
+    'analyzer' => 'standard',
+    'shard_size' => 5,
+    'highlight' => ['pre_tag' => '<em>', 'post_tag' => '</em>'],
+    'smoothing' => ['stupid_backoff' => ['discount' => 0.4]],
+                    // ['laplace' => ['alpha ' => 0.5]],
+                    // ['linear_interpolation' => ['trigram_lambda' => ?, 'bigram_lambda' => ?, 'unigram_lambda' => ?]],
+])]
 class PhraseSuggester implements SuggesterInterface
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $field;
-
-    /** @var string */
-    protected $text;
-
     /** @var CandidateGeneratorInterface[] */
-    protected $directGenerators = [];
+    protected array $directGenerators = [];
+    /** @var mixed[]|null */
+    protected ?array $collate = null;
 
-    /** @var array|null */
-    protected $collate;
-
-    public function __construct(string $field, string $text, array $options = [])
-    {
-        $this->field = $field;
-        $this->text = $text;
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(
+        protected string $field,
+        protected string $text,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
@@ -63,36 +63,23 @@ class PhraseSuggester implements SuggesterInterface
 
     /**
      * @param CandidateGeneratorInterface[] $candidateGenerators
-     *
-     * @return $this
      */
-    public function setDirectGenerators(array $candidateGenerators): PhraseSuggester
+    public function setDirectGenerators(array $candidateGenerators): static
     {
         $this->directGenerators = $candidateGenerators;
-
         return $this;
     }
 
-    /**
-     * @param CandidateGeneratorInterface $candidateGenerator
-     *
-     * @return $this
-     */
-    public function addDirectGenerator(CandidateGeneratorInterface $candidateGenerator): PhraseSuggester
+    public function addDirectGenerator(CandidateGeneratorInterface $candidateGenerator): static
     {
         $this->directGenerators[] = $candidateGenerator;
-
         return $this;
     }
 
     /**
-     * @param MatcherInterface $query
-     * @param array            $params
-     * @param bool|null        $prune
-     *
-     * @return $this
+     * @param array<string, mixed> $params
      */
-    public function setCollate(MatcherInterface $query, array $params = [], bool $prune = null): PhraseSuggester
+    public function setCollate(MatcherInterface $query, array $params = [], ?bool $prune = null): static
     {
         $rawCollate = [];
         $rawCollate['query'] = $query->jsonSerialize();
@@ -109,9 +96,9 @@ class PhraseSuggester implements SuggesterInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['text'] = $this->text;

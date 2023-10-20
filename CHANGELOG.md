@@ -4,6 +4,29 @@ All notable changes to `elasticsearch-query-dsl-php` will be documented in this 
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [6.0.0] - 2023-10-*
+### Added
+- TermsSetMatcher
+- WrapperMatcher
+- AutoIntervalDateHistogramAggregation
+- CompositeAggregation
+- ParentAggregation
+- SignificantTextAggregation
+- MedianAbsoluteDeviationAggregation
+- WeightedAvgAggregation
+- BucketSortAggregation
+- MovingFunctionAggregation
+- `SourceFilterInterface|array|null` for simplified usage
+
+### Changed
+- Parameter, property, return types
+- Renamed `RegexMatcher` to `RegexpMatcher`
+
+### Removed
+- GeoDistanceRangeMatcher
+- IndicesMatcher
+- TemplateMatcher
+
 ## [5.0.1] - 2018-11-04
 ### Added
 - Documentation for using RangeMatcher with range mapping type

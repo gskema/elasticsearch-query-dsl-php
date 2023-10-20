@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Specialized;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 
-class ScriptMatcherTest extends AbstractJsonSerializeTest
+final class ScriptMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -34,7 +34,7 @@ class ScriptMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new ScriptMatcher(
             new InlineScript(
@@ -43,6 +43,6 @@ class ScriptMatcherTest extends AbstractJsonSerializeTest
                 'painless'
             )
         );
-        $this->assertInstanceOf(ScriptMatcher::class, $matcher1);
+        self::assertInstanceOf(ScriptMatcher::class, $matcher1);
     }
 }

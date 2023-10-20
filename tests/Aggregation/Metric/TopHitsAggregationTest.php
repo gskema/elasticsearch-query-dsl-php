@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\SearchRequest\TopHitsRequest;
 
-class TopHitsAggregationTest extends AbstractJsonSerializeTest
+final class TopHitsAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -36,12 +36,12 @@ class TopHitsAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $req = new TopHitsAggregation(
             (new TopHitsRequest())->setSize(1)
         );
 
-        $this->assertInstanceOf(TopHitsAggregation::class, $req);
+        self::assertInstanceOf(TopHitsAggregation::class, $req);
     }
 }

@@ -3,27 +3,23 @@
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-span-containing-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-span-containing-query.html
  * @see SpanContainingMatcherTest
- *
- * @options '_name' => '?',
  */
+#[Options([
+    '_name' => '?',
+])]
 class SpanContainingMatcher implements SpanMatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var SpanMatcherInterface */
-    protected $little;
-
-    /** @var SpanMatcherInterface */
-    protected $big;
-
-    public function __construct(SpanMatcherInterface $little, SpanMatcherInterface $big)
-    {
-        $this->little = $little;
-        $this->big = $big;
+    public function __construct(
+        protected SpanMatcherInterface $little,
+        protected SpanMatcherInterface $big,
+    ) {
     }
 
     public function __clone()
@@ -33,9 +29,9 @@ class SpanContainingMatcher implements SpanMatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [
             'little' => $this->little->jsonSerialize(),

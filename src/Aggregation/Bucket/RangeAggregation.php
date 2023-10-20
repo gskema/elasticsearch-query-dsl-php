@@ -2,77 +2,92 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
+use InvalidArgumentException;
+
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-bucket-range-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-bucket-range-aggregation.html
  * @see RangeAggregationTest
- *
- * @options 'keyed' => true,
  */
+#[Options([
+    'keyed' => true,
+])]
 class RangeAggregation implements BucketAggregationInterface
 {
     use HasOptionsTrait;
     use HasAggsTrait;
 
-    /** @var array */
-    protected $body;
-
     /**
-     * ['from' => 5, 'to' => 5, 'key' => 'custom_bucket_key'],
-     *
-     * @var array[]
+     * @param array<string, mixed> $options
      */
-    protected $ranges;
-
-    protected function __construct(array $body, array $ranges, array $options = [])
-    {
-        $this->body = $body;
-        $this->ranges = $ranges;
+    protected function __construct(
+        protected ?string $field,
+        protected ?ScriptInterface $script,
+        /** @var array<string, mixed>[] ['from' => 5, 'to' => 5, 'key' => 'custom_bucket_key'], */
+        protected array $ranges,
+        array $options = [],
+    ) {
+        if (null === $field && null === $script) {
+            throw new InvalidArgumentException('Expected at least one to be not null: field or script.');
+        }
         $this->options = $options;
     }
 
     public function __clone()
     {
+        if (null !== $this->script) {
+            $this->script = clone $this->script;
+        }
         $this->aggs = array_clone($this->aggs);
     }
 
+    /**
+     * @param array<string, mixed>[] $ranges
+     * @param array<string, mixed> $options
+     */
     public static function fromField(
         string $field,
         array $ranges,
         array $options = [],
-        InlineScript $valueScript = null
-    ): RangeAggregation {
-        $body = [];
-        $body['field'] = $field;
-        if (null !== $valueScript) {
-            $body['script'] = $valueScript->jsonSerialize();
-        }
-
-        return new static($body, $ranges, $options);
-    }
-
-    public static function fromScript(ScriptInterface $script, array $ranges, array $options = []): RangeAggregation
-    {
-        return new static(['script' => $script->jsonSerialize()], $ranges, $options);
+        ?InlineScript $valueScript = null,
+    ): static {
+        return new static($field, $valueScript, $ranges, $options);
     }
 
     /**
-     * @inheritdoc
+     * @param mixed[][] $ranges
+     * @param array<string, mixed> $options
      */
-    public function jsonSerialize()
+    public static function fromScript(ScriptInterface $script, array $ranges, array $options = []): static
     {
-        $body = [];
-        $body['range'] = $this->body;
-        $body['range']['ranges'] = $this->ranges;
-        $body['range'] += $this->options;
+        return new static(null, $script, $ranges, $options);
+    }
 
-        if ($this->hasAggs()) {
-            $body['aggs'] = $this->jsonSerializeAggs();
+    /**
+     * @inheritDoc
+     */
+    public function jsonSerialize(): mixed
+    {
+        $aggBody = [];
+        if (null !== $this->field) {
+            $aggBody['field'] = $this->field;
+        }
+        if (null !== $this->script) {
+            $aggBody['script'] = $this->script;
+        }
+        $aggBody['ranges'] = $this->ranges;
+        $aggBody += $this->options;
+
+        $body = ['range' => $aggBody];
+        if (!empty($this->aggs)) {
+            $body['aggs'] = obj_array_json_serialize($this->aggs);
         }
 
         return $body;

@@ -5,31 +5,21 @@ namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-query.html
  * @see HasQueryTraitTest
  */
 trait HasQueryTrait
 {
-    /** @var MatcherInterface|null */
-    protected $query;
+    protected ?MatcherInterface $query = null;
 
-    /**
-     * @return MatcherInterface|null
-     */
-    public function getQuery()
+    public function getQuery(): ?MatcherInterface
     {
         return $this->query;
     }
 
-    /**
-     * @param MatcherInterface|null $query
-     *
-     * @return $this
-     */
-    public function setQuery(MatcherInterface $query = null)
+    public function setQuery(?MatcherInterface $query): static
     {
         $this->query = $query;
-
         return $this;
     }
 }

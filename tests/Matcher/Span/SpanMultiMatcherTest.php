@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Matcher\TermLevel\PrefixMatcher;
 
-class SpanMultiMatcherTest extends AbstractJsonSerializeTest
+final class SpanMultiMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -27,11 +27,11 @@ class SpanMultiMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new SpanMultiMatcher(
             new PrefixMatcher('field1', 'prefix1')
         );
-        $this->assertInstanceOf(SpanMultiMatcher::class, $matcher1);
+        self::assertInstanceOf(SpanMultiMatcher::class, $matcher1);
     }
 }

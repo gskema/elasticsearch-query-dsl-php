@@ -4,23 +4,22 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MultiTermMatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-span-multi-term-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-span-multi-term-query.html
  * @see SpanMultiMatcherTest
- *
- * @options '_name' => '?',
  */
+#[Options([
+    '_name' => '?',
+])]
 class SpanMultiMatcher implements SpanMatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var MultiTermMatcherInterface */
-    protected $matcher;
-
-    public function __construct(MultiTermMatcherInterface $matcher)
-    {
-        $this->matcher = $matcher;
+    public function __construct(
+        protected MultiTermMatcherInterface $matcher,
+    ) {
     }
 
     public function __clone()
@@ -29,9 +28,9 @@ class SpanMultiMatcher implements SpanMatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['match'] = $this->matcher->jsonSerialize();

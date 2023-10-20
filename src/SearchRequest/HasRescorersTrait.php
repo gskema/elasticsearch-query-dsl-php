@@ -5,13 +5,13 @@ namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 use Gskema\ElasticSearchQueryDSL\Rescorer\RescorerInterface;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-rescore.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-rescore.html
  * @see HasRescorersTraitTest
  */
 trait HasRescorersTrait
 {
     /** @var RescorerInterface[] */
-    protected $rescorers = [];
+    protected array $rescorers = [];
 
     /**
      * @return RescorerInterface[]
@@ -23,25 +23,16 @@ trait HasRescorersTrait
 
     /**
      * @param RescorerInterface[] $rescorers
-     *
-     * @return $this
      */
-    public function setRescorers(array $rescorers)
+    public function setRescorers(array $rescorers): static
     {
         $this->rescorers = $rescorers;
-
         return $this;
     }
 
-    /**
-     * @param RescorerInterface $rescorer
-     *
-     * @return $this
-     */
-    public function addRescorer(RescorerInterface $rescorer)
+    public function addRescorer(RescorerInterface $rescorer): static
     {
         $this->rescorers[] = $rescorer;
-
         return $this;
     }
 }

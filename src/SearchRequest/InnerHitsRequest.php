@@ -2,20 +2,22 @@
 
 namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
-use Gskema\ElasticSearchQueryDSL\Sorter\SorterInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 use JsonSerializable;
 use stdClass;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-inner-hits.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-inner-hits.html
  * @see InnerHitsRequestTest
- *
- * @options 'explain' => true,
- *          'version' => true,
  */
+#[Options([
+    'explain' => true,
+    'version' => true,
+])]
 class InnerHitsRequest implements JsonSerializable
 {
     use HasOptionsTrait;
@@ -27,8 +29,7 @@ class InnerHitsRequest implements JsonSerializable
     use HasScriptFieldsTrait;
     use HasDocValueFieldsTrait;
 
-    /** @var string|null */
-    protected $name;
+    protected ?string $name = null;
 
     public function __clone()
     {
@@ -38,25 +39,21 @@ class InnerHitsRequest implements JsonSerializable
         $this->sourceFields = $this->sourceFields ? clone $this->sourceFields : null;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): InnerHitsRequest
+    public function setName(string $name): static
     {
         $this->name = $name;
-
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = $this->options;
 
@@ -64,12 +61,10 @@ class InnerHitsRequest implements JsonSerializable
             $body['name'] = $this->name;
         }
         if (null !== $this->sourceFields) {
-            $body['_source'] = $this->sourceFields->jsonSerialize();
+            $body['_source'] = $this->jsonSerializeSourceFields();
         }
         if (!empty($this->scriptFields)) {
-            $body['script_fields'] = array_map(function (ScriptInterface $script) {
-                return $script->jsonSerialize();
-            }, $this->scriptFields);
+            $body['script_fields'] = obj_array_json_serialize($this->scriptFields);
         }
         if (!empty($this->docValueFields)) {
             $body['docvalue_fields'] = $this->docValueFields;
@@ -81,17 +76,12 @@ class InnerHitsRequest implements JsonSerializable
             $body['size'] = $this->size;
         }
         if (!empty($this->sorters)) {
-            $rawSorters = array_map(function (SorterInterface $sorter) {
-                return $sorter->jsonSerialize();
-            }, $this->sorters);
-            $body['sort'] = 1 === count($this->sorters) ? $rawSorters[0] : $rawSorters;
+            $body['sort'] = $this->jsonSerializeSorters();
         }
         if (null !== $this->highlighter) {
             $body['highlight'] = $this->highlighter->jsonSerialize();
         }
 
-        $body = $body ?: new stdClass();
-
-        return $body;
+        return $body ?: new stdClass();
     }
 }

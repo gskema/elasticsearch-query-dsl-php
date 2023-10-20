@@ -5,23 +5,22 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\Specialized;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-script-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-script-query.html
  * @see ScriptMatcherTest
- *
- * @options '_name' => '?',
  */
+#[Options([
+    '_name' => '?',
+])]
 class ScriptMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var ScriptInterface */
-    protected $script;
-
-    public function __construct(ScriptInterface $script)
-    {
-        $this->script = $script;
+    public function __construct(
+        protected ScriptInterface $script,
+    ) {
     }
 
     public function __clone()
@@ -30,9 +29,9 @@ class ScriptMatcher implements MatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['script'] = $this->script->jsonSerialize();

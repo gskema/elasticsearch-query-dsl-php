@@ -3,23 +3,20 @@
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-metrics-geocentroid-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-metrics-geocentroid-aggregation.html
  * @see GeoCentroidAggregationTest
  */
 class GeoCentroidAggregation implements MetricAggregationInterface
 {
-    /** @var string */
-    protected $field;
-
-    public function __construct(string $field)
-    {
-        $this->field = $field;
+    public function __construct(
+        protected string $field,
+    ) {
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'geo_centroid' => [

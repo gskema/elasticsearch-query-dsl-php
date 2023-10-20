@@ -2,16 +2,19 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
+use Gskema\ElasticSearchQueryDSL\Options;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-metrics-sum-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-metrics-sum-aggregation.html
  * @see SumAggregationTest
- *
- * @options 'missing' => 0,
  */
+#[Options([
+    'missing' => 0,
+])]
 class SumAggregation extends AbstractNumericMetricAggregation
 {
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function getType(): string
     {

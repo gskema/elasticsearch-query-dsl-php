@@ -4,43 +4,43 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\Joining;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-nested-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-nested-query.html
  * @see NestedMatcherTest
- *
- * @options 'score_mode' => 'min', 'max', 'sum', 'avg', 'none',
- *          'ignore_unmapped' => true,
- *          '_name' => '?',
  */
+#[Options([
+    'score_mode' => 'min', // 'max', 'sum', 'avg', 'none',
+    'ignore_unmapped' => true,
+    '_name' => '?',
+])]
 class NestedMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
     use HasInnerHitsTrait;
 
-    /** @var string */
-    protected $path;
-
-    /** @var MatcherInterface */
-    protected $query;
-
-    public function __construct(string $path, MatcherInterface $query, array $options = [])
-    {
-        $this->path = $path;
-        $this->query = $query;
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(
+        protected string $path,
+        protected MatcherInterface $query,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
     public function __clone()
     {
         $this->query = clone $this->query;
-        $this->innerHits = $this->innerHits ? clone $this->innerHits: null;
+        $this->innerHits = $this->innerHits ? clone $this->innerHits : null;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['path'] = $this->path;

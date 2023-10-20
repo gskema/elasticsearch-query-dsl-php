@@ -2,31 +2,28 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 use InvalidArgumentException;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-bucket-adjacency-matrix-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-bucket-adjacency-matrix-aggregation.html
  * @see AdjacencyMatrixAggregationTest
  */
 class AdjacencyMatrixAggregation implements BucketAggregationInterface
 {
     use HasAggsTrait;
 
-    /** @var MatcherInterface[] */
-    protected $filters;
-
-    /**
-     * @param MatcherInterface[] $filtersByName
-     */
-    public function __construct(array $filtersByName)
-    {
-        if (empty($filtersByName)) {
+    public function __construct(
+        /** @var array<string, MatcherInterface> */
+        protected array $filters,
+    ) {
+        if (empty($filters)) {
             throw new InvalidArgumentException('Expected at least one filter, got none');
         }
-        $this->filters = $filtersByName;
     }
 
     public function __clone()
@@ -36,17 +33,15 @@ class AdjacencyMatrixAggregation implements BucketAggregationInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
-        $body['adjacency_matrix']['filters'] = array_map(function (MatcherInterface $filter) {
-            return $filter->jsonSerialize();
-        }, $this->filters);
+        $body['adjacency_matrix']['filters'] = obj_array_json_serialize($this->filters);
 
-        if ($this->hasAggs()) {
-            $body['aggs'] = $this->jsonSerializeAggs();
+        if (!empty($this->aggs)) {
+            $body['aggs'] = obj_array_json_serialize($this->aggs);
         }
 
         return $body;

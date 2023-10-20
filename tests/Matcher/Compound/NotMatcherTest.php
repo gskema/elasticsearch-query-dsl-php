@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatchAllMatcher;
 
-class NotMatcherTest extends AbstractJsonSerializeTest
+final class NotMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -27,9 +27,9 @@ class NotMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new NotMatcher(new MatchAllMatcher());
-        $this->assertInstanceOf(NotMatcher::class, $matcher1);
+        self::assertInstanceOf(NotMatcher::class, $matcher1);
     }
 }

@@ -2,13 +2,13 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Sorter;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\GeoHash;
 use Gskema\ElasticSearchQueryDSL\Model\GeoPoint;
 
-class GeoDistanceSorterTest extends AbstractJsonSerializeTest
+final class GeoDistanceSorterTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -70,21 +70,21 @@ class GeoDistanceSorterTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $sorter = new GeoDistanceSorter('field1', [new GeoHash('abc123')]);
 
-        $this->assertEquals('field1', $sorter->getField());
-        $this->assertEquals([new GeoHash('abc123')], $sorter->getOrigins());
+        self::assertEquals('field1', $sorter->getField());
+        self::assertEquals([new GeoHash('abc123')], $sorter->getOrigins());
 
         $sorter->setOrder('order1');
         $sorter->setMode('mode1');
         $sorter->setUnit('km');
         $sorter->setOption('key1', 'value1');
 
-        $this->assertEquals('order1', $sorter->getOrder());
-        $this->assertEquals('mode1', $sorter->getMode());
-        $this->assertEquals('km', $sorter->getUnit());
-        $this->assertEquals('value1', $sorter->getOption('key1'));
+        self::assertEquals('order1', $sorter->getOrder());
+        self::assertEquals('mode1', $sorter->getMode());
+        self::assertEquals('km', $sorter->getUnit());
+        self::assertEquals('value1', $sorter->getOption('key1'));
     }
 }

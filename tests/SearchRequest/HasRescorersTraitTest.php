@@ -7,19 +7,21 @@ use Gskema\ElasticSearchQueryDSL\Matcher\MatchNoneMatcher;
 use Gskema\ElasticSearchQueryDSL\Rescorer\QueryRescorer;
 use PHPUnit\Framework\TestCase;
 
-class HasRescorersTraitTest extends TestCase
+final class HasRescorersTraitTest extends TestCase
 {
-    public function testMethods()
+    public function testMethods(): void
     {
         /** @var HasRescorersTrait $object */
-        $object = $this->getMockBuilder(HasRescorersTrait::class)->getMockForTrait();
+        $object = new class {
+            use HasRescorersTrait;
+        };
 
         $object->setRescorers([
             new QueryRescorer(new MatchAllMatcher())
         ]);
         $object->addRescorer(new QueryRescorer(new MatchNoneMatcher()));
 
-        $this->assertEquals([
+        self::assertEquals([
             new QueryRescorer(new MatchAllMatcher()),
             new QueryRescorer(new MatchNoneMatcher()),
 

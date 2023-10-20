@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\SourceFilter;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class DisabledSourceFilterTest extends AbstractJsonSerializeTest
+final class DisabledSourceFilterTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 

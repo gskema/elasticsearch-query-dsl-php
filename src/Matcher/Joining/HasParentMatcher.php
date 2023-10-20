@@ -4,30 +4,30 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\Joining;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-has-parent-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-has-parent-query.html
  * @see HasParentMatcherTest
- *
- * @options 'score' => true,
- *          'ignore_unmapped' => true,
- *          '_name' => '?',
  */
+#[Options([
+    'score' => true,
+    'ignore_unmapped' => true,
+    '_name' => '?',
+])]
 class HasParentMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
     use HasInnerHitsTrait;
 
-    /** @var string */
-    protected $parentType;
-
-    /** @var MatcherInterface */
-    protected $query;
-
-    public function __construct(string $parentType, MatcherInterface $query, array $options = [])
-    {
-        $this->parentType = $parentType;
-        $this->query = $query;
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(
+        protected string $parentType,
+        protected MatcherInterface $query,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
@@ -38,9 +38,9 @@ class HasParentMatcher implements MatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['parent_type'] = $this->parentType;

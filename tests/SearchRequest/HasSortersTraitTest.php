@@ -6,19 +6,21 @@ use Gskema\ElasticSearchQueryDSL\Sorter\FieldSorter;
 use Gskema\ElasticSearchQueryDSL\Sorter\RawSorter;
 use PHPUnit\Framework\TestCase;
 
-class HasSortersTraitTest extends TestCase
+final class HasSortersTraitTest extends TestCase
 {
-    public function testMethods()
+    public function testMethods(): void
     {
         /** @var HasSortersTrait $object */
-        $object = $this->getMockBuilder(HasSortersTrait::class)->getMockForTrait();
+        $object = new class {
+            use HasSortersTrait;
+        };
 
         $object->setSorters([
             new FieldSorter('field1')
         ]);
         $object->addSorter(new RawSorter('field2'));
 
-        $this->assertEquals([
+        self::assertEquals([
             new FieldSorter('field1'),
             new RawSorter('field2'),
         ], $object->getSorters());

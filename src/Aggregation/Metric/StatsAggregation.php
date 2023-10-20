@@ -2,16 +2,19 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
+use Gskema\ElasticSearchQueryDSL\Options;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-metrics-stats-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-metrics-stats-aggregation.html
  * @see StatsAggregationTest
- *
- * @options 'missing' => 0,
  */
+#[Options([
+    'missing' => 0,
+])]
 class StatsAggregation extends AbstractNumericMetricAggregation
 {
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function getType(): string
     {

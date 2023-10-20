@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline\Sibling;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class AvgBucketAggregationTest extends AbstractJsonSerializeTest
+final class AvgBucketAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -24,11 +24,11 @@ class AvgBucketAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg = (new AvgBucketAggregation('path1'))
             ->setOption('key1', 'value1');
 
-        $this->assertInstanceOf(AvgBucketAggregation::class, $agg);
+        self::assertInstanceOf(AvgBucketAggregation::class, $agg);
     }
 }

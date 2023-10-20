@@ -2,6 +2,6 @@
 
 namespace Gskema\ElasticSearchQueryDSL;
 
-class RawFragmentTest extends AbstractRawFragmentTest
+class RawFragmentTest extends AbstractRawFragmentTestCase
 {
 }

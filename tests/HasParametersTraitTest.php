@@ -4,38 +4,37 @@ namespace Gskema\ElasticSearchQueryDSL;
 
 use PHPUnit\Framework\TestCase;
 
-class HasParametersTraitTest extends TestCase
+final class HasParametersTraitTest extends TestCase
 {
-    public function testMethods()
+    public function testMethods(): void
     {
         /** @var HasParametersTrait $givenObject */
-        $givenObject = $this
-            ->getMockBuilder(HasParametersTrait::class)
-            ->setMethods(null)
-            ->getMockForTrait();
+        $givenObject = new class {
+            use HasParametersTrait;
+        };
 
-        $this->assertEquals(false, $givenObject->hasParameters());
-        $this->assertEquals(false, $givenObject->hasParameter('key1'));
+        self::assertEquals(false, $givenObject->hasParameters());
+        self::assertEquals(false, $givenObject->hasParameter('key1'));
 
         $givenObject->setParameters(['key1' => 'value1']);
         $givenObject->setParameter('key2', 'value2');
 
-        $this->assertEquals(true, $givenObject->hasParameters());
-        $this->assertEquals(true, $givenObject->hasParameter('key1'));
-        $this->assertEquals(true, $givenObject->hasParameter('key2'));
-        $this->assertEquals(false, $givenObject->hasParameter('key3'));
+        self::assertEquals(true, $givenObject->hasParameters());
+        self::assertEquals(true, $givenObject->hasParameter('key1'));
+        self::assertEquals(true, $givenObject->hasParameter('key2'));
+        self::assertEquals(false, $givenObject->hasParameter('key3'));
 
-        $this->assertEquals('value1', $givenObject->getParameter('key1'));
-        $this->assertEquals('value2', $givenObject->getParameter('key2'));
-        $this->assertEquals([
+        self::assertEquals('value1', $givenObject->getParameter('key1'));
+        self::assertEquals('value2', $givenObject->getParameter('key2'));
+        self::assertEquals([
             'key1' => 'value1',
             'key2' => 'value2',
         ], $givenObject->getParameters());
 
         $givenObject->removeParameter('key2');
-        $this->assertEquals(['key1' => 'value1'], $givenObject->getParameters());
+        self::assertEquals(['key1' => 'value1'], $givenObject->getParameters());
 
         $givenObject->removeParameters();
-        $this->assertEquals([], $givenObject->getParameters());
+        self::assertEquals([], $givenObject->getParameters());
     }
 }

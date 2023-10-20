@@ -4,6 +4,6 @@ namespace Gskema\ElasticSearchQueryDSL\Sorter;
 
 use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
 
-class RawSorterTest extends RawFragmentTest
+final class RawSorterTest extends RawFragmentTest
 {
 }

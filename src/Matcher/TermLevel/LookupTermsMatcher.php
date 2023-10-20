@@ -4,55 +4,33 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\TermLevel;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-terms-query.html#query-dsl-terms-lookup
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-terms-query.html#query-dsl-terms-lookup
  * @see LookupTermsMatcherTest
- *
- * @options '_name' => '?',
  */
+#[Options([
+    '_name' => '?',
+])]
 class LookupTermsMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $field;
-
-    /** @var string */
-    protected $index;
-
-    /** @var string */
-    protected $type;
-
-    /** @var string */
-    protected $id;
-
-    /** @var string */
-    protected $path;
-
-    /** @var string|null */
-    protected $routing = null;
-
     public function __construct(
-        string $field,
-        string $index,
-        string $type,
-        string $id,
-        string $path,
-        string $routing = null
+        protected string $field,
+        protected string $index,
+        protected string $type,
+        protected string $id,
+        protected string $path,
+        protected ?string $routing = null,
     ) {
-        $this->field = $field;
-        $this->index = $index;
-        $this->type = $type;
-        $this->id = $id;
-        $this->path = $path;
-        $this->routing = $routing;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body[$this->field] = [

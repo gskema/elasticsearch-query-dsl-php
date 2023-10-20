@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 
-class ValueCountAggregationTest extends AbstractJsonSerializeTest
+final class ValueCountAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -36,12 +36,12 @@ class ValueCountAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg1 = ValueCountAggregation::fromField('field1');
-        $this->assertInstanceOf(ValueCountAggregation::class, $agg1);
+        self::assertInstanceOf(ValueCountAggregation::class, $agg1);
 
         $agg2 = ValueCountAggregation::fromScript(new InlineScript('source1'));
-        $this->assertInstanceOf(ValueCountAggregation::class, $agg2);
+        self::assertInstanceOf(ValueCountAggregation::class, $agg2);
     }
 }

@@ -4,44 +4,40 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\FullText;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-common-terms-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-common-terms-query.html
  * @see CommonTermsMatcherTest
- *
- * @options 'minimum_should_match' => ?, ['low_freq' => 2, 'high_freq' => 3],
- *          'low_freq_operator' => 'and', 'or',
- *          'high_freq_operator' => 'and', 'or',
- *          'boost' => 2.0,
- *          'analyzer' => 'standard',
- *          'disable_coord' => true,
- *          '_name' => '?',
  */
+#[Options([
+    'minimum_should_match' => '?', // ['low_freq' => 2, 'high_freq' => 3],
+    'low_freq_operator' => 'and', // 'or',
+    'high_freq_operator' => 'and',// 'or',
+    'boost' => 2.0,
+    'analyzer' => 'standard',
+    '_name' => '?',
+])]
 class CommonTermsMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $field;
-
-    /** @var string */
-    protected $query;
-
-    /** @var float */
-    protected $cutoffFrequency;
-
-    public function __construct(string $field, string $query, float $cutoffFrequency, array $options = [])
-    {
-        $this->field = $field;
-        $this->query = $query;
-        $this->cutoffFrequency = $cutoffFrequency;
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(
+        protected string $field,
+        protected string $query,
+        protected float $cutoffFrequency,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [
             'query' => $this->query,

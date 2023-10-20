@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatchAllMatcher;
 
-class ConstantScoreMatcherTest extends AbstractJsonSerializeTest
+final class ConstantScoreMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -29,12 +29,12 @@ class ConstantScoreMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new ConstantScoreMatcher(
             new MatchAllMatcher(),
             5
         );
-        $this->assertInstanceOf(ConstantScoreMatcher::class, $matcher1);
+        self::assertInstanceOf(ConstantScoreMatcher::class, $matcher1);
     }
 }

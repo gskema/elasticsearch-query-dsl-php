@@ -2,47 +2,47 @@
 
 namespace Gskema\ElasticSearchQueryDSL\ScoreFunction;
 
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-function-score-query.html#_supported_decay_functions
- *
- * @options 'offset' => 0,
- *          'decay' => 0.5,
- *          'multi_value_mode' => 'min', 'max', 'avg', 'sum',
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-function-score-query.html#_supported_decay_functions
  */
+#[Options([
+    'offset' => 0,
+    'decay' => 0.5,
+    'multi_value_mode' => 'min', // 'max', 'avg', 'sum',
+])]
 abstract class AbstractDecayScoreFunction implements ScoreFunctionInterface
 {
-    use HasOptionsTrait;
-
-    /** @var string */
-    protected $field;
-
-    /** @var string|float|int */
-    protected $origin;
-
-    /** @var string|float|int */
-    protected $scale;
-
-    public function __construct(string $field, $origin, $scale, array $options = [])
-    {
-        $this->field = $field;
-        $this->origin = $origin;
-        $this->scale = $scale;
-        $this->options = $options;
+    public function __construct(
+        protected string $field,
+        protected string|float|int $origin,
+        protected string|float|int $scale,
+        protected string|float|int|null $offset = null,
+        protected string|float|int|null $decay = null,
+        protected ?string $multiValueMode = null, // 'min', 'max', 'avg', 'sum'
+    ) {
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [
             'field' => $this->field,
             'origin' => $this->origin,
             'scale' => $this->scale,
         ];
-        $body += $this->options;
+        if (null !== $this->offset) {
+            $body['offset'] = $this->offset;
+        }
+        if (null !== $this->decay) {
+            $body['decay'] = $this->decay;
+        }
+        if (null !== $this->multiValueMode) {
+            $body['multi_value_mode'] = $this->multiValueMode;
+        }
 
         return [
             $this->getFunctionType() => $body,

@@ -2,23 +2,22 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-bucket-nested-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-bucket-nested-aggregation.html
  * @see NestedAggregationTest
  */
 class NestedAggregation implements BucketAggregationInterface
 {
     use HasAggsTrait;
 
-    /** @var string */
-    protected $path;
-
-    public function __construct(string $path)
-    {
-        $this->path = $path;
+    public function __construct(
+        protected string $path,
+    ) {
     }
 
     public function __clone()
@@ -27,15 +26,15 @@ class NestedAggregation implements BucketAggregationInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['nested']['path'] = $this->path;
 
-        if ($this->hasAggs()) {
-            $body['aggs'] = $this->jsonSerializeAggs();
+        if (!empty($this->aggs)) {
+            $body['aggs'] = obj_array_json_serialize($this->aggs);
         }
 
         return $body;

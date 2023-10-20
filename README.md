@@ -1,7 +1,8 @@
 # ElasticSearch Query DSL
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
-[![Build Status][ico-travis]][link-travis]
+[![Software License][ico-license]](LICENSE.md)
+[![Build Status][ico-build]][link-build]
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
@@ -13,12 +14,14 @@ Feature complete, object oriented, composable, extendable ElasticSearch query DS
 - Dependency free
 - Can be used with any PHP ElasticSearch client
 - Fully interfaced, ready for custom classes
-- Explicit class and property naming, fully matches produced JSON
+- Explicit class and property naming, fully matches produced JSON and ElasticSearch docs
 - All configuration options are listed inside classes, links to documentation
 - Classes can be easily composed, extended
 - Design that is easy to test and maintain
-- Chainable methods
+- Usage of setters/getters so that everything can be inlined and chained.
 - Fully working `::__clone()` methods
+- Extendable code: no usage of `private`, `final` or `readonly`
+- Basic objects created on `__construct`, no unnecessary body build logic until `jsonSerialize()` is called
 
 ## Versions
 
@@ -26,7 +29,8 @@ Most of the classes should be compatible with any ElasticSearch versions.
 If something is not compatible or not supported, `Raw*` or custom classes can be used.
 
 | Package version | ElasticSearch version |
-| ----------------| ----------------------|
+|-----------------|-----------------------|
+| >=6.0.0 <7.0.0  | >=6.0.0 <7.0.0        |
 | >=5.0.0 <6.0.0  | >=5.0.0 <6.0.0        |
 
 Because major version number follows ElasticSearch major version number, second number is reserved for breaking changes.
@@ -56,6 +60,14 @@ $searchRequest->setAgg(
 (new ElasticSearchClient())->search($searchRequest->jsonSerialize());
 ```
 
+## Matcher?
+
+Request object that is received by ElasticSearch `/_search/` has many properties and sub-properties
+like `query`, `filter`, `post_filter`, etc.
+
+To avoid convoluted expressions like `(new SearchRequest())->setQuery((new BoolQuery()->addFilter(new TermQuery('))`
+keyword `matcher` was explicitly chosen.
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
@@ -75,14 +87,14 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/gskema/elasticsearch-query-dsl-php.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/gskema/elasticsearch-query-dsl-php/master.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-build]: https://img.shields.io/github/actions/workflow/status/gskema/elasticsearch-query-dsl-php/ci.yml?branch=81.x
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/gskema/elasticsearch-query-dsl-php.svg?style=flat-square
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/gskema/elasticsearch-query-dsl-php.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/gskema/elasticsearch-query-dsl-php.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/gskema/elasticsearch-query-dsl-php
-[link-travis]: https://travis-ci.org/gskema/elasticsearch-query-dsl-php
+[link-build]: https://github.com/gskema/elasticsearch-query-dsl-php/actions
 [link-scrutinizer]: https://scrutinizer-ci.com/g/gskema/elasticsearch-query-dsl-php/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/gskema/elasticsearch-query-dsl-php
 [link-downloads]: https://packagist.org/packages/gskema/elasticsearch-query-dsl-php
-[link-contributors]: ../../contributors

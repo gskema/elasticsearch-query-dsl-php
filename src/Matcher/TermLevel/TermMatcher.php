@@ -4,40 +4,35 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\TermLevel;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-term-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-term-query.html
  * @see TermMatcherTest
- *
- * @options 'boost' => 1.0,
- *          '_name' => '?',
  */
+#[Options([
+    'boost' => 1.0,
+    '_name' => '?',
+])]
 class TermMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $field;
-
-    /** @var string|float|int|bool|null */
-    protected $value;
-
     /**
-     * @param string                     $field
-     * @param string|float|int|bool|null $value
-     * @param array                      $options
+     * @param array<string, mixed> $options
      */
-    public function __construct(string $field, $value, array $options = [])
-    {
-        $this->field = $field;
-        $this->value = $value;
+    public function __construct(
+        protected string $field,
+        protected string|float|int|bool|null $value,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         if (!empty($this->options)) {
             $body = [];

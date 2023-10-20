@@ -5,12 +5,14 @@ namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 use Gskema\ElasticSearchQueryDSL\Suggester\TermSuggester;
 use PHPUnit\Framework\TestCase;
 
-class HasSuggestersTraitTest extends TestCase
+final class HasSuggestersTraitTest extends TestCase
 {
-    public function testMethods()
+    public function testMethods(): void
     {
         /** @var HasSuggestersTrait $object */
-        $object = $this->getMockBuilder(HasSuggestersTrait::class)->getMockForTrait();
+        $object = new class {
+            use HasSuggestersTrait;
+        };
 
         $object
             ->setSuggesters([
@@ -20,9 +22,9 @@ class HasSuggestersTraitTest extends TestCase
             ->setSuggester('key3', new TermSuggester('field3', 'text3'))
             ->removeSuggester('key1');
 
-        $this->assertEquals(null, $object->getSuggester('key1'));
-        $this->assertEquals(new TermSuggester('field2', 'text2'), $object->getSuggester('key2'));
-        $this->assertEquals([
+        self::assertEquals(null, $object->getSuggester('key1'));
+        self::assertEquals(new TermSuggester('field2', 'text2'), $object->getSuggester('key2'));
+        self::assertEquals([
             'key2' => new TermSuggester('field2', 'text2'),
             'key3' => new TermSuggester('field3', 'text3'),
         ], $object->getSuggesters());

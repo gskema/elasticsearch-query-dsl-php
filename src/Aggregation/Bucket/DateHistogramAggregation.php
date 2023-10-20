@@ -2,88 +2,102 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
+use InvalidArgumentException;
+
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-bucket-datehistogram-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-bucket-datehistogram-aggregation.html
  * @see DateHistogramAggregationTest
- *
- * @options 'format' => 'yyyy-MM-dd',
- *          'time_zone' => '-01:00'
- *          'offset' => '+6h'
- *          'keyed' => true,
- *          'order' => ['_key' => 'desc'],
- *          'min_doc_count' => 1,
- *          'missing' => '2000/01/01',
- *          'extended_bounds' => ['min' => '2000/01/01', 'max' => '2030/01/01'],
  */
+#[Options([
+    'format' => 'yyyy-MM-dd',
+    'time_zone' => '-01:00',
+    'offset' => '+6h',
+    'keyed' => true,
+    'order' => ['_key' => 'desc'],
+    'min_doc_count' => 1,
+    'missing' => '2000/01/01',
+    'extended_bounds' => ['min' => '2000/01/01', 'max' => '2030/01/01'],
+])]
 class DateHistogramAggregation implements BucketAggregationInterface
 {
     use HasOptionsTrait;
     use HasAggsTrait;
 
-    /** @var array */
-    protected $body;
-
     /**
-     * 'year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second'
-     * '?d', '?h', '?m, '?s', '?ms', '?micros', '?nanos'
-     *
-     * @var string
+     * @param array<string, mixed> $options
      */
-    protected $interval;
-
-    protected function __construct(array $body, string $interval, array $options = [])
-    {
-        $this->body = $body;
-        $this->interval = $interval;
+    protected function __construct(
+        protected ?string $field,
+        protected ?ScriptInterface $script,
+        // 'year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second'
+        // '?d', '?h', '?m, '?s', '?ms', '?micros', '?nanos'
+        protected string $interval,
+        array $options = [],
+    ) {
+        if (null === $field && null === $script) {
+            throw new InvalidArgumentException('Expected at least one to be not null: field or script.');
+        }
         $this->options = $options;
     }
 
     public function __clone()
     {
+        if (null !== $this->script) {
+            $this->script = clone $this->script;
+        }
         $this->aggs = array_clone($this->aggs);
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public static function fromField(
         string $field,
         string $interval,
         array $options = [],
-        InlineScript $valueScript = null
-    ): DateHistogramAggregation {
-        $body = [];
-        $body['field'] = $field;
-        if (null !== $valueScript) {
-            $body['script'] = $valueScript->jsonSerialize();
-        }
-
-        return new static($body, $interval, $options);
-    }
-
-    public static function fromScript(
-        ScriptInterface $script,
-        string $interval,
-        array $options = []
-    ): DateHistogramAggregation {
-        return new static(['script' => $script->jsonSerialize()], $interval, $options);
+        ?InlineScript $valueScript = null,
+    ): static {
+        return new static($field, $valueScript, $interval, $options);
     }
 
     /**
-     * @inheritdoc
+     * @param array<string, mixed> $options
      */
-    public function jsonSerialize()
-    {
-        $body = [];
-        $body['date_histogram'] = $this->body;
-        $body['date_histogram']['interval'] = $this->interval;
-        $body['date_histogram'] += $this->options;
+    public static function fromScript(
+        ScriptInterface $script,
+        string $interval,
+        array $options = [],
+    ): static {
+        return new static(null, $script, $interval, $options);
+    }
 
-        if ($this->hasAggs()) {
-            $body['aggs'] = $this->jsonSerializeAggs();
+    /**
+     * @inheritDoc
+     */
+    public function jsonSerialize(): mixed
+    {
+        $aggBody = [];
+        if (null !== $this->field) {
+            $aggBody['field'] = $this->field;
+        }
+        if (null !== $this->script) {
+            $aggBody['script'] = $this->script;
+        }
+        $aggBody['interval'] = $this->interval;
+        $aggBody += $this->options;
+
+        $body = [];
+        $body['date_histogram'] = $aggBody;
+        if (!empty($this->aggs)) {
+            $body['aggs'] = obj_array_json_serialize($this->aggs);
         }
 
         return $body;

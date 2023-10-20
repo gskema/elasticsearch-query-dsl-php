@@ -9,15 +9,8 @@ use JsonSerializable;
  */
 class RawFragment implements JsonSerializable
 {
-    /** @var mixed */
-    protected $body;
-
-    /**
-     * @param mixed $body
-     */
-    public function __construct($body)
+    public function __construct(protected mixed $body)
     {
-        $this->body = $body;
     }
 
     public function __clone()
@@ -30,9 +23,9 @@ class RawFragment implements JsonSerializable
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return $this->body;
     }

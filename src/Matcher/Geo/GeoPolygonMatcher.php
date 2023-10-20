@@ -2,44 +2,41 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Geo;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 use Gskema\ElasticSearchQueryDSL\Model\GeoPointInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 use InvalidArgumentException;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-geo-polygon-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-geo-polygon-query.html
  * @see GeoPolygonMatcherTest
- *
- * @options 'ignore_malformed' => true,
- *          'ignore_unmapped' => true,
- *          'validation_method' => 'IGNORE_MALFORMED', 'COERCE', 'STRICT',
- *          '_name' => '?',
  */
+#[Options([
+    'ignore_unmapped' => true,
+    'validation_method' => 'IGNORE_MALFORMED', // 'COERCE', 'STRICT',
+    '_name' => '?',
+])]
 class GeoPolygonMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $field;
-
-    /** @var GeoPointInterface[] */
-    protected $points;
-
     /**
-     * @param string                 $field
-     * @param GeoPointInterface[] $points
-     * @param array                  $options
+     * @param array<string, mixed> $options
      */
-    public function __construct(string $field, array $points, array $options = [])
-    {
+    public function __construct(
+        protected string $field,
+        /** @var GeoPointInterface[] */
+        protected array $points,
+        array $options = [],
+    ) {
         $pointCount = count($points);
         if ($pointCount < 3) {
-            throw new InvalidArgumentException('Expected at least 3 geo polygon points, got '.$pointCount);
+            throw new InvalidArgumentException('Expected at least 3 geo polygon points, got ' . $pointCount);
         }
-        $this->field = $field;
-        $this->points = $points;
         $this->options = $options;
     }
 
@@ -49,13 +46,11 @@ class GeoPolygonMatcher implements MatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
-        $rawPoints = array_map(function (GeoPointInterface $point) {
-            return $point->jsonSerialize();
-        }, $this->points);
+        $rawPoints = obj_array_json_serialize($this->points);
 
         $body = [];
         $body[$this->field]['points'] = $rawPoints;

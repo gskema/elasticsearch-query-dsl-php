@@ -4,31 +4,24 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-boosting-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-boosting-query.html
  * @see BoostingMatcherTest
- *
- * @options '_name' => '?',
  */
+#[Options([
+    '_name' => '?',
+])]
 class BoostingMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var MatcherInterface */
-    protected $positiveQuery;
-
-    /** @var MatcherInterface */
-    protected $negativeQuery;
-
-    /** @var float */
-    protected $negativeBoost;
-
-    public function __construct(MatcherInterface $positiveQuery, MatcherInterface $negativeQuery, float $negativeBoost)
-    {
-        $this->positiveQuery = $positiveQuery;
-        $this->negativeQuery = $negativeQuery;
-        $this->negativeBoost = $negativeBoost;
+    public function __construct(
+        protected MatcherInterface $positiveQuery,
+        protected MatcherInterface $negativeQuery,
+        protected float $negativeBoost,
+    ) {
     }
 
     public function __clone()
@@ -38,9 +31,9 @@ class BoostingMatcher implements MatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [
             'positive' => $this->positiveQuery->jsonSerialize(),

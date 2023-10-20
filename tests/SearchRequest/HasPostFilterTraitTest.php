@@ -5,15 +5,17 @@ namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatchAllMatcher;
 use PHPUnit\Framework\TestCase;
 
-class HasPostFilterTraitTest extends TestCase
+final class HasPostFilterTraitTest extends TestCase
 {
-    public function testMethods()
+    public function testMethods(): void
     {
         /** @var HasPostFilterTrait $object */
-        $object = $this->getMockBuilder(HasPostFilterTrait::class)->getMockForTrait();
+        $object = new class {
+            use HasPostFilterTrait;
+        };
 
         $object->setPostFilter(new MatchAllMatcher());
 
-        $this->assertEquals(new MatchAllMatcher(), $object->getPostFilter());
+        self::assertEquals(new MatchAllMatcher(), $object->getPostFilter());
     }
 }

@@ -3,37 +3,36 @@
 namespace Gskema\ElasticSearchQueryDSL\Matcher;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticSearchQueryDSL\Options;
 use stdClass;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-match-all-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-match-all-query.html
  * @see MatchAllMatcherTest
- *
- * @options 'boost' => 1.0,
- *          '_name' => '?',
  */
+#[Options([
+    'boost' => 1.0,
+    '_name' => '?',
+])]
 class MatchAllMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public function __construct(array $options = [])
     {
         $this->options = $options;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
-        if (!empty($this->options)) {
-            $body = $this->options;
-        } else {
-            $body = new stdClass();
-        }
-
         return [
-            'match_all' => $body,
+            'match_all' => $this->options ?: new stdClass(),
         ];
     }
 }

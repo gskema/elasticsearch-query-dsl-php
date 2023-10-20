@@ -4,23 +4,22 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-bool-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-bool-query.html
  * @see NotMatcherTest
- *
- * @options '_name' => '?',
  */
+#[Options([
+    '_name' => '?',
+])]
 class NotMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var MatcherInterface */
-    protected $matcher;
-
-    public function __construct(MatcherInterface $matcher)
-    {
-        $this->matcher = $matcher;
+    public function __construct(
+        protected MatcherInterface $matcher,
+    ) {
     }
 
     public function __clone()
@@ -29,9 +28,9 @@ class NotMatcher implements MatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['must_not'] = $this->matcher->jsonSerialize();

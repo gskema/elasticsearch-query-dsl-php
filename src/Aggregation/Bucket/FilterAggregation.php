@@ -2,24 +2,23 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-bucket-filter-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-bucket-filter-aggregation.html
  * @see FilterAggregationTest
  */
 class FilterAggregation implements BucketAggregationInterface
 {
     use HasAggsTrait;
 
-    /** @var MatcherInterface */
-    protected $filter;
-
-    public function __construct(MatcherInterface $filter)
-    {
-        $this->filter = $filter;
+    public function __construct(
+        protected MatcherInterface $filter,
+    ) {
     }
 
     public function __clone()
@@ -29,15 +28,15 @@ class FilterAggregation implements BucketAggregationInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['filter'] = $this->filter->jsonSerialize();
 
-        if ($this->hasAggs()) {
-            $body['aggs'] = $this->jsonSerializeAggs();
+        if (!empty($this->aggs)) {
+            $body['aggs'] = obj_array_json_serialize($this->aggs);
         }
 
         return $body;

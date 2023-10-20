@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\TermLevel;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class TermsMatcherTest extends AbstractJsonSerializeTest
+final class TermsMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -24,9 +24,9 @@ class TermsMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new TermsMatcher('field1', ['value1', 'value2']);
-        $this->assertInstanceOf(TermsMatcher::class, $matcher1);
+        self::assertInstanceOf(TermsMatcher::class, $matcher1);
     }
 }

@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Suggester\ContextQuery;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\GeoPoint;
 
-class GeoLocationContextQueryTest extends AbstractJsonSerializeTest
+final class GeoLocationContextQueryTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -54,11 +54,11 @@ class GeoLocationContextQueryTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $ctxQuery = (new GeoLocationContextQuery())
             ->addGeoPoint(new GeoPoint(1.1, 1.1), 5, 1.0, ['1km', '2km']);
 
-        $this->assertInstanceOf(GeoLocationContextQuery::class, $ctxQuery);
+        self::assertInstanceOf(GeoLocationContextQuery::class, $ctxQuery);
     }
 }

@@ -3,30 +3,33 @@
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-metrics-geobounds-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-metrics-geobounds-aggregation.html
  * @see GeoBoundsAggregationTest
- *
- * @options 'wrap_longitude' => true,
  */
+#[Options([
+    'wrap_longitude' => true,
+])]
 class GeoBoundsAggregation implements MetricAggregationInterface
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $field;
-
-    public function __construct(string $field, array $options = [])
-    {
-        $this->field = $field;
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(
+        protected string $field,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['field'] = $this->field;

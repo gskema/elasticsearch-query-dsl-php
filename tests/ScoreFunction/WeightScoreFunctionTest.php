@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\ScoreFunction;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class WeightScoreFunctionTest extends AbstractJsonSerializeTest
+final class WeightScoreFunctionTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -22,10 +22,10 @@ class WeightScoreFunctionTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $function = (new WeightScoreFunction(5));
 
-        $this->assertInstanceOf(WeightScoreFunction::class, $function);
+        self::assertInstanceOf(WeightScoreFunction::class, $function);
     }
 }

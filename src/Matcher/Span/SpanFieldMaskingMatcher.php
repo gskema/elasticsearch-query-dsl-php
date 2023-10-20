@@ -3,27 +3,23 @@
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-span-field-masking-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-span-field-masking-query.html
  * @see SpanFieldMaskingMatcherTest
- *
- * @options '_name' => '?',
  */
+#[Options([
+    '_name' => '?',
+])]
 class SpanFieldMaskingMatcher implements SpanMatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $field;
-
-    /** @var SpanMatcherInterface */
-    protected $matcher;
-
-    public function __construct(string $field, SpanMatcherInterface $matcher)
-    {
-        $this->field = $field;
-        $this->matcher = $matcher;
+    public function __construct(
+        protected string $field,
+        protected SpanMatcherInterface $matcher,
+    ) {
     }
 
     public function __clone()
@@ -32,9 +28,9 @@ class SpanFieldMaskingMatcher implements SpanMatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [
             'query' => $this->matcher->jsonSerialize(),

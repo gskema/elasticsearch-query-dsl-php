@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Suggester;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class CompletionSuggesterTest extends AbstractJsonSerializeTest
+final class CompletionSuggesterTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -37,12 +37,12 @@ class CompletionSuggesterTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $suggester1 = CompletionSuggester::fromPrefix('field1', 'prefix1');
-        $this->assertInstanceOf(CompletionSuggester::class, $suggester1);
+        self::assertInstanceOf(CompletionSuggester::class, $suggester1);
 
         $suggester2 = CompletionSuggester::fromRegex('field1', 'regex1');
-        $this->assertInstanceOf(CompletionSuggester::class, $suggester2);
+        self::assertInstanceOf(CompletionSuggester::class, $suggester2);
     }
 }

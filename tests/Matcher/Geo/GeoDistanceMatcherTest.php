@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Geo;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\GeoPoint;
 
-class GeoDistanceMatcherTest extends AbstractJsonSerializeTest
+final class GeoDistanceMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -32,7 +32,7 @@ class GeoDistanceMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new GeoDistanceMatcher(
             'field1',
@@ -40,6 +40,6 @@ class GeoDistanceMatcherTest extends AbstractJsonSerializeTest
             '50km',
             ['validation_method' => 'IGNORE_MALFORMED']
         );
-        $this->assertInstanceOf(GeoDistanceMatcher::class, $matcher1);
+        self::assertInstanceOf(GeoDistanceMatcher::class, $matcher1);
     }
 }

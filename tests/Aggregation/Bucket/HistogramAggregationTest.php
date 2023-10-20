@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 
-class HistogramAggregationTest extends AbstractJsonSerializeTest
+final class HistogramAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -47,12 +47,12 @@ class HistogramAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg1 = HistogramAggregation::fromField('field1', 5.0, [], new InlineScript('source1'));
-        $this->assertInstanceOf(HistogramAggregation::class, $agg1);
+        self::assertInstanceOf(HistogramAggregation::class, $agg1);
 
         $agg2 = HistogramAggregation::fromScript(new InlineScript('source1'), 5.0);
-        $this->assertInstanceOf(HistogramAggregation::class, $agg2);
+        self::assertInstanceOf(HistogramAggregation::class, $agg2);
     }
 }

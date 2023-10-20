@@ -5,11 +5,11 @@ namespace Gskema\ElasticSearchQueryDSL;
 use ReflectionClass;
 use stdClass;
 
-abstract class AbstractRawFragmentTest extends AbstractJsonSerializeTest
+abstract class AbstractRawFragmentTestCase extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
-        $className = substr((new ReflectionClass($this))->getName(), 0, -4);
+        $className = substr((new ReflectionClass(static::class))->getName(), 0, -4);
 
         $dataSets = [];
 

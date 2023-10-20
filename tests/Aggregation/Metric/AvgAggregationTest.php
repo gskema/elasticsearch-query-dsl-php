@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 
-class AvgAggregationTest extends AbstractJsonSerializeTest
+final class AvgAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -49,12 +49,12 @@ class AvgAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg1 = AvgAggregation::fromField('field1', ['missing' => 0], new InlineScript('source1'));
-        $this->assertInstanceOf(AvgAggregation::class, $agg1);
+        self::assertInstanceOf(AvgAggregation::class, $agg1);
 
         $agg2 = AvgAggregation::fromScript(new InlineScript('source1'));
-        $this->assertInstanceOf(AvgAggregation::class, $agg2);
+        self::assertInstanceOf(AvgAggregation::class, $agg2);
     }
 }

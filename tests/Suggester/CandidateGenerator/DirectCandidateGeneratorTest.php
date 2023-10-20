@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Suggester\CandidateGenerator;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class DirectCandidateGeneratorTest extends AbstractJsonSerializeTest
+final class DirectCandidateGeneratorTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -32,10 +32,10 @@ class DirectCandidateGeneratorTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $generator = new DirectCandidateGenerator('field1', ['size' => 1]);
 
-        $this->assertInstanceOf(DirectCandidateGenerator::class, $generator);
+        self::assertInstanceOf(DirectCandidateGenerator::class, $generator);
     }
 }

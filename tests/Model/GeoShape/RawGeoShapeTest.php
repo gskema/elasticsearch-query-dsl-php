@@ -4,6 +4,6 @@ namespace Gskema\ElasticSearchQueryDSL\Model\GeoShape;
 
 use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
 
-class RawGeoShapeTest extends RawFragmentTest
+final class RawGeoShapeTest extends RawFragmentTest
 {
 }

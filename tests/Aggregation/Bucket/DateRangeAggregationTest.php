@@ -2,25 +2,27 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class DateRangeAggregationTest extends AbstractJsonSerializeTest
+final class DateRangeAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
         // #0
         $dataSets[] = [
             // language=JSON
-            '{ 
+            '{
                 "date_range": {
                     "field": "field1",
-                    "ranges": {
+                    "ranges": [
+                      {
                         "from": "2016/02/01",
                         "to": "now/d",
                         "key": "custom_bucket_key"
-                    }
+                      }
+                    ]
                 },
                 "aggs": {
                     "key1": {
@@ -31,9 +33,11 @@ class DateRangeAggregationTest extends AbstractJsonSerializeTest
             (new DateRangeAggregation(
                 'field1',
                 [
-                    'from' => '2016/02/01',
-                    'to' => 'now/d',
-                    'key' => 'custom_bucket_key'
+                    [
+                        'from' => '2016/02/01',
+                        'to' => 'now/d',
+                        'key' => 'custom_bucket_key'
+                    ]
                 ]
             ))->setAgg('key1', new GlobalAggregation()),
         ];
@@ -41,16 +45,18 @@ class DateRangeAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg = new DateRangeAggregation(
             'field1',
             [
-                'from' => '2016/02/01',
-                'to' => 'now/d',
-                'key' => 'custom_bucket_key'
+                [
+                    'from' => '2016/02/01',
+                    'to' => 'now/d',
+                    'key' => 'custom_bucket_key'
+                ]
             ]
         );
-        $this->assertInstanceOf(DateRangeAggregation::class, $agg);
+        self::assertInstanceOf(DateRangeAggregation::class, $agg);
     }
 }

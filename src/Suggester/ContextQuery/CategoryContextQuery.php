@@ -3,15 +3,15 @@
 namespace Gskema\ElasticSearchQueryDSL\Suggester\ContextQuery;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/suggester-context.html#suggester-context-category
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/suggester-context.html#suggester-context-category
  * @see CategoryContextQueryTest
  */
 class CategoryContextQuery implements ContextQueryInterface
 {
-    /** @var array[] */
-    protected $clauses = [];
+    /** @var mixed[][] */
+    protected array $clauses = [];
 
-    public function addCategory(string $category, float $boost = null, bool $prefix = null): CategoryContextQuery
+    public function addCategory(string $category, ?float $boost = null, ?bool $prefix = null): static
     {
         $clause = [];
         $clause['context'] = $category;
@@ -28,9 +28,9 @@ class CategoryContextQuery implements ContextQueryInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $hasParameters = false;
         foreach ($this->clauses as $clause) {

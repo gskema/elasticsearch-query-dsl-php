@@ -4,6 +4,6 @@ namespace Gskema\ElasticSearchQueryDSL\Suggester\ContextQuery;
 
 use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
 
-class RawContextQueryTest extends RawFragmentTest
+final class RawContextQueryTest extends RawFragmentTest
 {
 }

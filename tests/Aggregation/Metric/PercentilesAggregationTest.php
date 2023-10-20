@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 
-class PercentilesAggregationTest extends AbstractJsonSerializeTest
+final class PercentilesAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -26,12 +26,12 @@ class PercentilesAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg1 = PercentilesAggregation::fromField('field1', ['percents' => [1, 2, 3]], new InlineScript('source1'));
-        $this->assertInstanceOf(PercentilesAggregation::class, $agg1);
+        self::assertInstanceOf(PercentilesAggregation::class, $agg1);
 
         $agg2 = PercentilesAggregation::fromScript(new InlineScript('source1'), ['percents' => [1, 2, 3]]);
-        $this->assertInstanceOf(PercentilesAggregation::class, $agg2);
+        self::assertInstanceOf(PercentilesAggregation::class, $agg2);
     }
 }

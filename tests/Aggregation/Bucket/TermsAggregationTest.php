@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 
-class TermsAggregationTest extends AbstractJsonSerializeTest
+final class TermsAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -49,12 +49,12 @@ class TermsAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg1 = TermsAggregation::fromField('field1', ['order' => ['_count' => 'asc']], new InlineScript('source1'));
-        $this->assertInstanceOf(TermsAggregation::class, $agg1);
+        self::assertInstanceOf(TermsAggregation::class, $agg1);
 
         $agg2 = TermsAggregation::fromScript(new InlineScript('source1'), ['order' => ['_count' => 'asc']]);
-        $this->assertInstanceOf(TermsAggregation::class, $agg2);
+        self::assertInstanceOf(TermsAggregation::class, $agg2);
     }
 }

@@ -3,31 +3,28 @@
 namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-stored-fields.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-stored-fields.html
  * @see HasStoredFieldsTraitTest
  */
 trait HasStoredFieldsTrait
 {
     /** @var string[]|string|null */
-    protected $storedFields;
+    protected array|string|null $storedFields = null;
 
     /**
      * @return string[]|string|null
      */
-    public function getStoredFields()
+    public function getStoredFields(): array|string|null
     {
         return $this->storedFields;
     }
 
     /**
      * @param string[]|string|null $storedFields
-     *
-     * @return $this
      */
-    public function setStoredFields($storedFields = null)
+    public function setStoredFields(array|string|null $storedFields): static
     {
         $this->storedFields = $storedFields;
-
         return $this;
     }
 }

@@ -5,15 +5,17 @@ namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 use Gskema\ElasticSearchQueryDSL\Highlighter\Highlighter;
 use PHPUnit\Framework\TestCase;
 
-class HasHighlighterTraitTest extends TestCase
+final class HasHighlighterTraitTest extends TestCase
 {
-    public function testMethods()
+    public function testMethods(): void
     {
         /** @var HasHighlighterTrait $object */
-        $object = $this->getMockBuilder(HasHighlighterTrait::class)->getMockForTrait();
+        $object = new class {
+            use HasHighlighterTrait;
+        };
 
-        $object->setHighlighter(new Highlighter(['opt1' => 'val1']));
+        $object->setHighlighter(new Highlighter(options: ['opt1' => 'val1']));
 
-        $this->assertEquals(new Highlighter(['opt1' => 'val1']), $object->getHighlighter());
+        self::assertEquals(new Highlighter(options: ['opt1' => 'val1']), $object->getHighlighter());
     }
 }

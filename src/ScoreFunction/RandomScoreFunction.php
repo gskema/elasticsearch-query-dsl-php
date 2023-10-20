@@ -5,33 +5,32 @@ namespace Gskema\ElasticSearchQueryDSL\ScoreFunction;
 use stdClass;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-function-score-query.html#function-random
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-function-score-query.html#function-random
  * @see RandomScoreFunctionTest
  */
 class RandomScoreFunction implements ScoreFunctionInterface
 {
-    /** @var int|null */
-    protected $seed;
-
-    public function __construct(int $seed = null)
-    {
-        $this->seed = $seed;
+    public function __construct(
+        protected ?int $seed = null,
+        protected ?string $field = null,
+    ) {
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
+        $body = [];
         if (null !== $this->seed) {
-            $body = [];
             $body['seed'] = $this->seed;
-        } else {
-            $body = new stdClass();
+        }
+        if (null !== $this->field) {
+            $body['field'] = $this->field;
         }
 
         return [
-            'random_score' => $body,
+            'random_score' => $body ?: new stdClass(),
         ];
     }
 }

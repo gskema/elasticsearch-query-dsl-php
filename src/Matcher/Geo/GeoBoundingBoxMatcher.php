@@ -5,48 +5,33 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\Geo;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 use Gskema\ElasticSearchQueryDSL\Model\GeoPointInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-geo-bounding-box-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-geo-bounding-box-query.html
  * @see GeoBoundingBoxMatcherTest
- *
- * @options 'validation_method' => 'IGNORE_MALFORMED', 'COERCE', 'STRICT'
- *          'type' => 'indexed', 'memory',
- *          'ignore_unmapped' => true,
- *          '_name' => '?',
  */
+#[Options([
+    'validation_method' => 'IGNORE_MALFORMED', // 'COERCE', 'STRICT'
+    'type' => 'indexed', // 'memory',
+    'ignore_unmapped' => true,
+    '_name' => '?',
+])]
 class GeoBoundingBoxMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $field;
-
-    /** @var GeoPointInterface */
-    protected $topLeft;
-
-    /** @var GeoPointInterface */
-    protected $topRight;
-
-    /** @var GeoPointInterface */
-    protected $bottomLeft;
-
-    /** @var GeoPointInterface */
-    protected $bottomRight;
-
+    /**
+     * @param array<string, mixed> $options
+     */
     protected function __construct(
-        string $field,
-        GeoPointInterface $topLeft = null,
-        GeoPointInterface $topRight = null,
-        GeoPointInterface $bottomLeft = null,
-        GeoPointInterface $bottomRight = null,
-        array $options = []
+        protected string $field,
+        protected ?GeoPointInterface $topLeft = null,
+        protected ?GeoPointInterface $topRight = null,
+        protected ?GeoPointInterface $bottomLeft = null,
+        protected ?GeoPointInterface $bottomRight = null,
+        array $options = [],
     ) {
-        $this->field = $field;
-        $this->topLeft = $topLeft;
-        $this->topRight = $topRight;
-        $this->bottomLeft = $bottomLeft;
-        $this->bottomRight = $bottomRight;
         $this->options = $options;
     }
 
@@ -58,28 +43,34 @@ class GeoBoundingBoxMatcher implements MatcherInterface
         $this->bottomRight = $this->bottomRight ? clone $this->bottomRight : null;
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public static function fromTopLeft(
         string $field,
         GeoPointInterface $topLeft,
         GeoPointInterface $bottomRight,
-        array $options = []
-    ): GeoBoundingBoxMatcher {
+        array $options = [],
+    ): static {
         return new static($field, $topLeft, null, null, $bottomRight, $options);
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public static function fromTopRight(
         string $field,
         GeoPointInterface $topRight,
         GeoPointInterface $bottomLeft,
-        array $options = []
-    ): GeoBoundingBoxMatcher {
+        array $options = [],
+    ): static {
         return new static($field, null, $topRight, $bottomLeft, null, $options);
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $rawBox = [];
         if (null !== $this->topLeft) {

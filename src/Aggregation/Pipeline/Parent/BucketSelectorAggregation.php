@@ -5,32 +5,28 @@ namespace Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline\Parent;
 use Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline\PipelineAggregationInterface;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-pipeline-bucket-selector-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-pipeline-bucket-selector-aggregation.html
  * @see BucketSelectorAggregationTest
- *
- * @options 'gap_policy' => 'skip', 'insert_zeros',
  */
+#[Options([
+    'gap_policy' => 'skip',// 'insert_zeros',
+])]
 class BucketSelectorAggregation implements PipelineAggregationInterface
 {
     use HasOptionsTrait;
 
-    /** @var string[] */
-    protected $bucketsPath;
-
-    /** @var ScriptInterface */
-    protected $script;
-
     /**
-     * @param string[]        $bucketsPathByVar
-     * @param ScriptInterface $script
-     * @param array           $options
+     * @param array<string, mixed> $options
      */
-    public function __construct(array $bucketsPathByVar, ScriptInterface $script, array $options = [])
-    {
-        $this->bucketsPath = $bucketsPathByVar;
-        $this->script = $script;
+    public function __construct(
+        /** @var array<string, string> */
+        protected array $bucketsPath,
+        protected ScriptInterface $script,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
@@ -40,9 +36,9 @@ class BucketSelectorAggregation implements PipelineAggregationInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [
             'buckets_path' => $this->bucketsPath,

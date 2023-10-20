@@ -2,13 +2,13 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Sorter;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\FileScript;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 
-class ScriptSorterTest extends AbstractJsonSerializeTest
+final class ScriptSorterTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -20,7 +20,7 @@ class ScriptSorterTest extends AbstractJsonSerializeTest
                     "type": "number",
                     "script": "script1",
                     "order": "asc"
-                }     
+                }
             }',
             (new ScriptSorter('number', new InlineScript('script1')))->setOrder('asc'),
         ];
@@ -37,7 +37,7 @@ class ScriptSorterTest extends AbstractJsonSerializeTest
                     "order": "asc",
                     "mode": "avg"
                 }
-                
+
             }',
             (new ScriptSorter('number', new FileScript('file1')))
                 ->setOrder('asc')
@@ -47,17 +47,17 @@ class ScriptSorterTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $sorter = new ScriptSorter('type1', new InlineScript('source1'));
 
-        $this->assertEquals('type1', $sorter->getType());
-        $this->assertEquals(new InlineScript('source1'), $sorter->getScript());
+        self::assertEquals('type1', $sorter->getType());
+        self::assertEquals(new InlineScript('source1'), $sorter->getScript());
 
         $sorter->setOrder('order1');
         $sorter->setMode('mode1');
 
-        $this->assertEquals('order1', $sorter->getOrder());
-        $this->assertEquals('mode1', $sorter->getMode());
+        self::assertEquals('order1', $sorter->getOrder());
+        self::assertEquals('mode1', $sorter->getMode());
     }
 }

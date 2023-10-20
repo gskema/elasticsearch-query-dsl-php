@@ -2,13 +2,13 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Geo;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\GeoPoint;
 use InvalidArgumentException;
 
-class GeoPolygonMatcherTest extends AbstractJsonSerializeTest
+final class GeoPolygonMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -39,7 +39,7 @@ class GeoPolygonMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new GeoPolygonMatcher(
             'field1',
@@ -49,7 +49,7 @@ class GeoPolygonMatcherTest extends AbstractJsonSerializeTest
                 new GeoPoint(3, 3),
             ]
         );
-        $this->assertInstanceOf(GeoPolygonMatcher::class, $matcher1);
+        self::assertInstanceOf(GeoPolygonMatcher::class, $matcher1);
 
         $this->expectException(InvalidArgumentException::class);
         new GeoPolygonMatcher(

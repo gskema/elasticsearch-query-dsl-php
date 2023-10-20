@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class NestedAggregationTest extends AbstractJsonSerializeTest
+final class NestedAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -24,7 +24,7 @@ class NestedAggregationTest extends AbstractJsonSerializeTest
                         }
                     }
                 }
-               
+
             }',
             (new NestedAggregation('path1'))
                 ->setAgg('key1', TermsAggregation::fromField('path1.field1')),
@@ -33,9 +33,9 @@ class NestedAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg = new NestedAggregation('path1');
-        $this->assertInstanceOf(NestedAggregation::class, $agg);
+        self::assertInstanceOf(NestedAggregation::class, $agg);
     }
 }

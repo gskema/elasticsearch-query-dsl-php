@@ -2,18 +2,18 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class SpanWithinMatcherTest extends AbstractJsonSerializeTest
+final class SpanWithinMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
         // #0
         $dataSets[] = [
             // language=JSON
-            '{ 
+            '{
                 "span_within": {
                     "little": { "span_term" : { "field1": "value1" } },
                     "big": { "span_term" : { "field2": "value2" } }
@@ -28,12 +28,12 @@ class SpanWithinMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new SpanWithinMatcher(
             new SpanTermMatcher('field1', 'value1'),
             new SpanTermMatcher('field2', 'value2')
         );
-        $this->assertInstanceOf(SpanWithinMatcher::class, $matcher1);
+        self::assertInstanceOf(SpanWithinMatcher::class, $matcher1);
     }
 }

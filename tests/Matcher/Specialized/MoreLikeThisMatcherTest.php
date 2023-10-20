@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Specialized;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class MoreLikeThisMatcherTest extends AbstractJsonSerializeTest
+final class MoreLikeThisMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -34,7 +34,7 @@ class MoreLikeThisMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new MoreLikeThisMatcher(
             ['field1', 'field2'],
@@ -44,6 +44,6 @@ class MoreLikeThisMatcherTest extends AbstractJsonSerializeTest
                 'max_doc_freq' => 0,
             ]
         );
-        $this->assertInstanceOf(MoreLikeThisMatcher::class, $matcher1);
+        self::assertInstanceOf(MoreLikeThisMatcher::class, $matcher1);
     }
 }

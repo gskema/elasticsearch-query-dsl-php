@@ -2,36 +2,38 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticSearchQueryDSL\Options;
+
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-bucket-iprange-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-bucket-iprange-aggregation.html
  * @see IpRangeAggregationTest
- *
- * @options 'keyed' => true,
  */
+#[Options([
+    'keyed' => true,
+])]
 class IpRangeAggregation implements BucketAggregationInterface
 {
     use HasOptionsTrait;
     use HasAggsTrait;
 
-    /** @var string */
-    protected $field;
-
     /**
-     * ['from' => '10.0.0.5', 'to' => '10.0.0.5', 'key' => 'custom_bucket_key'],
-     * ['mask' => '10.0.0.0/25', 'key' => 'custom_bucket_key'],
-     *
-     * @var array[]
+     * @param array<string, mixed> $options
      */
-    protected $ranges;
-
-    public function __construct(string $field, array $ranges, array $options = [])
-    {
-        $this->field = $field;
-        $this->ranges = $ranges;
+    public function __construct(
+        protected string $field,
+        /**
+         * @var array<string, string>[]
+         * ['from' => '10.0.0.5', 'to' => '10.0.0.5', 'key' => 'custom_bucket_key'],
+         * ['mask' => '10.0.0.0/25', 'key' => 'custom_bucket_key'],
+         */
+        protected array $ranges,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
@@ -41,17 +43,17 @@ class IpRangeAggregation implements BucketAggregationInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['ip_ranges']['field'] = $this->field;
         $body['ip_ranges']['ranges'] = $this->ranges;
         $body['ip_ranges'] += $this->options;
 
-        if ($this->hasAggs()) {
-            $body['aggs'] = $this->jsonSerializeAggs();
+        if (!empty($this->aggs)) {
+            $body['aggs'] = obj_array_json_serialize($this->aggs);
         }
 
         return $body;

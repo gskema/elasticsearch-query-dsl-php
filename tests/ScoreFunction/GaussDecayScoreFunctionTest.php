@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\ScoreFunction;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class GaussDecayScoreFunctionTest extends AbstractJsonSerializeTest
+final class GaussDecayScoreFunctionTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -23,23 +23,31 @@ class GaussDecayScoreFunctionTest extends AbstractJsonSerializeTest
                    "multi_value_mode": "mvm1"
                 }
             }',
-            (new GaussDecayScoreFunction('field1', 'origin1', 'scale1'))
-                ->setOption('offset', 'offset1')
-                ->setOption('decay', 'decay1')
-                ->setOption('multi_value_mode', 'mvm1'),
+            new GaussDecayScoreFunction(
+                'field1',
+                'origin1',
+                'scale1',
+                'offset1',
+                'decay1',
+                'mvm1'
+            ),
         ];
 
         return $dataSets;
     }
 
 
-    public function testMethods()
+    public function testMethods(): void
     {
-        $function = (new GaussDecayScoreFunction('field1', 'origin1', 'scale1'))
-            ->setOption('offset', 'offset1')
-            ->setOption('decay', 'decay1')
-            ->setOption('multi_value_mode', 'mvm1');
+        $function = new GaussDecayScoreFunction(
+            'field1',
+            'origin1',
+            'scale1',
+            'offset1',
+            'decay1',
+            'mvm1'
+        );
 
-        $this->assertInstanceOf(GaussDecayScoreFunction::class, $function);
+        self::assertInstanceOf(GaussDecayScoreFunction::class, $function);
     }
 }

@@ -2,12 +2,13 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Sorter;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatchAllMatcher;
+use stdClass;
 
-class NestedSorterTest extends AbstractJsonSerializeTest
+final class NestedSorterTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -40,27 +41,27 @@ class NestedSorterTest extends AbstractJsonSerializeTest
                 ->setMode('max')
                 ->setNestedFilter(new MatchAllMatcher())
                 ->setOrder('desc'),
-            new \stdClass(),
+            new stdClass(),
         ];
 
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $sorter = new NestedSorter('field1', 'path1');
 
-        $this->assertEquals('field1', $sorter->getField());
-        $this->assertEquals('path1', $sorter->getNestedPath());
+        self::assertEquals('field1', $sorter->getField());
+        self::assertEquals('path1', $sorter->getNestedPath());
 
         $sorter->setOrder('order1');
         $sorter->setMode('mode1');
         $sorter->setNestedFilter(new MatchAllMatcher());
         $sorter->setOption('key1', 'value1');
 
-        $this->assertEquals('order1', $sorter->getOrder());
-        $this->assertEquals('mode1', $sorter->getMode());
-        $this->assertEquals(new MatchAllMatcher(), $sorter->getNestedFilter());
-        $this->assertEquals('value1', $sorter->getOption('key1'));
+        self::assertEquals('order1', $sorter->getOrder());
+        self::assertEquals('mode1', $sorter->getMode());
+        self::assertEquals(new MatchAllMatcher(), $sorter->getNestedFilter());
+        self::assertEquals('value1', $sorter->getOption('key1'));
     }
 }

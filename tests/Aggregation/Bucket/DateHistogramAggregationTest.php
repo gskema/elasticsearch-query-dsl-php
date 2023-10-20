@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 
-class DateHistogramAggregationTest extends AbstractJsonSerializeTest
+final class DateHistogramAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -58,12 +58,12 @@ class DateHistogramAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg1 = DateHistogramAggregation::fromField('field1', '1day', [], new InlineScript('source1'));
-        $this->assertInstanceOf(DateHistogramAggregation::class, $agg1);
+        self::assertInstanceOf(DateHistogramAggregation::class, $agg1);
 
         $agg2 = DateHistogramAggregation::fromScript(new InlineScript('source1'), '1day');
-        $this->assertInstanceOf(DateHistogramAggregation::class, $agg2);
+        self::assertInstanceOf(DateHistogramAggregation::class, $agg2);
     }
 }

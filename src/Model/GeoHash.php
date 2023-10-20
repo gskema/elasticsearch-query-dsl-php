@@ -7,12 +7,8 @@ namespace Gskema\ElasticSearchQueryDSL\Model;
  */
 class GeoHash implements GeoPointInterface
 {
-    /** @var string */
-    protected $value;
-
-    public function __construct(string $value)
+    public function __construct(protected string $value)
     {
-        $this->value = $value;
     }
 
     public function getValue(): string
@@ -26,9 +22,9 @@ class GeoHash implements GeoPointInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return $this->value;
     }

@@ -2,29 +2,28 @@
 
 namespace Gskema\ElasticSearchQueryDSL\FieldCollapser;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticSearchQueryDSL\Options;
 use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHitsRequest;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-collapse.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-collapse.html
  * @see FieldCollapserTest
- *
- * @options 'max_concurrent_group_searches' => 4,
  */
+#[Options([
+    'max_concurrent_group_searches' => 4,
+])]
 class FieldCollapser implements FieldCollapserInterface
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $field;
-
-    /** @var InnerHitsRequest[] */
-    protected $innerHits = [];
-
-    public function __construct(string $field)
-    {
-        $this->field = $field;
+    public function __construct(
+        protected string $field,
+        /** @var InnerHitsRequest[] */
+        protected array $innerHits = [],
+    ) {
     }
 
     public function __clone()
@@ -47,32 +46,23 @@ class FieldCollapser implements FieldCollapserInterface
 
     /**
      * @param InnerHitsRequest[] $requests
-     *
-     * @return $this
      */
-    public function setInnerHits(array $requests): FieldCollapser
+    public function setInnerHits(array $requests): static
     {
         $this->innerHits = $requests;
-
         return $this;
     }
 
-    /**
-     * @param InnerHitsRequest $request
-     *
-     * @return $this
-     */
-    public function addInnerHits(InnerHitsRequest $request): FieldCollapser
+    public function addInnerHits(InnerHitsRequest $request): static
     {
         $this->innerHits[] = $request;
-
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['field'] = $this->field;

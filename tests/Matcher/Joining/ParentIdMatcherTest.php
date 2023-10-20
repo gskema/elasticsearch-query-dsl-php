@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Joining;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHitsRequest;
 
-class ParentIdMatcherTest extends AbstractJsonSerializeTest
+final class ParentIdMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -42,9 +42,9 @@ class ParentIdMatcherTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $matcher1 = new ParentIdMatcher('childType1', 'parentId1');
-        $this->assertInstanceOf(ParentIdMatcher::class, $matcher1);
+        self::assertInstanceOf(ParentIdMatcher::class, $matcher1);
     }
 }

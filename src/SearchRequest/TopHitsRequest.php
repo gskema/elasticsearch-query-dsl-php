@@ -2,20 +2,22 @@
 
 namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
-use Gskema\ElasticSearchQueryDSL\Sorter\SorterInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 use JsonSerializable;
 use stdClass;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-inner-hits.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-inner-hits.html
  * @see TopHitsRequest
- *
- * @options 'explain' => true,
- *          'version' => true,
  */
+#[Options([
+    'explain' => true,
+    'version' => true,
+])]
 class TopHitsRequest implements JsonSerializable
 {
     use HasFromTrait;
@@ -37,22 +39,20 @@ class TopHitsRequest implements JsonSerializable
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = $this->options;
 
         if (null !== $this->sourceFields) {
-            $body['_source'] = $this->sourceFields->jsonSerialize();
+            $body['_source'] = $this->jsonSerializeSourceFields();
         }
         if (null !== $this->storedFields) {
             $body['stored_fields'] = $this->storedFields;
         }
         if (!empty($this->scriptFields)) {
-            $body['script_fields'] = array_map(function (ScriptInterface $script) {
-                return $script->jsonSerialize();
-            }, $this->scriptFields);
+            $body['script_fields'] = obj_array_json_serialize($this->scriptFields);
         }
         if (!empty($this->docValueFields)) {
             $body['docvalue_fields'] = $this->docValueFields;
@@ -64,17 +64,12 @@ class TopHitsRequest implements JsonSerializable
             $body['size'] = $this->size;
         }
         if (!empty($this->sorters)) {
-            $rawSorters = array_map(function (SorterInterface $sorter) {
-                return $sorter->jsonSerialize();
-            }, $this->sorters);
-            $body['sort'] = 1 === count($this->sorters) ? $rawSorters[0] : $rawSorters;
+            $body['sort'] = $this->jsonSerializeSorters();
         }
         if (null !== $this->highlighter) {
             $body['highlight'] = $this->highlighter->jsonSerialize();
         }
 
-        $body = $body ?: new stdClass();
-
-        return $body;
+        return $body ?: new stdClass();
     }
 }

@@ -2,30 +2,34 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Suggester;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
+use Gskema\ElasticSearchQueryDSL\Options;
 use Gskema\ElasticSearchQueryDSL\Suggester\ContextQuery\ContextQueryInterface;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/suggester-context.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/suggester-context.html
  * @see ContextSuggesterTest
- *
- * @options 'gram_size' => 3,
- *          'real_word_error_likelihood' => 0.95,
- *          'confidence' => 1.0,
- *          'max_errors' => 1.0,
- *          'separator' => ' ',
- *          'size' => 5,
- *          'analyzer' => 'standard',
- *          'shard_size' => 5,
- *          'highlight' => ['pre_tag' => '<em>', 'post_tag' => '</em>']
- *          'smoothing' => ['stupid_backoff' => ['discount' => 0.4]],
- *                         ['laplace' => ['alpha ' => 0.5]],
- *                         ['linear_interpolation' => ['trigram_lambda' => ?, 'bigram_lambda' => ?, 'unigram_lambda' => ?]],
  */
+#[Options([
+    'gram_size' => 3,
+    'real_word_error_likelihood' => 0.95,
+    'confidence' => 1.0,
+    'max_errors' => 1.0,
+    'separator' => ' ',
+    'size' => 5,
+    'analyzer' => 'standard',
+    'shard_size' => 5,
+    'highlight' => ['pre_tag' => '<em>', 'post_tag' => '</em>'],
+    'smoothing' => ['stupid_backoff' => ['discount' => 0.4]],
+                   // ['laplace' => ['alpha ' => 0.5]],
+                   // ['linear_interpolation' => ['trigram_lambda' => '?', 'bigram_lambda' => '?', 'unigram_lambda' => '?']],
+])]
 class ContextSuggester extends CompletionSuggester
 {
     /** @var ContextQueryInterface[] */
-    protected $contexts = [];
+    protected array $contexts = [];
 
     public function __clone()
     {
@@ -40,64 +44,41 @@ class ContextSuggester extends CompletionSuggester
         return $this->contexts;
     }
 
-    /**
-     * @param string $contextName
-     *
-     * @return ContextQueryInterface|null
-     */
-    public function getContext(string $contextName)
+    public function getContext(string $contextName): ?ContextQueryInterface
     {
         return $this->contexts[$contextName] ?? null;
     }
 
     /**
      * @param ContextQueryInterface[] $queriesByContextName
-     *
-     * @return $this
      */
-    public function setContexts(array $queriesByContextName): ContextSuggester
+    public function setContexts(array $queriesByContextName): static
     {
         $this->contexts = $queriesByContextName;
-
         return $this;
     }
 
-    /**
-     * @param string                $contextName
-     * @param ContextQueryInterface $query
-     *
-     * @return ContextSuggester
-     */
-    public function setContext(string $contextName, ContextQueryInterface $query): ContextSuggester
+    public function setContext(string $contextName, ContextQueryInterface $query): static
     {
         $this->contexts[$contextName] = $query;
-
         return $this;
     }
 
-    /**
-     * @param string $contextName
-     *
-     * @return $this
-     */
-    public function removeContext(string $contextName): ContextSuggester
+    public function removeContext(string $contextName): static
     {
         unset($this->contexts[$contextName]);
-
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = parent::jsonSerialize();
 
         if (!empty($this->contexts)) {
-            $body['completion']['contexts'] = array_map(function (ContextQueryInterface $query) {
-                return $query->jsonSerialize();
-            }, $this->contexts);
+            $body['completion']['contexts'] = obj_array_json_serialize($this->contexts);
         }
 
         return $body;

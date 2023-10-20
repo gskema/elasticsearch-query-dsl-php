@@ -4,37 +4,27 @@ namespace Gskema\ElasticSearchQueryDSL\Sorter;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-sort.html#nested-sorting
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-sort.html#nested-sorting
  * @see NestedSorterTest
- *
- * @options 'missing' => '_first', '_last',
- *          'unmapped_type' => 'long',
  */
+#[Options([
+    'missing' => '_first', // '_last',
+    'unmapped_type' => 'long',
+])]
 class NestedSorter implements SorterInterface
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $field;
-
-    /** @var string */
-    protected $nestedPath;
-
-    /** @var MatcherInterface|null */
-    protected $nestedFilter;
-
-    /** @var string|null 'asc', 'desc' */
-    protected $order;
-
-    /** @var string|null 'min', 'max', 'sum', 'avg', 'median' */
-    protected $mode;
-
-    public function __construct(string $field, string $nestedPath)
-    {
-        $this->field = $field;
-        $this->nestedPath = $nestedPath;
+    public function __construct(
+        protected string $field,
+        protected string $nestedPath,
+        protected ?MatcherInterface $nestedFilter = null,
+        protected ?string $order = null, // 'asc', 'desc'
+        protected ?string $mode = null, // /** 'min', 'max', 'sum', 'avg', 'median'
+    ) {
     }
 
     public function __clone()
@@ -52,70 +42,43 @@ class NestedSorter implements SorterInterface
         return $this->nestedPath;
     }
 
-    /**
-     * @return MatcherInterface|null
-     */
-    public function getNestedFilter()
+    public function getNestedFilter(): ?MatcherInterface
     {
         return $this->nestedFilter;
     }
 
-    /**
-     * @param MatcherInterface|null $filter
-     *
-     * @return $this
-     */
-    public function setNestedFilter(MatcherInterface $filter = null): NestedSorter
+    public function setNestedFilter(?MatcherInterface $filter): static
     {
         $this->nestedFilter = $filter;
-
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getOrder()
+    public function getOrder(): ?string
     {
         return $this->order;
     }
 
-    /**
-     * @param string|null $order
-     *
-     * @return $this
-     */
-    public function setOrder(string $order = null): NestedSorter
+    public function setOrder(?string $order): static
     {
         $this->order = $order;
-
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getMode()
+    public function getMode(): ?string
     {
         return $this->mode;
     }
 
-    /**
-     * @param string|null $mode
-     *
-     * @return $this
-     */
-    public function setMode(string $mode = null): NestedSorter
+    public function setMode(?string $mode): static
     {
         $this->mode = $mode;
-
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['nested_path'] = $this->nestedPath;

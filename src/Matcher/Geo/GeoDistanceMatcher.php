@@ -5,36 +5,31 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\Geo;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 use Gskema\ElasticSearchQueryDSL\Model\GeoPointInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-geo-distance-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-geo-distance-query.html
  * @see GeoDistanceMatcherTest
- *
- * @options 'distance_type' => 'arc', 'plane',
- *          'optimize_bbox' => 'memory', 'indexed',
- *          'ignore_malformed' => true,
- *          'ignore_unmapped' => true,
- *          'validation_method' => 'IGNORE_MALFORMED', 'COERCE', 'STRICT',
- *          '_name' => '?',
  */
+#[Options([
+    'distance_type' => 'arc', // 'plane',
+    'ignore_unmapped' => true,
+    'validation_method' => 'IGNORE_MALFORMED', // 'COERCE', 'STRICT',
+    '_name' => '?',
+])]
 class GeoDistanceMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $field;
-
-    /** @var GeoPointInterface */
-    protected $origin;
-
-    /** @var string */
-    protected $distance;
-
-    public function __construct(string $field, GeoPointInterface $origin, string $distance, array $options = [])
-    {
-        $this->field = $field;
-        $this->origin = $origin;
-        $this->distance = $distance;
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(
+        protected string $field,
+        protected GeoPointInterface $origin,
+        protected string $distance,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
@@ -44,9 +39,9 @@ class GeoDistanceMatcher implements MatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [
             $this->field => $this->origin->jsonSerialize(),

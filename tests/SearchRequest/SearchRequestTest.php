@@ -2,7 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Aggregation\Bucket\FilterAggregation;
 use Gskema\ElasticSearchQueryDSL\Aggregation\Bucket\TermsAggregation;
 use Gskema\ElasticSearchQueryDSL\Aggregation\Metric\MaxAggregation;
@@ -20,9 +20,9 @@ use Gskema\ElasticSearchQueryDSL\SourceFilter\DisabledSourceFilter;
 use Gskema\ElasticSearchQueryDSL\Suggester\PhraseSuggester;
 use Gskema\ElasticSearchQueryDSL\Suggester\TermSuggester;
 
-class SearchRequestTest extends AbstractJsonSerializeTest
+final class SearchRequestTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -178,7 +178,7 @@ class SearchRequestTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $req = (new SearchRequest())
             ->setOptions([
@@ -225,41 +225,41 @@ class SearchRequestTest extends AbstractJsonSerializeTest
             ])
             ->setAgg('agg3', MaxAggregation::fromField('field11'));
 
-        $this->assertEquals(true, $req->getOption('explain'));
-        $this->assertEquals(true, $req->getOption('version'));
-        $this->assertEquals(new DisabledSourceFilter(), $req->getSourceFields());
-        $this->assertEquals(['storedField1', 'storedField2'], $req->getStoredFields());
-        $this->assertEquals([
+        self::assertEquals(true, $req->getOption('explain'));
+        self::assertEquals(true, $req->getOption('version'));
+        self::assertEquals(new DisabledSourceFilter(), $req->getSourceFields());
+        self::assertEquals(['storedField1', 'storedField2'], $req->getStoredFields());
+        self::assertEquals([
             'scriptField1' => new InlineScript('script1'),
             'scriptField2' => new InlineScript('script2'),
             'scriptField3' => new InlineScript('script3'),
         ], $req->getScriptFields());
-        $this->assertEquals(['docValueField1', 'docValueField2'], $req->getDocValueFields());
-        $this->assertEquals(10, $req->getFrom());
-        $this->assertEquals(5, $req->getSize());
-        $this->assertEquals(new TermMatcher('field1', 'value1'), $req->getQuery());
-        $this->assertEquals(new WildcardMatcher('field2', 'value*'), $req->getPostFilter());
-        $this->assertEquals([
+        self::assertEquals(['docValueField1', 'docValueField2'], $req->getDocValueFields());
+        self::assertEquals(10, $req->getFrom());
+        self::assertEquals(5, $req->getSize());
+        self::assertEquals(new TermMatcher('field1', 'value1'), $req->getQuery());
+        self::assertEquals(new WildcardMatcher('field2', 'value*'), $req->getPostFilter());
+        self::assertEquals([
             new FieldSorter('field3', 'desc'),
             new RawSorter('field4'),
         ], $req->getSorters());
-        $this->assertEquals([
+        self::assertEquals([
             (new QueryRescorer(new MatchAllMatcher()))->setScoreMode('avg'),
             new QueryRescorer(new MatchNoneMatcher()),
         ], $req->getRescorers());
-        $this->assertEquals(
+        self::assertEquals(
             (new Highlighter())
             ->setField('field5', ['order' => 'score'])
             ->setField('field6'),
             $req->getHighlighter()
         );
-        $this->assertEquals([
+        self::assertEquals([
             'suggesterKey1' => new TermSuggester('field7', 'text1'),
             'suggesterKey2' => new PhraseSuggester('field8', 'text2'),
         ], $req->getSuggesters());
-        $this->assertEquals(['statGroup1', 'statGroup2', 'statGroup3'], $req->getStatGroups());
-        $this->assertEquals(new FieldCollapser('field9'), $req->getFieldCollapser());
-        $this->assertEquals([
+        self::assertEquals(['statGroup1', 'statGroup2', 'statGroup3'], $req->getStatGroups());
+        self::assertEquals(new FieldCollapser('field9'), $req->getFieldCollapser());
+        self::assertEquals([
             'agg1' => (new FilterAggregation(new MatchAllMatcher()))
                 ->setAgg('agg2', TermsAggregation::fromField('field10')),
             'agg3' => MaxAggregation::fromField('field11')

@@ -8,19 +8,20 @@ abstract class AbstractNumericPipelineAggregation implements PipelineAggregation
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $bucketsPath;
-
-    public function __construct(string $bucketsPath, array $options = [])
-    {
-        $this->bucketsPath = $bucketsPath;
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(
+        protected string $bucketsPath,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['buckets_path'] = $this->bucketsPath;
@@ -31,5 +32,8 @@ abstract class AbstractNumericPipelineAggregation implements PipelineAggregation
         ];
     }
 
+    /**
+     * @return string 'avg', 'cumulative_sum', 'derivative', ...
+     */
     abstract protected function getType(): string;
 }

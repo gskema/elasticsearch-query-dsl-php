@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<ruleset name="phpcs_ruleset">
+    <!-- @see https://github.com/squizlabs/PHP_CodeSniffer/wiki -->
+    <description>~</description>
+
+    <arg name="extensions" value="php"/>
+    <arg name="cache" value="build/phpcs.cache" />
+    <file>src</file>
+    <file>tests</file>
+
+    <rule ref="PSR12">
+        <exclude name="Generic.Files.LineLength" />
+    </rule>
+
+    <autoload>./vendor/autoload.php</autoload>
+    <rule ref="./vendor/gskema/phpcs-type-sniff/src/Sniffs/CompositeCodeElementSniff.php" />
+
+</ruleset>

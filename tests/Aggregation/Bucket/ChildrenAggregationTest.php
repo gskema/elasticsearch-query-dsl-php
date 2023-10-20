@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class ChildrenAggregationTest extends AbstractJsonSerializeTest
+final class ChildrenAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -30,9 +30,9 @@ class ChildrenAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg = new ChildrenAggregation('childrenType1');
-        $this->assertInstanceOf(ChildrenAggregation::class, $agg);
+        self::assertInstanceOf(ChildrenAggregation::class, $agg);
     }
 }

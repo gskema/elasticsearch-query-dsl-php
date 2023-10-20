@@ -6,17 +6,14 @@ use Gskema\ElasticSearchQueryDSL\SearchRequest\TopHitsRequest;
 use stdClass;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-metrics-top-hits-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-metrics-top-hits-aggregation.html
  * @see TopHitsAggregationTest
  */
 class TopHitsAggregation implements MetricAggregationInterface
 {
-    /** @var TopHitsRequest|null */
-    protected $request;
-
-    public function __construct(TopHitsRequest $request = null)
-    {
-        $this->request = $request;
+    public function __construct(
+        protected ?TopHitsRequest $request = null,
+    ) {
     }
 
     public function __clone()
@@ -25,9 +22,9 @@ class TopHitsAggregation implements MetricAggregationInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         if (null !== $this->request) {
             $body = $this->request->jsonSerialize();

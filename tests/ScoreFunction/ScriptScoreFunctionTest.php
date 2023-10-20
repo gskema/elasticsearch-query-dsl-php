@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\ScoreFunction;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 
-class ScriptScoreFunctionTest extends AbstractJsonSerializeTest
+final class ScriptScoreFunctionTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -26,10 +26,10 @@ class ScriptScoreFunctionTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $function = (new ScriptScoreFunction(new InlineScript('script1')))->setOption('boost_mode', 'replace');
 
-        $this->assertInstanceOf(ScriptScoreFunction::class, $function);
+        self::assertInstanceOf(ScriptScoreFunction::class, $function);
     }
 }

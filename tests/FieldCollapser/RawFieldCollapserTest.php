@@ -4,6 +4,6 @@ namespace Gskema\ElasticSearchQueryDSL\FieldCollapser;
 
 use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
 
-class RawFieldCollapserTest extends RawFragmentTest
+final class RawFieldCollapserTest extends RawFragmentTest
 {
 }

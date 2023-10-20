@@ -4,55 +4,80 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\Specialized;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-percolate-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-percolate-query.html
  * @see PercolateMatcherTest
- *
- * @options 'routing' => ?,
- *          'preference' => ?
- *          'version' => 2,
- *          '_name' => '?',
  */
+#[Options([
+    'routing' => '?',
+    'preference' => '?',
+    'version' => 2,
+    'name' => 'query1',
+    '_name' => '?',
+])]
 class PercolateMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var array */
-    protected $body;
-
-    protected function __construct(array $body, array $options = [])
-    {
-        $this->body = $body;
+    /**
+     * @param array<string, mixed> $options
+     */
+    protected function __construct(
+        /** @var mixed[] */
+        protected array $body,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
-    public static function fromDocSource(
+    /**
+     * @param mixed[][] $docSources
+     * @param array<string, mixed> $options
+     */
+    public static function fromDocSources(
         string $queryField,
-        string $docType,
-        array $docSource,
-        array $options = []
-    ): PercolateMatcher {
+        array $docSources,
+        array $options = [],
+    ): static {
         $body = [
             'field' => $queryField,
-            'document_type' => $docType,
+            'documents' => $docSources,
+        ];
+
+        return new static($body, $options);
+    }
+
+    /**
+     * @param mixed[] $docSource
+     * @param array<string, mixed> $options
+     */
+    public static function fromDocSource(
+        string $queryField,
+        array $docSource,
+        array $options = [],
+    ): static {
+        $body = [
+            'field' => $queryField,
             'document' => $docSource,
         ];
 
         return new static($body, $options);
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public static function fromIndexedDoc(
         string $queryField,
-        string $docType,
         string $index,
         string $type,
         string $id,
-        array $options = []
-    ): PercolateMatcher {
+        array $options = [],
+    ): static {
         $body = [
             'field' => $queryField,
-            'document_type' => $docType,
             'index' => $index,
             'type' => $type,
             'id' => $id,
@@ -62,9 +87,9 @@ class PercolateMatcher implements MatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = $this->body;
         $body += $this->options;

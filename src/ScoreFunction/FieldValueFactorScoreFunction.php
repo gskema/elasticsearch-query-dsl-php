@@ -2,37 +2,36 @@
 
 namespace Gskema\ElasticSearchQueryDSL\ScoreFunction;
 
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-function-score-query.html#function-field-value-factor
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-function-score-query.html#function-field-value-factor
  * @see FieldValueFactorScoreFunctionTest
- *
- * @options 'factor' => 1,
- *          'modifier' => 'none', 'log', 'log1p', 'log2p', 'ln', 'ln1p', 'ln2p', 'square', 'sqrt', 'reciprocal',
- *          'missing' => 0,
  */
 class FieldValueFactorScoreFunction implements ScoreFunctionInterface
 {
-    use HasOptionsTrait;
-
-    /** @var string */
-    protected $field;
-
-    public function __construct(string $field, array $options = [])
-    {
-        $this->field = $field;
-        $this->options = $options;
+    public function __construct(
+        protected string $field,
+        protected ?float $factor = null,
+        protected ?string $modifier = null, // none, log, log1p, log2p, ln, ln1p, ln2p, square, sqrt, reciprocal
+        protected float|int|null $missing = null,
+    ) {
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['field'] = $this->field;
-        $body += $this->options;
+        if (null !== $this->factor) {
+            $body['factor'] = $this->factor;
+        }
+        if (null !== $this->modifier) {
+            $body['modifier'] = $this->modifier;
+        }
+        if (null !== $this->missing) {
+            $body['missing'] = $this->missing;
+        }
 
         return [
             'field_value_factor' => $body,

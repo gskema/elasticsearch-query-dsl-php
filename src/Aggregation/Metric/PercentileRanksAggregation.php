@@ -5,77 +5,83 @@ namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
+use InvalidArgumentException;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations-metrics-percentile-rank-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-metrics-percentile-rank-aggregation.html
  * @see PercentileRanksAggregationTest
- *
- * @options 'keyed' => true,
- *          'hdr' => ['number_of_significant_value_digits' => 3],
- *          'missing' => 10,
  */
+#[Options([
+    'keyed' => true,
+    'hdr' => ['number_of_significant_value_digits' => 3],
+    'missing' => 10,
+])]
 class PercentileRanksAggregation implements MetricAggregationInterface
 {
     use HasOptionsTrait;
 
-    /** @var array */
-    protected $body;
-
-    protected function __construct(array $body, array $options = [])
-    {
-        $this->body = $body;
+    /**
+     * @param array<string, mixed> $options
+     */
+    protected function __construct(
+        protected ?string $field,
+        protected ?ScriptInterface $script,
+        /** @var float[]|int[] */
+        protected array $values,
+        array $options = [],
+    ) {
+        if (null === $field && null === $script) {
+            throw new InvalidArgumentException('Expected at least one to be not null: field or script.');
+        }
         $this->options = $options;
     }
 
+    public function __clone()
+    {
+        if (null !== $this->script) {
+            $this->script = clone $this->script;
+        }
+    }
+
     /**
-     * @param string            $field
-     * @param float[]           $values
-     * @param array             $options
-     * @param InlineScript|null $valueScript
-     *
-     * @return PercentileRanksAggregation
+     * @param float[]|int[] $values
+     * @param array<string, mixed> $options
      */
     public static function fromField(
         string $field,
         array $values,
         array $options = [],
-        InlineScript $valueScript = null
-    ): PercentileRanksAggregation {
-        $body = [];
-        $body['values'] = $values;
-        $body['field'] = $field;
-        if (null !== $valueScript) {
-            $body['script'] = $valueScript->jsonSerialize();
-        }
-
-        return new static($body, $options);
+        ?InlineScript $valueScript = null,
+    ): static {
+        return new static($field, $valueScript, $values, $options);
     }
 
     /**
-     * @param float[]         $values
-     * @param ScriptInterface $script
-     * @param array           $options
-     *
-     * @return PercentileRanksAggregation
+     * @param float[]|int[] $values
+     * @param array<string, mixed> $options
      */
     public static function fromScript(
         array $values,
         ScriptInterface $script,
-        array $options = []
-    ): PercentileRanksAggregation {
-        $body = [];
-        $body['values'] = $values;
-        $body['script'] = $script->jsonSerialize();
-
-        return new static($body, $options);
+        array $options = [],
+    ): static {
+        return new static(null, $script, $values, $options);
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
-        $body = $this->body;
+        $body = [];
+        $body['values'] = $this->values;
+        if (null !== $this->field) {
+            $body['field'] = $this->field;
+        }
+        if (null !== $this->script) {
+            $body['script'] = $this->script->jsonSerialize();
+        }
         $body += $this->options;
 
         return [

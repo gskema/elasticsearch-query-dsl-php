@@ -5,76 +5,51 @@ namespace Gskema\ElasticSearchQueryDSL;
 use Gskema\ElasticSearchQueryDSL\Aggregation\AggregationInterface;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-aggregations.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations.html
  * @see HasAggsTraitTest
  */
 trait HasAggsTrait
 {
-    /** @var AggregationInterface[] */
-    protected $aggs = [];
+    /** @var array<string, AggregationInterface> */
+    protected array $aggs = [];
 
     /**
-     * @return AggregationInterface[]
+     * @inheritDoc
      */
     public function getAggs(): array
     {
         return $this->aggs;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return AggregationInterface|null
-     */
-    public function getAgg(string $key)
+    public function getAgg(string $key): ?AggregationInterface
     {
         return $this->aggs[$key] ?? null;
     }
 
     /**
-     * @param AggregationInterface[] $aggsByKey
-     *
-     * @return $this
+     * @inheritDoc
      */
-    public function setAggs(array $aggsByKey)
+    public function setAggs(array $keyAggMap): static
     {
-        $this->aggs = $aggsByKey;
-
+        $this->aggs = $keyAggMap;
         return $this;
     }
 
-    /**
-     * @param string               $key
-     * @param AggregationInterface $agg
-     *
-     * @return $this
-     */
-    public function setAgg(string $key, AggregationInterface $agg)
+    public function setAgg(string $key, AggregationInterface $agg): static
     {
         $this->aggs[$key] = $agg;
-
         return $this;
     }
 
-    /**
-     * @return $this
-     */
-    public function removeAggs()
+    public function removeAggs(): static
     {
         $this->aggs = [];
-
         return $this;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return $this
-     */
-    public function removeAgg(string $key)
+    public function removeAgg(string $key): static
     {
         unset($this->aggs[$key]);
-
         return $this;
     }
 
@@ -86,12 +61,5 @@ trait HasAggsTrait
     public function hasAgg(string $key): bool
     {
         return key_exists($key, $this->aggs);
-    }
-
-    protected function jsonSerializeAggs(): array
-    {
-        return array_map(function (AggregationInterface $agg) {
-            return $agg->jsonSerialize();
-        }, $this->aggs);
     }
 }

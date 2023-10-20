@@ -2,35 +2,39 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticSearchQueryDSL\Options;
 use Gskema\ElasticSearchQueryDSL\ScoreFunction\ScoreFunctionInterface;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-function-score-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-function-score-query.html
  * @see FunctionScoreMatcherTest
- *
- * @options 'boost' => 5.0,
- *          'max_boost' => 2000,
- *          'score_mode' => 'multiply', 'sum', 'avg', 'first', 'max', 'min',
- *          'boost_mode' => 'multiply', 'replace', 'sum', 'avg', 'max', 'min',
- *          'min_score' => 1.0,
- *          '_name' => '?',
  */
+#[Options([
+    'boost' => 5.0,
+    'max_boost' => 2000,
+    'score_mode' => 'multiply', // 'sum', 'avg', 'first', 'max', 'min',
+    'boost_mode' => 'multiply', // 'replace', 'sum', 'avg', 'max', 'min',
+    'min_score' => 1.0,
+    '_name' => '?',
+])]
 class FunctionScoreMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var MatcherInterface */
-    protected $query;
+    /** @var mixed[][] */
+    protected array $functions = [];
 
-    /** @var array[] */
-    protected $functions = [];
-
-    public function __construct(MatcherInterface $query = null, array $options = [])
-    {
-        $this->query = $query;
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(
+        protected ?MatcherInterface $query = null,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
@@ -40,18 +44,11 @@ class FunctionScoreMatcher implements MatcherInterface
         $this->functions = array_clone($this->functions);
     }
 
-    /**
-     * @param ScoreFunctionInterface $function
-     * @param MatcherInterface|null  $filter
-     * @param int|null               $weight
-     *
-     * @return $this
-     */
     public function addScoreFunction(
         ScoreFunctionInterface $function,
-        MatcherInterface $filter = null,
-        int $weight = null
-    ): FunctionScoreMatcher {
+        ?MatcherInterface $filter = null,
+        ?int $weight = null,
+    ): static {
         $rawFunction = [];
         $rawFunction['_function'] = $function;
         if (null !== $filter) {
@@ -66,9 +63,9 @@ class FunctionScoreMatcher implements MatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         if (null !== $this->query) {

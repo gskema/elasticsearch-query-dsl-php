@@ -5,31 +5,21 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\Joining;
 use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHitsRequest;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-inner-hits.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-inner-hits.html
  * @see HasInnerHitsTraitTest
  */
 trait HasInnerHitsTrait
 {
-    /** @var InnerHitsRequest|null */
-    protected $innerHits;
+    protected ?InnerHitsRequest $innerHits = null;
 
-    /**
-     * @return InnerHitsRequest|null
-     */
-    public function getInnerHits()
+    public function getInnerHits(): ?InnerHitsRequest
     {
         return $this->innerHits;
     }
 
-    /**
-     * @param InnerHitsRequest|null $request
-     *
-     * @return $this
-     */
-    public function setInnerHits(InnerHitsRequest $request = null)
+    public function setInnerHits(?InnerHitsRequest $request): static
     {
         $this->innerHits = $request;
-
         return $this;
     }
 

@@ -4,37 +4,30 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\TermLevel;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-ids-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-ids-query.html
  * @see IdsMatcherTest
- *
- * @options '_name' => '?',
  */
+#[Options([
+    '_name' => '?',
+])]
 class IdsMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var string[] */
-    protected $ids;
-
-    /** @var string|null */
-    protected $type;
-
-    /**
-     * @param string[]    $ids
-     * @param string|null $type
-     */
-    public function __construct(array $ids, string $type = null)
-    {
-        $this->ids = $ids;
-        $this->type = $type;
+    public function __construct(
+        /** @var string[] */
+        protected array $ids,
+        protected ?string $type = null,
+    ) {
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['values'] = $this->ids;

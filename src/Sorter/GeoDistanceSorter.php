@@ -2,43 +2,32 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Sorter;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Model\GeoPointInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
+
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-sort.html#geo-sorting
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-sort.html#geo-sorting
  * @see GeoDistanceSorterTest
- *
- * @options 'distance_type' => 'arc', 'plane',
  */
+#[Options([
+    'distance_type' => 'arc', // 'plane',
+])]
 class GeoDistanceSorter implements SorterInterface
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $field;
-
-    /** @var GeoPointInterface[] */
-    protected $origins;
-
-    /** @var string|null 'km', 'm', ... */
-    protected $unit;
-
-    /** @var string|null 'asc', 'desc' */
-    protected $order;
-
-    /** @var string|null 'min', 'max', 'sum', 'avg', 'median' */
-    protected $mode;
-
-    /**
-     * @param string              $field
-     * @param GeoPointInterface[] $origins
-     */
-    public function __construct(string $field, array $origins)
-    {
-        $this->field = $field;
-        $this->origins = $origins;
+    public function __construct(
+        protected string $field,
+        /** @var GeoPointInterface[] */
+        protected array $origins,
+        protected ?string $unit = null, // 'km', 'm', ...
+        protected ?string $order = null, // 'asc', 'desc'
+        protected ?string $mode = null, // 'min', 'max', 'sum', 'avg', 'median'
+    ) {
     }
 
     public function __clone()
@@ -59,77 +48,48 @@ class GeoDistanceSorter implements SorterInterface
         return $this->origins;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getUnit()
+    public function getUnit(): ?string
     {
         return $this->unit;
     }
 
-    /**
-     * @param string|null $unit
-     *
-     * @return $this
-     */
-    public function setUnit(string $unit = null): GeoDistanceSorter
+    public function setUnit(?string $unit): static
     {
         $this->unit = $unit;
-
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getOrder()
+    public function getOrder(): ?string
     {
         return $this->order;
     }
 
-    /**
-     * @param string|null $order
-     *
-     * @return $this
-     */
-    public function setOrder(string $order = null): GeoDistanceSorter
+    public function setOrder(?string $order): static
     {
         $this->order = $order;
-
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getMode()
+    public function getMode(): ?string
     {
         return $this->mode;
     }
 
-    /**
-     * @param string|null $mode
-     *
-     * @return $this
-     */
-    public function setMode(string $mode = null): GeoDistanceSorter
+    public function setMode(?string $mode): static
     {
         $this->mode = $mode;
-
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body[$this->field] = $this->field;
 
-        $rawPoints = array_map(function (GeoPointInterface $origin) {
-            return $origin->jsonSerialize();
-        }, $this->origins);
+        $rawPoints = obj_array_json_serialize($this->origins);
         $body[$this->field] = 1 === count($this->origins) ? $rawPoints[0] : $rawPoints;
 
         if (null !== $this->unit) {

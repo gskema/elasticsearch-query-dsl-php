@@ -2,16 +2,16 @@
 
 namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Highlighter\Highlighter;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 use Gskema\ElasticSearchQueryDSL\Sorter\FieldSorter;
 use Gskema\ElasticSearchQueryDSL\Sorter\RawSorter;
 use Gskema\ElasticSearchQueryDSL\SourceFilter\DisabledSourceFilter;
 
-class TopHitsRequestTest extends AbstractJsonSerializeTest
+final class TopHitsRequestTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -90,7 +90,7 @@ class TopHitsRequestTest extends AbstractJsonSerializeTest
     }
 
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $req = (new TopHitsRequest())
             ->setOptions([
@@ -117,23 +117,23 @@ class TopHitsRequestTest extends AbstractJsonSerializeTest
                     ->setField('field6')
             );
 
-        $this->assertEquals(true, $req->getOption('explain'));
-        $this->assertEquals(true, $req->getOption('version'));
-        $this->assertEquals(new DisabledSourceFilter(), $req->getSourceFields());
-        $this->assertEquals([
+        self::assertEquals(true, $req->getOption('explain'));
+        self::assertEquals(true, $req->getOption('version'));
+        self::assertEquals(new DisabledSourceFilter(), $req->getSourceFields());
+        self::assertEquals([
             'scriptField1' => new InlineScript('script1'),
             'scriptField2' => new InlineScript('script2'),
             'scriptField3' => new InlineScript('script3'),
         ], $req->getScriptFields());
-        $this->assertEquals(['storedField1', 'storedField2'], $req->getStoredFields());
-        $this->assertEquals(['docValueField1', 'docValueField2'], $req->getDocValueFields());
-        $this->assertEquals(10, $req->getFrom());
-        $this->assertEquals(5, $req->getSize());
-        $this->assertEquals([
+        self::assertEquals(['storedField1', 'storedField2'], $req->getStoredFields());
+        self::assertEquals(['docValueField1', 'docValueField2'], $req->getDocValueFields());
+        self::assertEquals(10, $req->getFrom());
+        self::assertEquals(5, $req->getSize());
+        self::assertEquals([
             new FieldSorter('field3', 'desc'),
             new RawSorter('field4')
         ], $req->getSorters());
-        $this->assertEquals(
+        self::assertEquals(
             (new Highlighter())
                 ->setField('field5', ['order' => 'score'])
                 ->setField('field6'),

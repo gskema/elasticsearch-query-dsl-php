@@ -5,16 +5,18 @@ namespace Gskema\ElasticSearchQueryDSL\SourceFilter;
 use stdClass;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-source-filtering.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-source-filtering.html
  * @see SourceFilterTest
  */
 class SourceFilter implements SourceFilterInterface
 {
-    /** @var string[] */
-    protected $includes = [];
-
-    /** @var string[] */
-    protected $excludes = [];
+    public function __construct(
+        /** @var string[] */
+        protected array $includes = [],
+        /** @var string[] */
+        protected array $excludes = [],
+    ) {
+    }
 
     /**
      * @return string[]
@@ -26,25 +28,16 @@ class SourceFilter implements SourceFilterInterface
 
     /**
      * @param string[] $includes
-     *
-     * @return SourceFilter
      */
-    public function setIncludes(array $includes): SourceFilter
+    public function setIncludes(array $includes): static
     {
         $this->includes = $includes;
-
         return $this;
     }
 
-    /**
-     * @param string $includedField
-     *
-     * @return SourceFilter
-     */
-    public function addInclude(string $includedField): SourceFilter
+    public function addInclude(string $includedField): static
     {
         $this->includes[] = $includedField;
-
         return $this;
     }
 
@@ -58,32 +51,23 @@ class SourceFilter implements SourceFilterInterface
 
     /**
      * @param string[] $excludes
-     *
-     * @return SourceFilter
      */
-    public function setExcludes(array $excludes): SourceFilter
+    public function setExcludes(array $excludes): static
     {
         $this->excludes = $excludes;
-
         return $this;
     }
 
-    /**
-     * @param string $excludedField
-     *
-     * @return SourceFilter
-     */
-    public function addExclude(string $excludedField): SourceFilter
+    public function addExclude(string $excludedField): static
     {
         $this->excludes[] = $excludedField;
-
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $includes = 1 === count($this->includes) ? $this->includes[0] : $this->includes;
         $excludes = 1 === count($this->excludes) ? $this->excludes[0] : $this->excludes;

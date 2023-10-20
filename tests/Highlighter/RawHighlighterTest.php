@@ -4,6 +4,6 @@ namespace Gskema\ElasticSearchQueryDSL\Highlighter;
 
 use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
 
-class RawHighlighterTest extends RawFragmentTest
+final class RawHighlighterTest extends RawFragmentTest
 {
 }

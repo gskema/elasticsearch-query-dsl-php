@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\FieldCollapser;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHitsRequest;
 
-class FieldCollapserTest extends AbstractJsonSerializeTest
+final class FieldCollapserTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -43,12 +43,12 @@ class FieldCollapserTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $givenCollapser = new FieldCollapser('field1');
 
-        $this->assertEquals('field1', $givenCollapser->getField());
-        $this->assertEquals([], $givenCollapser->getInnerHits());
+        self::assertEquals('field1', $givenCollapser->getField());
+        self::assertEquals([], $givenCollapser->getInnerHits());
 
         $givenCollapser->setInnerHits([
             (new InnerHitsRequest())->setName('name1'),
@@ -56,7 +56,7 @@ class FieldCollapserTest extends AbstractJsonSerializeTest
         ]);
         $givenCollapser->addInnerHits((new InnerHitsRequest())->setName('name3'));
 
-        $this->assertEquals([
+        self::assertEquals([
             (new InnerHitsRequest())->setName('name1'),
             (new InnerHitsRequest())->setName('name2'),
             (new InnerHitsRequest())->setName('name3'),

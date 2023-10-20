@@ -5,31 +5,21 @@ namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 use Gskema\ElasticSearchQueryDSL\Highlighter\HighlighterInterface;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-highlighting.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-highlighting.html
  * @see HasHighlighterTraitTest
  */
 trait HasHighlighterTrait
 {
-    /** @var HighlighterInterface|null */
-    protected $highlighter;
+    protected ?HighlighterInterface $highlighter = null;
 
-    /**
-     * @return HighlighterInterface|null
-     */
-    public function getHighlighter()
+    public function getHighlighter(): ?HighlighterInterface
     {
         return $this->highlighter;
     }
 
-    /**
-     * @param HighlighterInterface|null $highlighter
-     *
-     * @return $this
-     */
-    public function setHighlighter(HighlighterInterface $highlighter = null)
+    public function setHighlighter(?HighlighterInterface $highlighter): static
     {
         $this->highlighter = $highlighter;
-
         return $this;
     }
 }

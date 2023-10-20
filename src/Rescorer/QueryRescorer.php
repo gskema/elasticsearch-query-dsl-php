@@ -5,29 +5,20 @@ namespace Gskema\ElasticSearchQueryDSL\Rescorer;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-rescore.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-rescore.html
  * @see QueryRescorerTest
  */
 class QueryRescorer implements RescorerInterface
 {
-    /** @var MatcherInterface */
-    protected $query;
+    protected ?float $queryWeight = null;
+    protected ?float $rescoreQueryWeight = null;
+    /** 'total', 'multiply', 'avg', 'max', 'min' */
+    protected ?string $scoreMode = null;
+    protected ?int $windowSize = null;
 
-    /** @var float|null */
-    protected $queryWeight;
-
-    /** @var float|null */
-    protected $rescoreQueryWeight;
-
-    /** @var string|null 'total', 'multiply', 'avg', 'max', 'min' */
-    protected $scoreMode;
-
-    /** @var int|null */
-    protected $windowSize;
-
-    public function __construct(MatcherInterface $query)
-    {
-        $this->query = $query;
+    public function __construct(
+        protected MatcherInterface $query,
+    ) {
     }
 
     public function __clone()
@@ -40,90 +31,54 @@ class QueryRescorer implements RescorerInterface
         return $this->query;
     }
 
-    /**
-     * @return float|null
-     */
-    public function getQueryWeight()
+    public function getQueryWeight(): ?float
     {
         return $this->queryWeight;
     }
 
-    /**
-     * @param float|null $queryWeight
-     *
-     * @return $this
-     */
-    public function setQueryWeight(float $queryWeight): QueryRescorer
+    public function setQueryWeight(?float $queryWeight): static
     {
         $this->queryWeight = $queryWeight;
-
         return $this;
     }
 
-    /**
-     * @return float|null
-     */
-    public function getRescoreQueryWeight()
+    public function getRescoreQueryWeight(): ?float
     {
         return $this->rescoreQueryWeight;
     }
 
-    /**
-     * @param float|null $rescoreQueryWeight
-     *
-     * @return $this
-     */
-    public function setRescoreQueryWeight(float $rescoreQueryWeight): QueryRescorer
+    public function setRescoreQueryWeight(?float $rescoreQueryWeight): static
     {
         $this->rescoreQueryWeight = $rescoreQueryWeight;
-
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getScoreMode()
+    public function getScoreMode(): ?string
     {
         return $this->scoreMode;
     }
 
-    /**
-     * @param string|null $scoreMode
-     *
-     * @return $this
-     */
-    public function setScoreMode(string $scoreMode = null): QueryRescorer
+    public function setScoreMode(?string $scoreMode): static
     {
         $this->scoreMode = $scoreMode;
-
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getWindowSize()
+    public function getWindowSize(): ?int
     {
         return $this->windowSize;
     }
 
-    /**
-     * @param int|null $windowSize
-     *
-     * @return $this
-     */
-    public function setWindowSize(int $windowSize = null): QueryRescorer
+    public function setWindowSize(?int $windowSize): static
     {
         $this->windowSize = $windowSize;
-
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         if (null !== $this->windowSize) {

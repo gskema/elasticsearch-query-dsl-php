@@ -2,42 +2,33 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticSearchQueryDSL\Options;
 use InvalidArgumentException;
 
+use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-span-near-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-span-near-query.html
  * @see SpanNearMatcherTest
- *
- * @options '_name' => '?',
  */
+#[Options([
+    '_name' => '?',
+])]
 class SpanNearMatcher implements SpanMatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var SpanMatcherInterface[] */
-    protected $spanMatchers;
-
-    /** @var int */
-    protected $slop;
-
-    /** @var bool */
-    protected $inOrder;
-
-    /**
-     * @param SpanMatcherInterface[] $spanMatchers
-     * @param int                    $slop
-     * @param bool                   $inOrder
-     */
-    public function __construct(array $spanMatchers, int $slop, bool $inOrder)
-    {
+    public function __construct(
+        /** @var SpanMatcherInterface[] */
+        protected array $spanMatchers,
+        protected int $slop,
+        protected bool $inOrder,
+    ) {
         if (empty($spanMatchers)) {
             throw new InvalidArgumentException('Expected at least one span matcher, got none');
         }
-        $this->spanMatchers = $spanMatchers;
-        $this->slop = $slop;
-        $this->inOrder = $inOrder;
     }
 
     public function __clone()
@@ -46,14 +37,12 @@ class SpanNearMatcher implements SpanMatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [
-            'clauses' => array_map(function (SpanMatcherInterface $matcher) {
-                return $matcher->jsonSerialize();
-            }, $this->spanMatchers),
+            'clauses' => obj_array_json_serialize($this->spanMatchers),
             'slop' => $this->slop,
             'in_order' => $this->inOrder,
         ];

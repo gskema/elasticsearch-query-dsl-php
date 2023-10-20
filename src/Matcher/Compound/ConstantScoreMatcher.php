@@ -4,27 +4,27 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-constant-score-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-constant-score-query.html
  * @see ConstantScoreMatcherTest
- *
- * @options '_name' => '?',
  */
+#[Options([
+    '_name' => '?',
+])]
 class ConstantScoreMatcher implements MatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var MatcherInterface */
-    protected $filter;
-
-    /** @var float */
-    protected $boost;
-
-    public function __construct(MatcherInterface $filter, float $boost, array $options = [])
-    {
-        $this->filter = $filter;
-        $this->boost = $boost;
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(
+        protected MatcherInterface $filter,
+        protected float $boost,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
@@ -34,9 +34,9 @@ class ConstantScoreMatcher implements MatcherInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [
             'filter' => $this->filter->jsonSerialize(),

@@ -2,13 +2,13 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Suggester;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Matcher\MatchAllMatcher;
 use Gskema\ElasticSearchQueryDSL\Suggester\CandidateGenerator\DirectCandidateGenerator;
 
-class PhraseSuggesterTest extends AbstractJsonSerializeTest
+final class PhraseSuggesterTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -51,7 +51,7 @@ class PhraseSuggesterTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $suggester = (new PhraseSuggester('field1', 'text1', ['key1' => 'value1']))
             ->setDirectGenerators([
@@ -60,8 +60,8 @@ class PhraseSuggesterTest extends AbstractJsonSerializeTest
             ->addDirectGenerator(new DirectCandidateGenerator('field2'))
             ->setCollate(new MatchAllMatcher(), ['param1' => 'value1'], true);
 
-        $this->assertInstanceOf(PhraseSuggester::class, $suggester);
-        $this->assertEquals([
+        self::assertInstanceOf(PhraseSuggester::class, $suggester);
+        self::assertEquals([
             new DirectCandidateGenerator('field1'),
             new DirectCandidateGenerator('field2'),
         ], $suggester->getDirectGenerators());

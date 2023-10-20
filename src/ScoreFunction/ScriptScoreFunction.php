@@ -4,23 +4,26 @@ namespace Gskema\ElasticSearchQueryDSL\ScoreFunction;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-function-score-query.html#function-script-score
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-function-score-query.html#function-script-score
  * @see ScriptScoreFunctionTest
- *
- * @options 'boost_mode' => 'replace'
  */
+#[Options([
+    'boost_mode' => 'replace'
+])]
 class ScriptScoreFunction implements ScoreFunctionInterface
 {
     use HasOptionsTrait;
 
-    /** @var ScriptInterface */
-    protected $script;
-
-    public function __construct(ScriptInterface $script, array $options = [])
-    {
-        $this->script = $script;
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(
+        protected ScriptInterface $script,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
@@ -30,9 +33,9 @@ class ScriptScoreFunction implements ScoreFunctionInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         $body['script'] = $this->script->jsonSerialize();

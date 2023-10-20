@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline\Parent;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
 
-class BucketScriptAggregationTest extends AbstractJsonSerializeTest
+final class BucketScriptAggregationTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -35,7 +35,7 @@ class BucketScriptAggregationTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $agg = new BucketScriptAggregation(
             [
@@ -45,6 +45,6 @@ class BucketScriptAggregationTest extends AbstractJsonSerializeTest
             new InlineScript('params.var1 / params.var2')
         );
 
-        $this->assertInstanceOf(BucketScriptAggregation::class, $agg);
+        self::assertInstanceOf(BucketScriptAggregation::class, $agg);
     }
 }

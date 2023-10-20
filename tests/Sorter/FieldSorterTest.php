@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Sorter;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class FieldSorterTest extends AbstractJsonSerializeTest
+final class FieldSorterTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -32,20 +32,20 @@ class FieldSorterTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $sorter = new FieldSorter('field1', 'order1', 'mode1');
 
-        $this->assertEquals('field1', $sorter->getField());
-        $this->assertEquals('order1', $sorter->getOrder());
-        $this->assertEquals('mode1', $sorter->getMode());
+        self::assertEquals('field1', $sorter->getField());
+        self::assertEquals('order1', $sorter->getOrder());
+        self::assertEquals('mode1', $sorter->getMode());
 
         $sorter->setOrder('order2');
         $sorter->setMode('mode2');
         $sorter->setOption('key1', 'value1');
 
-        $this->assertEquals('order2', $sorter->getOrder());
-        $this->assertEquals('mode2', $sorter->getMode());
-        $this->assertEquals('value1', $sorter->getOption('key1'));
+        self::assertEquals('order2', $sorter->getOrder());
+        self::assertEquals('mode2', $sorter->getMode());
+        self::assertEquals('value1', $sorter->getOption('key1'));
     }
 }

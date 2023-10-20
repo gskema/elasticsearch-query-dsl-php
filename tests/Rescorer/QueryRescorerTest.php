@@ -2,12 +2,12 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Rescorer;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Matcher\TermLevel\TermMatcher;
 
-class QueryRescorerTest extends AbstractJsonSerializeTest
+final class QueryRescorerTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -36,7 +36,7 @@ class QueryRescorerTest extends AbstractJsonSerializeTest
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
         $rescorer = (new QueryRescorer(new TermMatcher('field1', 'value1')))
             ->setQueryWeight(1.0)
@@ -44,10 +44,10 @@ class QueryRescorerTest extends AbstractJsonSerializeTest
             ->setScoreMode('avg')
             ->setWindowSize(10);
 
-        $this->assertEquals(new TermMatcher('field1', 'value1'), $rescorer->getQuery());
-        $this->assertEquals(1.0, $rescorer->getQueryWeight());
-        $this->assertEquals(2.0, $rescorer->getRescoreQueryWeight());
-        $this->assertEquals('avg', $rescorer->getScoreMode());
-        $this->assertEquals(10, $rescorer->getWindowSize());
+        self::assertEquals(new TermMatcher('field1', 'value1'), $rescorer->getQuery());
+        self::assertEquals(1.0, $rescorer->getQueryWeight());
+        self::assertEquals(2.0, $rescorer->getRescoreQueryWeight());
+        self::assertEquals('avg', $rescorer->getScoreMode());
+        self::assertEquals(10, $rescorer->getWindowSize());
     }
 }

@@ -5,17 +5,19 @@ namespace Gskema\ElasticSearchQueryDSL\Matcher\Joining;
 use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHitsRequest;
 use PHPUnit\Framework\TestCase;
 
-class HasInnerHitsTraitTest extends TestCase
+final class HasInnerHitsTraitTest extends TestCase
 {
-    public function testMethods()
+    public function testMethods(): void
     {
         /** @var HasInnerHitsTrait $object */
-        $object = $this->getMockForTrait(HasInnerHitsTrait::class);
+        $object = new class {
+            use HasInnerHitsTrait;
+        };
 
         $object->setInnerHits((new InnerHitsRequest())->setName('name1'));
 
-        $this->assertEquals(true, $object->hasInnerHits());
-        $this->assertEquals(
+        self::assertEquals(true, $object->hasInnerHits());
+        self::assertEquals(
             (new InnerHitsRequest())->setName('name1'),
             $object->getInnerHits()
         );

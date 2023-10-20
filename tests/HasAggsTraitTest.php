@@ -6,38 +6,37 @@ use Gskema\ElasticSearchQueryDSL\Aggregation\Bucket\GlobalAggregation;
 use Gskema\ElasticSearchQueryDSL\Aggregation\EmptyAggregation;
 use PHPUnit\Framework\TestCase;
 
-class HasAggsTraitTest extends TestCase
+final class HasAggsTraitTest extends TestCase
 {
-    public function testMethods()
+    public function testMethods(): void
     {
         /** @var HasAggsTrait $givenObject */
-        $givenObject = $this
-            ->getMockBuilder(HasAggsTrait::class)
-            ->setMethods(null)
-            ->getMockForTrait();
+        $givenObject = new class {
+            use HasAggsTrait;
+        };
 
-        $this->assertEquals(false, $givenObject->hasAggs());
-        $this->assertEquals(false, $givenObject->hasAgg('key1'));
+        self::assertEquals(false, $givenObject->hasAggs());
+        self::assertEquals(false, $givenObject->hasAgg('key1'));
 
         $givenObject->setAggs(['key1' => new GlobalAggregation()]);
         $givenObject->setAgg('key2', new EmptyAggregation('stats'));
 
-        $this->assertEquals(true, $givenObject->hasAggs());
-        $this->assertEquals(true, $givenObject->hasAgg('key1'));
-        $this->assertEquals(true, $givenObject->hasAgg('key2'));
-        $this->assertEquals(false, $givenObject->hasAgg('key3'));
+        self::assertEquals(true, $givenObject->hasAggs());
+        self::assertEquals(true, $givenObject->hasAgg('key1'));
+        self::assertEquals(true, $givenObject->hasAgg('key2'));
+        self::assertEquals(false, $givenObject->hasAgg('key3'));
 
-        $this->assertEquals(new GlobalAggregation(), $givenObject->getAgg('key1'));
-        $this->assertEquals(new EmptyAggregation('stats'), $givenObject->getAgg('key2'));
-        $this->assertEquals([
+        self::assertEquals(new GlobalAggregation(), $givenObject->getAgg('key1'));
+        self::assertEquals(new EmptyAggregation('stats'), $givenObject->getAgg('key2'));
+        self::assertEquals([
             'key1' => new GlobalAggregation(),
             'key2' => new EmptyAggregation('stats'),
         ], $givenObject->getAggs());
 
         $givenObject->removeAgg('key2');
-        $this->assertEquals(['key1' => new GlobalAggregation()], $givenObject->getAggs());
+        self::assertEquals(['key1' => new GlobalAggregation()], $givenObject->getAggs());
 
         $givenObject->removeAggs();
-        $this->assertEquals([], $givenObject->getAggs());
+        self::assertEquals([], $givenObject->getAggs());
     }
 }

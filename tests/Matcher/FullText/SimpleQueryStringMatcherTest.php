@@ -2,11 +2,11 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\FullText;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTest;
+use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 
-class SimpleQueryStringMatcherTest extends AbstractJsonSerializeTest
+final class SimpleQueryStringMatcherTest extends AbstractJsonSerializeTestCase
 {
-    public function dataTestJsonSerialize(): array
+    public static function dataTestJsonSerialize(): iterable
     {
         $dataSets = [];
 
@@ -16,18 +16,18 @@ class SimpleQueryStringMatcherTest extends AbstractJsonSerializeTest
             '{
                 "simple_query_string": {
                     "query": "this AND that OR thus",
-                    "all_fields": true
+                    "analyze_wildcard": true
                 }
              }',
-            new SimpleQueryStringMatcher('this AND that OR thus', ['all_fields' => true]),
+            new SimpleQueryStringMatcher('this AND that OR thus', ['analyze_wildcard' => true]),
         ];
 
         return $dataSets;
     }
 
-    public function testMethods()
+    public function testMethods(): void
     {
-        $matcher1 = new SimpleQueryStringMatcher('this AND that OR thus', ['all_fields' => true]);
-        $this->assertInstanceOf(SimpleQueryStringMatcher::class, $matcher1);
+        $matcher1 = new SimpleQueryStringMatcher('this AND that OR thus', ['analyze_wildcard' => true]);
+        self::assertInstanceOf(SimpleQueryStringMatcher::class, $matcher1);
     }
 }

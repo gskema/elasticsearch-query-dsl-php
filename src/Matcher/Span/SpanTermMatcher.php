@@ -3,35 +3,35 @@
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticSearchQueryDSL\Options;
 
 /**
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-span-term-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-span-term-query.html
  * @see SpanTermMatcherTest
- *
- * @options 'boost' => 1.0,
- *          '_name' => '?',
  */
+#[Options([
+    'boost' => 1.0,
+    '_name' => '?',
+])]
 class SpanTermMatcher implements SpanMatcherInterface
 {
     use HasOptionsTrait;
 
-    /** @var string */
-    protected $field;
-
-    /** @var string */
-    protected $value;
-
-    public function __construct(string $field, string $value, array $options = [])
-    {
-        $this->field = $field;
-        $this->value = $value;
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(
+        protected string $field,
+        protected string $value,
+        array $options = [],
+    ) {
         $this->options = $options;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $body = [];
         if (!empty($this->options)) {
