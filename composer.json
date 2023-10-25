@@ -36,8 +36,7 @@
     "scripts": {
         "prep": "mkdir -p build",
         "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-clover=clover.xml",
-        "test-coverage-local": "php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-html=build/coverage",
+        "test-local": "php -d xdebug.mode=coverage ./vendor/bin/phpunit",
         "style": "@composer prep && ./vendor/bin/phpcs --standard=phpcs.xml -p"
     },
     "config": {
