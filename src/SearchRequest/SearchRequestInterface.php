@@ -13,4 +13,10 @@ use JsonSerializable;
  */
 interface SearchRequestInterface extends JsonSerializable
 {
+    /**
+     * Returns a list of URL parameters to be sent with request.
+     * @see SearchRequest - #[Parameters] attribute
+     * @return array<string, mixed>
+     */
+    public function getParameters(): array;
 }

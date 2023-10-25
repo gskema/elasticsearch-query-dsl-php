@@ -2,6 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 
+use Gskema\ElasticSearchQueryDSL\HasParametersTrait;
 use Gskema\ElasticSearchQueryDSL\RawFragment;
 
 /**
@@ -10,4 +11,5 @@ use Gskema\ElasticSearchQueryDSL\RawFragment;
  */
 class RawSearchRequest extends RawFragment implements SearchRequestInterface
 {
+    use HasParametersTrait;
 }
