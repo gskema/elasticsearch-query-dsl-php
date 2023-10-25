@@ -88,7 +88,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-version]: https://img.shields.io/packagist/v/gskema/elasticsearch-query-dsl-php.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-build]: https://img.shields.io/github/actions/workflow/status/gskema/elasticsearch-query-dsl-php/ci.yml?branch=6.x
-[ico-coverage]: https://raw.githubusercontent.com/gskema/elasticsearch-query-dsl-php/image-data/badge.svg
+[ico-coverage]: https://raw.githubusercontent.com/gskema/elasticsearch-query-dsl-php/image-data/coverage.svg
 [ico-downloads]: https://img.shields.io/packagist/dt/gskema/elasticsearch-query-dsl-php.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/gskema/elasticsearch-query-dsl-php
