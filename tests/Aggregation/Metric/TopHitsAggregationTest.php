@@ -3,7 +3,7 @@
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\SearchRequest\TopHitsRequest;
+use Gskema\ElasticSearchQueryDSL\SearchRequest\TopHits\TopHitsRequest;
 
 final class TopHitsAggregationTest extends AbstractJsonSerializeTestCase
 {

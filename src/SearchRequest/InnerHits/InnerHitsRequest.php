@@ -1,10 +1,16 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
+namespace Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHits;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Options;
-use JsonSerializable;
+use Gskema\ElasticSearchQueryDSL\SearchRequest\HasDocValueFieldsTrait;
+use Gskema\ElasticSearchQueryDSL\SearchRequest\HasFromTrait;
+use Gskema\ElasticSearchQueryDSL\SearchRequest\HasHighlighterTrait;
+use Gskema\ElasticSearchQueryDSL\SearchRequest\HasScriptFieldsTrait;
+use Gskema\ElasticSearchQueryDSL\SearchRequest\HasSizeTrait;
+use Gskema\ElasticSearchQueryDSL\SearchRequest\HasSortersTrait;
+use Gskema\ElasticSearchQueryDSL\SearchRequest\HasSourceFieldsTrait;
 use stdClass;
 
 use function Gskema\ElasticSearchQueryDSL\array_clone;
@@ -12,30 +18,42 @@ use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-inner-hits.html
- * @see TopHitsRequest
+ * @see InnerHitsRequestTest
  */
 #[Options([
     'explain' => true,
     'version' => true,
 ])]
-class TopHitsRequest implements JsonSerializable
+class InnerHitsRequest implements InnerHitsRequestInterface
 {
-    use HasFromTrait;
+    use HasOptionsTrait;
     use HasSizeTrait;
-    use HasSortersTrait;
+    use HasFromTrait;
     use HasHighlighterTrait;
+    use HasSortersTrait;
     use HasSourceFieldsTrait;
-    use HasStoredFieldsTrait;
     use HasScriptFieldsTrait;
     use HasDocValueFieldsTrait;
-    use HasOptionsTrait;
+
+    protected ?string $name = null;
 
     public function __clone()
     {
-        $this->sorters = array_clone($this->sorters);
         $this->highlighter = $this->highlighter ? clone $this->highlighter : null;
-        $this->sourceFields = $this->sourceFields ? clone $this->sourceFields : null;
         $this->scriptFields = array_clone($this->scriptFields);
+        $this->sorters = array_clone($this->sorters);
+        $this->sourceFields = $this->sourceFields ? clone $this->sourceFields : null;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
+        return $this;
     }
 
     /**
@@ -45,11 +63,11 @@ class TopHitsRequest implements JsonSerializable
     {
         $body = $this->options;
 
+        if (null !== $this->name) {
+            $body['name'] = $this->name;
+        }
         if (null !== $this->sourceFields) {
             $body['_source'] = $this->jsonSerializeSourceFields();
-        }
-        if (null !== $this->storedFields) {
-            $body['stored_fields'] = $this->storedFields;
         }
         if (!empty($this->scriptFields)) {
             $body['script_fields'] = obj_array_json_serialize($this->scriptFields);

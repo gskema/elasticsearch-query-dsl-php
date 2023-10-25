@@ -2,7 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
-use Gskema\ElasticSearchQueryDSL\SearchRequest\TopHitsRequest;
+use Gskema\ElasticSearchQueryDSL\SearchRequest\TopHits\TopHitsRequestInterface;
 use stdClass;
 
 /**
@@ -12,7 +12,7 @@ use stdClass;
 class TopHitsAggregation implements MetricAggregationInterface
 {
     public function __construct(
-        protected ?TopHitsRequest $request = null,
+        protected ?TopHitsRequestInterface $request = null,
     ) {
     }
 

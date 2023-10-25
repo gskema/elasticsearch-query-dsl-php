@@ -2,7 +2,7 @@
 
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Joining;
 
-use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHitsRequest;
+use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHits\InnerHitsRequestInterface;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-inner-hits.html
@@ -10,14 +10,14 @@ use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHitsRequest;
  */
 trait HasInnerHitsTrait
 {
-    protected ?InnerHitsRequest $innerHits = null;
+    protected ?InnerHitsRequestInterface $innerHits = null;
 
-    public function getInnerHits(): ?InnerHitsRequest
+    public function getInnerHits(): ?InnerHitsRequestInterface
     {
         return $this->innerHits;
     }
 
-    public function setInnerHits(?InnerHitsRequest $request): static
+    public function setInnerHits(?InnerHitsRequestInterface $request): static
     {
         $this->innerHits = $request;
         return $this;

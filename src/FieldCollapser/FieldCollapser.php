@@ -4,7 +4,7 @@ namespace Gskema\ElasticSearchQueryDSL\FieldCollapser;
 
 use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
 use Gskema\ElasticSearchQueryDSL\Options;
-use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHitsRequest;
+use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHits\InnerHitsRequestInterface;
 
 use function Gskema\ElasticSearchQueryDSL\array_clone;
 
@@ -21,7 +21,7 @@ class FieldCollapser implements FieldCollapserInterface
 
     public function __construct(
         protected string $field,
-        /** @var InnerHitsRequest[] */
+        /** @var InnerHitsRequestInterface[] */
         protected array $innerHits = [],
     ) {
     }
@@ -37,7 +37,7 @@ class FieldCollapser implements FieldCollapserInterface
     }
 
     /**
-     * @return InnerHitsRequest[]
+     * @return InnerHitsRequestInterface[]
      */
     public function getInnerHits(): array
     {
@@ -45,7 +45,7 @@ class FieldCollapser implements FieldCollapserInterface
     }
 
     /**
-     * @param InnerHitsRequest[] $requests
+     * @param InnerHitsRequestInterface[] $requests
      */
     public function setInnerHits(array $requests): static
     {
@@ -53,7 +53,7 @@ class FieldCollapser implements FieldCollapserInterface
         return $this;
     }
 
-    public function addInnerHits(InnerHitsRequest $request): static
+    public function addInnerHits(InnerHitsRequestInterface $request): static
     {
         $this->innerHits[] = $request;
         return $this;

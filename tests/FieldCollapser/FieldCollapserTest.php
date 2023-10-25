@@ -3,7 +3,7 @@
 namespace Gskema\ElasticSearchQueryDSL\FieldCollapser;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHitsRequest;
+use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHits\InnerHitsRequest;
 
 final class FieldCollapserTest extends AbstractJsonSerializeTestCase
 {

@@ -5,6 +5,7 @@ namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Highlighter\Highlighter;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
+use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHits\InnerHitsRequest;
 use Gskema\ElasticSearchQueryDSL\Sorter\FieldSorter;
 use Gskema\ElasticSearchQueryDSL\Sorter\RawSorter;
 use Gskema\ElasticSearchQueryDSL\SourceFilter\DisabledSourceFilter;

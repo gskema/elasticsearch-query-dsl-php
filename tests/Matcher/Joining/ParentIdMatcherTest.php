@@ -3,7 +3,7 @@
 namespace Gskema\ElasticSearchQueryDSL\Matcher\Joining;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHitsRequest;
+use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHits\InnerHitsRequest;
 
 final class ParentIdMatcherTest extends AbstractJsonSerializeTestCase
 {
