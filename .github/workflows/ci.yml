@@ -37,7 +37,7 @@ jobs:
       - name: Tests & Style
         run: |
           composer test-coverage
-          composer phpcs
+          composer style
 
       - name: Upload Coverage
         if: github.repository_owner == 'gskema'
