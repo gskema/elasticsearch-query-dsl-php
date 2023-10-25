@@ -12,11 +12,10 @@ Feature complete, object oriented, composable, extendable ElasticSearch query DS
 
 - Dependency free
 - Can be used with any PHP ElasticSearch client
-- Fully interfaced, ready for custom classes
+- Fully interfaced, ready for custom classes and 
 - Explicit class and property naming, fully matches produced JSON and ElasticSearch docs
 - All configuration options are listed inside classes, links to documentation
 - Classes can be easily composed, extended
-- Design that is easy to test and maintain
 - Usage of setters/getters so that everything can be inlined and chained.
 - Fully working `::__clone()` methods
 - Extendable code: no usage of `private`, `final` or `readonly`
@@ -37,7 +36,7 @@ Because major version number follows ElasticSearch major version number, second 
 ## Install
 
 ``` bash
-composer require gskema/elasticsearch-query-dsl-php 5.*
+composer require gskema/elasticsearch-query-dsl-php 6.* # match your ElasticSearch version
 ```
 
 ## Usage
@@ -59,12 +58,42 @@ $searchRequest->setAgg(
 (new ElasticSearchClient())->search($searchRequest->jsonSerialize());
 ```
 
+All classes match naming in official ElasticSearch documentation.
+Each class has a list of possible configuration options listed above
+class using attributes:
+
+```php
+#[Options([
+    'flags' => 'ALL|ANYSTRING|COMPLEMENT|EMPTY|INTERSECTION|INTERVAL|NONE',
+    'max_determinized_states' => 2000,
+    ...
+])]
+class RegexpMatcher implements MultiTermMatcherInterface {}
+```
+
+Similarly, `SearchRequest` class also has possible URL parameters listed:
+
+```php
+#[Parameters([
+    'timeout' => '2s',
+    'terminate_after' => 1,
+    'max_concurrent_shard_requests' => 2,
+    ...
+])]
+class SearchRequest implements SearchRequestInterface {}
+```
+
 ## Matcher?
 
 Request object that is received by ElasticSearch `/_search/` has many properties and sub-properties
 like `query`, `filter`, `post_filter`, etc.
 
-To avoid convoluted expressions like `(new SearchRequest())->setQuery((new BoolQuery()->addFilter(new TermQuery('))`
+To avoid convoluted expressions like
+```php
+(new SearchRequest())->setQuery(
+    (new BoolQuery()->addFilter(new TermQuery('x')
+)->setPostFilter(new BoolQuery(...)))
+```
 keyword `matcher` was explicitly chosen.
 
 ## Change log
