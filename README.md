@@ -3,8 +3,7 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status][ico-build]][link-build]
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
-[![Quality Score][ico-code-quality]][link-code-quality]
+[![Coverage Status][ico-coverage]][link-build]
 [![Total Downloads][ico-downloads]][link-downloads]
 
 Feature complete, object oriented, composable, extendable ElasticSearch query DSL builder for PHP.
@@ -89,12 +88,9 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-version]: https://img.shields.io/packagist/v/gskema/elasticsearch-query-dsl-php.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-build]: https://img.shields.io/github/actions/workflow/status/gskema/elasticsearch-query-dsl-php/ci.yml?branch=6.x
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/gskema/elasticsearch-query-dsl-php.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/gskema/elasticsearch-query-dsl-php.svg?style=flat-square
+[ico-coverage]: https://raw.githubusercontent.com/gskema/elasticsearch-query-dsl-php/image-data/badge.svg
 [ico-downloads]: https://img.shields.io/packagist/dt/gskema/elasticsearch-query-dsl-php.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/gskema/elasticsearch-query-dsl-php
 [link-build]: https://github.com/gskema/elasticsearch-query-dsl-php/actions
-[link-scrutinizer]: https://scrutinizer-ci.com/g/gskema/elasticsearch-query-dsl-php/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/gskema/elasticsearch-query-dsl-php
 [link-downloads]: https://packagist.org/packages/gskema/elasticsearch-query-dsl-php
