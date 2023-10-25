@@ -35,6 +35,7 @@
         "psr-4": { "Gskema\\ElasticSearchQueryDSL\\": "tests/" }
     },
     "scripts": {
+        "prep": "mkdir -p build",
         "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --coverage-clover=clover.xml",
         "test-coverage-local": "php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-html=build/coverage",
