@@ -4,21 +4,26 @@ All notable changes to `elasticsearch-query-dsl-php` will be documented in this 
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## [6.0.0] - 2023-10-*
+## [6.0.0] - 2023-10-25
 ### Added
-- TermsSetMatcher
-- WrapperMatcher
-- AutoIntervalDateHistogramAggregation
-- CompositeAggregation
-- ParentAggregation
-- SignificantTextAggregation
-- MedianAbsoluteDeviationAggregation
-- WeightedAvgAggregation
-- BucketSortAggregation
-- MovingFunctionAggregation
+- `TermsSetMatcher`
+- `WrapperMatcher`
+- `AutoIntervalDateHistogramAggregation`
+- `CompositeAggregation`
+- `ParentAggregation`
+- `SignificantTextAggregation`
+- `MedianAbsoluteDeviationAggregation`
+- `WeightedAvgAggregation`
+- `BucketSortAggregation`
+- `MovingFunctionAggregation`
 - `SourceFilterInterface|array|null` for simplified usage
+- `SearchRequestInterface::getParameters`
+- `InnerHitsRequestInterface`
+- `TopHitsRequestInterface`
+- `obj_array_json_serialize` for internal use
 
 ### Changed
+- Constructor signatures
 - Parameter, property, return types
 - Renamed `RegexMatcher` to `RegexpMatcher`
 
