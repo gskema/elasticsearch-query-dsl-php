@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-    bootstrap="./vendor/autoload.php"
-    cacheDirectory="./build/.phpunit.cache"
-    colors="true"
-    displayDetailsOnTestsThatTriggerNotices="true"
-    displayDetailsOnTestsThatTriggerDeprecations="true"
-    displayDetailsOnTestsThatTriggerWarnings="true"
-    displayDetailsOnSkippedTests="true"
-    processIsolation="false"
-    stopOnFailure="false"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        bootstrap="./vendor/autoload.php"
+        cacheDirectory="./build/.phpunit.cache"
+        colors="true"
+        displayDetailsOnTestsThatTriggerNotices="true"
+        displayDetailsOnTestsThatTriggerDeprecations="true"
+        displayDetailsOnTestsThatTriggerWarnings="true"
+        displayDetailsOnSkippedTests="true"
+        processIsolation="false"
+        stopOnFailure="false"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.4/phpunit.xsd"
 >
     <testsuites>
         <testsuite name="Tests">
             <directory suffix="Test.php">tests</directory>
         </testsuite>
     </testsuites>
-
     <coverage>
-        <include>
-            <directory suffix=".php">src/</directory>
-        </include>
         <report>
             <html outputDirectory="./build/coverage" lowUpperBound="35" highLowerBound="70"/>
             <clover outputFile="./build/clover.xml"/>
@@ -28,4 +26,9 @@
     <logging>
         <junit outputFile="./build/junit.xml"/>
     </logging>
+    <source>
+        <include>
+            <directory suffix=".php">src/</directory>
+        </include>
+    </source>
 </phpunit>
