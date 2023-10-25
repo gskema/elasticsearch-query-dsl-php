@@ -4,6 +4,7 @@ namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
+use InvalidArgumentException;
 
 final class DiversifiedSamplerAggregationTest extends AbstractJsonSerializeTestCase
 {
@@ -28,6 +29,23 @@ final class DiversifiedSamplerAggregationTest extends AbstractJsonSerializeTestC
                 ->setAgg('key1', new GlobalAggregation()),
         ];
 
+        // #0
+        $dataSets[] = [
+            // language=JSON
+            '{
+                "diversified_sampler" : {
+                    "script": "script1"
+                },
+                "aggs": {
+                    "key1": {
+                        "global": {}
+                    }
+                }
+            }',
+            DiversifiedSamplerAggregation::fromScript(new InlineScript('script1'))
+                ->setAgg('key1', new GlobalAggregation()),
+        ];
+
         return $dataSets;
     }
 
@@ -38,5 +56,16 @@ final class DiversifiedSamplerAggregationTest extends AbstractJsonSerializeTestC
 
         $agg2 = DiversifiedSamplerAggregation::fromScript(new InlineScript('source1'));
         self::assertInstanceOf(DiversifiedSamplerAggregation::class, $agg2);
+    }
+
+    public function testConstructorException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new class extends DiversifiedSamplerAggregation {
+            public function __construct()
+            {
+                parent::__construct(null, null);
+            }
+        };
     }
 }

@@ -4,6 +4,7 @@ namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
+use InvalidArgumentException;
 
 final class RangeAggregationTest extends AbstractJsonSerializeTestCase
 {
@@ -74,5 +75,16 @@ final class RangeAggregationTest extends AbstractJsonSerializeTestCase
             ['from' => 5, 'to' => 5, 'key' => 'custom_bucket_key'],
         ]);
         self::assertInstanceOf(RangeAggregation::class, $agg);
+    }
+
+    public function testConstructorException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new class extends RangeAggregation {
+            public function __construct()
+            {
+                parent::__construct(null, null, []);
+            }
+        };
     }
 }

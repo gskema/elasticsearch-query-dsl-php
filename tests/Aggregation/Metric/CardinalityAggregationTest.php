@@ -4,6 +4,7 @@ namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
+use InvalidArgumentException;
 
 final class CardinalityAggregationTest extends AbstractJsonSerializeTestCase
 {
@@ -43,5 +44,16 @@ final class CardinalityAggregationTest extends AbstractJsonSerializeTestCase
 
         $agg2 = CardinalityAggregation::fromScript(new InlineScript('source1'));
         self::assertInstanceOf(CardinalityAggregation::class, $agg2);
+    }
+
+    public function testConstructorException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new class extends CardinalityAggregation {
+            public function __construct()
+            {
+                parent::__construct(null, null);
+            }
+        };
     }
 }

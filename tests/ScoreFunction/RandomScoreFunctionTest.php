@@ -24,10 +24,11 @@ final class RandomScoreFunctionTest extends AbstractJsonSerializeTestCase
             // language=JSON
             '{
                 "random_score": {
-                    "seed": 1
+                    "seed": 1,
+                    "field": "field1"
                 }
             }',
-            (new RandomScoreFunction(1)),
+            (new RandomScoreFunction(1, 'field1')),
         ];
 
         return $dataSets;

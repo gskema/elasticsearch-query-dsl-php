@@ -4,6 +4,7 @@ namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
+use InvalidArgumentException;
 
 final class PercentileRanksAggregationTest extends AbstractJsonSerializeTestCase
 {
@@ -81,5 +82,16 @@ final class PercentileRanksAggregationTest extends AbstractJsonSerializeTestCase
             ['keyed' => true]
         );
         self::assertInstanceOf(PercentileRanksAggregation::class, $agg2);
+    }
+
+    public function testConstructorException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new class extends PercentileRanksAggregation {
+            public function __construct()
+            {
+                parent::__construct(null, null, []);
+            }
+        };
     }
 }

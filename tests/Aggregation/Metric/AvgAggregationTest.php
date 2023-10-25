@@ -4,6 +4,7 @@ namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
+use InvalidArgumentException;
 
 final class AvgAggregationTest extends AbstractJsonSerializeTestCase
 {
@@ -56,5 +57,16 @@ final class AvgAggregationTest extends AbstractJsonSerializeTestCase
 
         $agg2 = AvgAggregation::fromScript(new InlineScript('source1'));
         self::assertInstanceOf(AvgAggregation::class, $agg2);
+    }
+
+    public function testConstructorException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new class extends AvgAggregation {
+            public function __construct()
+            {
+                parent::__construct(null, null);
+            }
+        };
     }
 }

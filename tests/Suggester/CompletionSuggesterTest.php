@@ -3,6 +3,7 @@
 namespace Gskema\ElasticSearchQueryDSL\Suggester;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
+use InvalidArgumentException;
 
 final class CompletionSuggesterTest extends AbstractJsonSerializeTestCase
 {
@@ -44,5 +45,16 @@ final class CompletionSuggesterTest extends AbstractJsonSerializeTestCase
 
         $suggester2 = CompletionSuggester::fromRegex('field1', 'regex1');
         self::assertInstanceOf(CompletionSuggester::class, $suggester2);
+    }
+
+    public function testConstructorException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new class extends CompletionSuggester {
+            public function __construct()
+            {
+                parent::__construct('field1', null, null);
+            }
+        };
     }
 }

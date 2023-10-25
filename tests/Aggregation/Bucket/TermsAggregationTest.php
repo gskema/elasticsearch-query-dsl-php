@@ -4,6 +4,7 @@ namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
+use InvalidArgumentException;
 
 final class TermsAggregationTest extends AbstractJsonSerializeTestCase
 {
@@ -56,5 +57,16 @@ final class TermsAggregationTest extends AbstractJsonSerializeTestCase
 
         $agg2 = TermsAggregation::fromScript(new InlineScript('source1'), ['order' => ['_count' => 'asc']]);
         self::assertInstanceOf(TermsAggregation::class, $agg2);
+    }
+
+    public function testConstructorException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new class extends TermsAggregation {
+            public function __construct()
+            {
+                parent::__construct(null, null);
+            }
+        };
     }
 }

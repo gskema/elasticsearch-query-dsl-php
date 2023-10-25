@@ -36,4 +36,15 @@ final class CompositeAggregationTest extends AbstractJsonSerializeTestCase
 
         return $dataSets;
     }
+
+    public function testMethods(): void
+    {
+        $obj = (new CompositeAggregation([
+            ['agg1' => TermsAggregation::fromField('field1')],
+            ['agg2' => TermsAggregation::fromField('field2')]
+        ], ['size' => 10]))
+            ->setAgg('agg1', new GlobalAggregation());
+
+        self::assertInstanceOf(CompositeAggregation::class, $obj);
+    }
 }

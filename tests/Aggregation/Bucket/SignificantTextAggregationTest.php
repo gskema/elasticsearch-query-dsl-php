@@ -3,6 +3,7 @@
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticSearchQueryDSL\Matcher\MatchNoneMatcher;
 
 final class SignificantTextAggregationTest extends AbstractJsonSerializeTestCase
 {
@@ -29,5 +30,18 @@ final class SignificantTextAggregationTest extends AbstractJsonSerializeTestCase
         ];
 
         return $dataSets;
+    }
+
+    public function testMethods(): void
+    {
+        $obj = (new SignificantTextAggregation('field1', [
+            'size' => 3,
+            'background_filter' => new MatchNoneMatcher()
+        ]))->setAgg('agg1', new GlobalAggregation());
+
+        $string = json_encode($obj->jsonSerialize());
+        self::assertIsString($string);
+
+        self::assertInstanceOf(SignificantTextAggregation::class, $obj);
     }
 }

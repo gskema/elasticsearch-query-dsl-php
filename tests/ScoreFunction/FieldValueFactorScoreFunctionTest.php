@@ -27,10 +27,12 @@ final class FieldValueFactorScoreFunctionTest extends AbstractJsonSerializeTestC
             '{
                 "field_value_factor" : {
                     "field" : "field1",
-                    "factor": 1
+                    "factor": 1,
+                    "modifier": "ln",
+                    "missing": 0
                 }
             }',
-            new FieldValueFactorScoreFunction('field1', 1)
+            new FieldValueFactorScoreFunction('field1', 1, 'ln', 0)
         ];
 
         return $dataSets;

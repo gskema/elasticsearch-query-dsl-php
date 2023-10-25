@@ -92,5 +92,14 @@ final class PercolateMatcherTest extends AbstractJsonSerializeTestCase
             'id1'
         );
         self::assertInstanceOf(PercolateMatcher::class, $matcher2);
+
+        $matcher2 = PercolateMatcher::fromDocSources(
+            'queryField1',
+            [
+                ['body' => 'body1'],
+                ['body' => 'body2'],
+            ],
+        );
+        self::assertInstanceOf(PercolateMatcher::class, $matcher2);
     }
 }

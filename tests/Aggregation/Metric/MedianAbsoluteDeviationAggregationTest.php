@@ -37,4 +37,10 @@ final class MedianAbsoluteDeviationAggregationTest extends AbstractJsonSerialize
 
         return $dataSets;
     }
+
+    public function testMethods(): void
+    {
+        $obj = new MedianAbsoluteDeviationAggregation(new InlineScript('script1'), ['missing' => 1]);
+        self::assertInstanceOf(MedianAbsoluteDeviationAggregation::class, $obj);
+    }
 }

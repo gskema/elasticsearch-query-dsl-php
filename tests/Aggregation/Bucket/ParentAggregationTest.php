@@ -28,4 +28,11 @@ final class ParentAggregationTest extends AbstractJsonSerializeTestCase
 
         return $dataSets;
     }
+
+    public function testMethods(): void
+    {
+        $obj = (new ParentAggregation('type1'))->setAgg('agg1', new GlobalAggregation());
+
+        self::assertInstanceOf(ParentAggregation::class, $obj);
+    }
 }

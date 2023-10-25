@@ -26,4 +26,10 @@ final class MovingFunctionAggregationTest extends AbstractJsonSerializeTestCase
 
         return $dataSets;
     }
+
+    public function testMethods(): void
+    {
+        $obj = new MovingFunctionAggregation('path1', 10, new InlineScript('script1'));
+        self::assertInstanceOf(MovingFunctionAggregation::class, $obj);
+    }
 }

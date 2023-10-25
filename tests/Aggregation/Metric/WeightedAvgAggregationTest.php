@@ -63,4 +63,17 @@ final class WeightedAvgAggregationTest extends AbstractJsonSerializeTestCase
 
         return $dataSets;
     }
+
+    public function testMethods(): void
+    {
+        $obj = new WeightedAvgAggregation(
+            new InlineScript('value1'),
+            new InlineScript('weight1'),
+            'missing1',
+            'missing2',
+            ['format' => 'yyyy']
+        );
+
+        self::assertInstanceOf(WeightedAvgAggregation::class, $obj);
+    }
 }

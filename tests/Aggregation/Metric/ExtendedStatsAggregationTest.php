@@ -3,6 +3,7 @@
 namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
+use InvalidArgumentException;
 
 final class ExtendedStatsAggregationTest extends AbstractJsonSerializeTestCase
 {
@@ -22,5 +23,16 @@ final class ExtendedStatsAggregationTest extends AbstractJsonSerializeTestCase
         ];
 
         return $dataSets;
+    }
+
+    public function testConstructorException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new class extends ExtendedStatsAggregation {
+            public function __construct()
+            {
+                parent::__construct(null, null);
+            }
+        };
     }
 }

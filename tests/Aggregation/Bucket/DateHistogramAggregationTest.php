@@ -4,6 +4,7 @@ namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
+use InvalidArgumentException;
 
 final class DateHistogramAggregationTest extends AbstractJsonSerializeTestCase
 {
@@ -65,5 +66,16 @@ final class DateHistogramAggregationTest extends AbstractJsonSerializeTestCase
 
         $agg2 = DateHistogramAggregation::fromScript(new InlineScript('source1'), '1day');
         self::assertInstanceOf(DateHistogramAggregation::class, $agg2);
+    }
+
+    public function testConstructorException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new class extends DateHistogramAggregation {
+            public function __construct()
+            {
+                parent::__construct(null, null, 10);
+            }
+        };
     }
 }

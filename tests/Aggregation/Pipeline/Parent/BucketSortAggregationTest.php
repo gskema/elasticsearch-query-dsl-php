@@ -26,4 +26,10 @@ final class BucketSortAggregationTest extends AbstractJsonSerializeTestCase
 
         return $dataSets;
     }
+
+    public function testMethods(): void
+    {
+        $obj = new BucketSortAggregation([new FieldSorter('field1')], 10, 12);
+        self::assertInstanceOf(BucketSortAggregation::class, $obj);
+    }
 }

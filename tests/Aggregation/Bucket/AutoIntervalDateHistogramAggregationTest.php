@@ -4,6 +4,7 @@ namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
+use InvalidArgumentException;
 
 final class AutoIntervalDateHistogramAggregationTest extends AbstractJsonSerializeTestCase
 {
@@ -79,5 +80,35 @@ final class AutoIntervalDateHistogramAggregationTest extends AbstractJsonSeriali
         ];
 
         return $dataSets;
+    }
+
+    public function testMethods(): void
+    {
+        $obj1 = AutoIntervalDateHistogramAggregation::fromField(
+            'field1',
+            10,
+            ['format' => 'yyyy-MM-dd']
+        )->setAgg('agg1', new GlobalAggregation());
+
+        self::assertInstanceOf(AutoIntervalDateHistogramAggregation::class, $obj1);
+
+        $obj2 = AutoIntervalDateHistogramAggregation::fromScript(
+            new InlineScript('script1'),
+            10,
+            ['format' => 'yyyy-MM-dd'],
+        )->setAgg('agg1', new GlobalAggregation());
+
+        self::assertInstanceOf(AutoIntervalDateHistogramAggregation::class, $obj2);
+    }
+
+    public function testConstructorException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new class extends AutoIntervalDateHistogramAggregation {
+            public function __construct()
+            {
+                parent::__construct(null, null, 10, []);
+            }
+        };
     }
 }

@@ -4,6 +4,7 @@ namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
+use InvalidArgumentException;
 
 final class ValueCountAggregationTest extends AbstractJsonSerializeTestCase
 {
@@ -43,5 +44,16 @@ final class ValueCountAggregationTest extends AbstractJsonSerializeTestCase
 
         $agg2 = ValueCountAggregation::fromScript(new InlineScript('source1'));
         self::assertInstanceOf(ValueCountAggregation::class, $agg2);
+    }
+
+    public function testConstructorException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new class extends ValueCountAggregation {
+            public function __construct()
+            {
+                parent::__construct(null, null);
+            }
+        };
     }
 }

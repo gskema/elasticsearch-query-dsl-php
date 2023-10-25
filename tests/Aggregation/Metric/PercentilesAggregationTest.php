@@ -4,6 +4,7 @@ namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
 
 use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
 use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
+use InvalidArgumentException;
 
 final class PercentilesAggregationTest extends AbstractJsonSerializeTestCase
 {
@@ -23,6 +24,18 @@ final class PercentilesAggregationTest extends AbstractJsonSerializeTestCase
             PercentilesAggregation::fromField('field1', ['percents' => [1, 2, 3]]),
         ];
 
+        // #1
+        $dataSets[] = [
+            // language=JSON
+            '{
+                "percentiles": {
+                    "script": "s1",
+                    "percents": [1, 2, 3]
+                }
+            }',
+            PercentilesAggregation::fromScript(new InlineScript('s1'), ['percents' => [1, 2, 3]]),
+        ];
+
         return $dataSets;
     }
 
@@ -33,5 +46,16 @@ final class PercentilesAggregationTest extends AbstractJsonSerializeTestCase
 
         $agg2 = PercentilesAggregation::fromScript(new InlineScript('source1'), ['percents' => [1, 2, 3]]);
         self::assertInstanceOf(PercentilesAggregation::class, $agg2);
+    }
+
+    public function testConstructorException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new class extends PercentilesAggregation {
+            public function __construct()
+            {
+                parent::__construct(null, null);
+            }
+        };
     }
 }
