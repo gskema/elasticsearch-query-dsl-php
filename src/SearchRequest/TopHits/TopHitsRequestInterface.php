@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest\TopHits;
+namespace Gskema\ElasticsearchQueryDSL\SearchRequest\TopHits;
 
 use JsonSerializable;
 

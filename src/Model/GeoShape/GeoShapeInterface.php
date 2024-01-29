@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Model\GeoShape;
+namespace Gskema\ElasticsearchQueryDSL\Model\GeoShape;
 
 use JsonSerializable;
 

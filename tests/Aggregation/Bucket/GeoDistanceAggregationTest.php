@@ -1,9 +1,9 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\Model\GeoPoint;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\Model\GeoPoint;
 
 final class GeoDistanceAggregationTest extends AbstractJsonSerializeTestCase
 {

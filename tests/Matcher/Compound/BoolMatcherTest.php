@@ -1,10 +1,10 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
+namespace Gskema\ElasticsearchQueryDSL\Matcher\Compound;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\Matcher\MatchAllMatcher;
-use Gskema\ElasticSearchQueryDSL\Matcher\TermLevel\TermMatcher;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\Matcher\MatchAllMatcher;
+use Gskema\ElasticsearchQueryDSL\Matcher\TermLevel\TermMatcher;
 
 final class BoolMatcherTest extends AbstractJsonSerializeTestCase
 {

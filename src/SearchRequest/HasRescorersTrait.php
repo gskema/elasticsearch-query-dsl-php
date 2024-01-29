@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
+namespace Gskema\ElasticsearchQueryDSL\SearchRequest;
 
-use Gskema\ElasticSearchQueryDSL\Rescorer\RescorerInterface;
+use Gskema\ElasticsearchQueryDSL\Rescorer\RescorerInterface;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-rescore.html

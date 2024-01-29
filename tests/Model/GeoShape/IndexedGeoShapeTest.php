@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Model\GeoShape;
+namespace Gskema\ElasticsearchQueryDSL\Model\GeoShape;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
 
 final class IndexedGeoShapeTest extends AbstractJsonSerializeTestCase
 {

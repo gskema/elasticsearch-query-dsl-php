@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher\Joining;
+namespace Gskema\ElasticsearchQueryDSL\Matcher\Joining;
 
-use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHits\InnerHitsRequest;
+use Gskema\ElasticsearchQueryDSL\SearchRequest\InnerHits\InnerHitsRequest;
 use PHPUnit\Framework\TestCase;
 
 final class HasInnerHitsTraitTest extends TestCase

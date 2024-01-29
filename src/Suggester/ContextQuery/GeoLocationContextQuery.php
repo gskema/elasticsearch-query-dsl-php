@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Suggester\ContextQuery;
+namespace Gskema\ElasticsearchQueryDSL\Suggester\ContextQuery;
 
-use Gskema\ElasticSearchQueryDSL\Model\GeoPointInterface;
+use Gskema\ElasticsearchQueryDSL\Model\GeoPointInterface;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/suggester-context.html#_category_query

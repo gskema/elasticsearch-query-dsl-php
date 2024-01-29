@@ -1,9 +1,9 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher;
+namespace Gskema\ElasticsearchQueryDSL\Matcher;
 
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-use Gskema\ElasticSearchQueryDSL\Options;
+use Gskema\ElasticsearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticsearchQueryDSL\Options;
 use stdClass;
 
 /**

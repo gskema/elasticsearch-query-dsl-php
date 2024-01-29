@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Suggester\ContextQuery;
+namespace Gskema\ElasticsearchQueryDSL\Suggester\ContextQuery;
 
 use JsonSerializable;
 

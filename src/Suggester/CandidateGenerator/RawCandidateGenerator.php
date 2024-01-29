@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Suggester\CandidateGenerator;
+namespace Gskema\ElasticsearchQueryDSL\Suggester\CandidateGenerator;
 
-use Gskema\ElasticSearchQueryDSL\RawFragment;
+use Gskema\ElasticsearchQueryDSL\RawFragment;
 
 /**
  * @see RawContextQueryTest

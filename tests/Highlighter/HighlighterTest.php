@@ -1,10 +1,10 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Highlighter;
+namespace Gskema\ElasticsearchQueryDSL\Highlighter;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\Matcher\MatchAllMatcher;
-use Gskema\ElasticSearchQueryDSL\Matcher\MatchNoneMatcher;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\Matcher\MatchAllMatcher;
+use Gskema\ElasticsearchQueryDSL\Matcher\MatchNoneMatcher;
 
 final class HighlighterTest extends AbstractJsonSerializeTestCase
 {

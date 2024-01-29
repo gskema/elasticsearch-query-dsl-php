@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Metric;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
 
 final class GeoBoundsAggregationTest extends AbstractJsonSerializeTestCase
 {

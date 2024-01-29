@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher\TermLevel;
+namespace Gskema\ElasticsearchQueryDSL\Matcher\TermLevel;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
 
 final class MissingMatcherTest extends AbstractJsonSerializeTestCase
 {

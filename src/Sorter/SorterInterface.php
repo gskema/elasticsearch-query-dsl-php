@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Sorter;
+namespace Gskema\ElasticsearchQueryDSL\Sorter;
 
 use JsonSerializable;
 

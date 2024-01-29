@@ -1,10 +1,10 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher\TermLevel;
+namespace Gskema\ElasticsearchQueryDSL\Matcher\TermLevel;
 
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
-use Gskema\ElasticSearchQueryDSL\Options;
+use Gskema\ElasticsearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticsearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticsearchQueryDSL\Options;
 
 /**
  * @see LookupTermsMatcher

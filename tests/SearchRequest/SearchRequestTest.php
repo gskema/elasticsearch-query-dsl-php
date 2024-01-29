@@ -1,24 +1,24 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
+namespace Gskema\ElasticsearchQueryDSL\SearchRequest;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\Aggregation\Bucket\FilterAggregation;
-use Gskema\ElasticSearchQueryDSL\Aggregation\Bucket\TermsAggregation;
-use Gskema\ElasticSearchQueryDSL\Aggregation\Metric\MaxAggregation;
-use Gskema\ElasticSearchQueryDSL\FieldCollapser\FieldCollapser;
-use Gskema\ElasticSearchQueryDSL\Highlighter\Highlighter;
-use Gskema\ElasticSearchQueryDSL\Matcher\MatchAllMatcher;
-use Gskema\ElasticSearchQueryDSL\Matcher\MatchNoneMatcher;
-use Gskema\ElasticSearchQueryDSL\Matcher\TermLevel\TermMatcher;
-use Gskema\ElasticSearchQueryDSL\Matcher\TermLevel\WildcardMatcher;
-use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
-use Gskema\ElasticSearchQueryDSL\Rescorer\QueryRescorer;
-use Gskema\ElasticSearchQueryDSL\Sorter\FieldSorter;
-use Gskema\ElasticSearchQueryDSL\Sorter\RawSorter;
-use Gskema\ElasticSearchQueryDSL\SourceFilter\DisabledSourceFilter;
-use Gskema\ElasticSearchQueryDSL\Suggester\PhraseSuggester;
-use Gskema\ElasticSearchQueryDSL\Suggester\TermSuggester;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\Aggregation\Bucket\FilterAggregation;
+use Gskema\ElasticsearchQueryDSL\Aggregation\Bucket\TermsAggregation;
+use Gskema\ElasticsearchQueryDSL\Aggregation\Metric\MaxAggregation;
+use Gskema\ElasticsearchQueryDSL\FieldCollapser\FieldCollapser;
+use Gskema\ElasticsearchQueryDSL\Highlighter\Highlighter;
+use Gskema\ElasticsearchQueryDSL\Matcher\MatchAllMatcher;
+use Gskema\ElasticsearchQueryDSL\Matcher\MatchNoneMatcher;
+use Gskema\ElasticsearchQueryDSL\Matcher\TermLevel\TermMatcher;
+use Gskema\ElasticsearchQueryDSL\Matcher\TermLevel\WildcardMatcher;
+use Gskema\ElasticsearchQueryDSL\Model\Script\InlineScript;
+use Gskema\ElasticsearchQueryDSL\Rescorer\QueryRescorer;
+use Gskema\ElasticsearchQueryDSL\Sorter\FieldSorter;
+use Gskema\ElasticsearchQueryDSL\Sorter\RawSorter;
+use Gskema\ElasticsearchQueryDSL\SourceFilter\DisabledSourceFilter;
+use Gskema\ElasticsearchQueryDSL\Suggester\PhraseSuggester;
+use Gskema\ElasticsearchQueryDSL\Suggester\TermSuggester;
 
 final class SearchRequestTest extends AbstractJsonSerializeTestCase
 {

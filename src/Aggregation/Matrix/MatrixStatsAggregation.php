@@ -1,9 +1,9 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Matrix;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Matrix;
 
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-use Gskema\ElasticSearchQueryDSL\Options;
+use Gskema\ElasticsearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticsearchQueryDSL\Options;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-matrix-stats-aggregation.html

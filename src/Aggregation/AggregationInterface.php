@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation;
 
 use JsonSerializable;
 

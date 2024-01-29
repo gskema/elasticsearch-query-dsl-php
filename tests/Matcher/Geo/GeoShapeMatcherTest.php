@@ -1,10 +1,10 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher\Geo;
+namespace Gskema\ElasticsearchQueryDSL\Matcher\Geo;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\Model\GeoShape\IndexedGeoShape;
-use Gskema\ElasticSearchQueryDSL\Model\GeoShape\RawGeoShape;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\Model\GeoShape\IndexedGeoShape;
+use Gskema\ElasticsearchQueryDSL\Model\GeoShape\RawGeoShape;
 
 final class GeoShapeMatcherTest extends AbstractJsonSerializeTestCase
 {

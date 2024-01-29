@@ -1,9 +1,9 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\ScoreFunction;
+namespace Gskema\ElasticsearchQueryDSL\ScoreFunction;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\Model\Script\InlineScript;
 
 final class ScriptScoreFunctionTest extends AbstractJsonSerializeTestCase
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Sorter;
+namespace Gskema\ElasticsearchQueryDSL\Sorter;
 
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-use Gskema\ElasticSearchQueryDSL\Options;
+use Gskema\ElasticsearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticsearchQueryDSL\Options;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-sort.html

@@ -1,10 +1,10 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Sorter;
+namespace Gskema\ElasticsearchQueryDSL\Sorter;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\Model\GeoHash;
-use Gskema\ElasticSearchQueryDSL\Model\GeoPoint;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\Model\GeoHash;
+use Gskema\ElasticsearchQueryDSL\Model\GeoPoint;
 
 final class GeoDistanceSorterTest extends AbstractJsonSerializeTestCase
 {

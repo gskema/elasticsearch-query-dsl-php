@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
+namespace Gskema\ElasticsearchQueryDSL\SearchRequest;
 
-use Gskema\ElasticSearchQueryDSL\FieldCollapser\FieldCollapser;
+use Gskema\ElasticsearchQueryDSL\FieldCollapser\FieldCollapser;
 use PHPUnit\Framework\TestCase;
 
 final class HasFieldCollapserTraitTest extends TestCase

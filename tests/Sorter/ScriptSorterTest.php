@@ -1,10 +1,10 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Sorter;
+namespace Gskema\ElasticsearchQueryDSL\Sorter;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\Model\Script\FileScript;
-use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\Model\Script\FileScript;
+use Gskema\ElasticsearchQueryDSL\Model\Script\InlineScript;
 
 final class ScriptSorterTest extends AbstractJsonSerializeTestCase
 {

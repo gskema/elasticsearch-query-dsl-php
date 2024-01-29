@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Rescorer;
+namespace Gskema\ElasticsearchQueryDSL\Rescorer;
 
-use Gskema\ElasticSearchQueryDSL\RawFragment;
+use Gskema\ElasticsearchQueryDSL\RawFragment;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-rescore.html

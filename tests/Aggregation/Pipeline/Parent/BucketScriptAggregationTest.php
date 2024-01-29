@@ -1,9 +1,9 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline\Parent;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Pipeline\Parent;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\Model\Script\InlineScript;
 
 final class BucketScriptAggregationTest extends AbstractJsonSerializeTestCase
 {

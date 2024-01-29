@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Suggester;
+namespace Gskema\ElasticsearchQueryDSL\Suggester;
 
-use Gskema\ElasticSearchQueryDSL\RawFragment;
+use Gskema\ElasticsearchQueryDSL\RawFragment;
 
 /**
  * @see RawSuggesterTest

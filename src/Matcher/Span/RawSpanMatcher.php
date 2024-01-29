@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
+namespace Gskema\ElasticsearchQueryDSL\Matcher\Span;
 
-use Gskema\ElasticSearchQueryDSL\RawFragment;
+use Gskema\ElasticsearchQueryDSL\RawFragment;
 
 class RawSpanMatcher extends RawFragment implements SpanMatcherInterface
 {

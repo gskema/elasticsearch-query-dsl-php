@@ -1,9 +1,9 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\Matcher\MatchAllMatcher;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\Matcher\MatchAllMatcher;
 
 final class FilterAggregationTest extends AbstractJsonSerializeTestCase
 {

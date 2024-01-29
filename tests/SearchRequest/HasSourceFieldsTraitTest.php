@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
+namespace Gskema\ElasticsearchQueryDSL\SearchRequest;
 
-use Gskema\ElasticSearchQueryDSL\SourceFilter\DisabledSourceFilter;
+use Gskema\ElasticsearchQueryDSL\SourceFilter\DisabledSourceFilter;
 use PHPUnit\Framework\TestCase;
 
 final class HasSourceFieldsTraitTest extends TestCase

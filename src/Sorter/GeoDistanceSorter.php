@@ -1,13 +1,13 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Sorter;
+namespace Gskema\ElasticsearchQueryDSL\Sorter;
 
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-use Gskema\ElasticSearchQueryDSL\Model\GeoPointInterface;
-use Gskema\ElasticSearchQueryDSL\Options;
+use Gskema\ElasticsearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticsearchQueryDSL\Model\GeoPointInterface;
+use Gskema\ElasticsearchQueryDSL\Options;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
-use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+use function Gskema\ElasticsearchQueryDSL\array_clone;
+use function Gskema\ElasticsearchQueryDSL\obj_array_json_serialize;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-sort.html#geo-sorting

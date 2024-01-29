@@ -1,9 +1,9 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
+namespace Gskema\ElasticsearchQueryDSL\SearchRequest;
 
-use Gskema\ElasticSearchQueryDSL\Sorter\FieldSorter;
-use Gskema\ElasticSearchQueryDSL\Sorter\RawSorter;
+use Gskema\ElasticsearchQueryDSL\Sorter\FieldSorter;
+use Gskema\ElasticsearchQueryDSL\Sorter\RawSorter;
 use PHPUnit\Framework\TestCase;
 
 final class HasSortersTraitTest extends TestCase

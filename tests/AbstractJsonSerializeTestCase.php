@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL;
+namespace Gskema\ElasticsearchQueryDSL;
 
 use JsonSerializable;
 use PHPUnit\Framework\Attributes\DataProvider;

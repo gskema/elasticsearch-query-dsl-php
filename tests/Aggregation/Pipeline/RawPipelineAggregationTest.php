@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Pipeline;
 
-use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
+use Gskema\ElasticsearchQueryDSL\RawFragmentTest;
 
 final class RawPipelineAggregationTest extends RawFragmentTest
 {

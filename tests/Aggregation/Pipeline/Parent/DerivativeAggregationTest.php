@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline\Parent;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Pipeline\Parent;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
 
 final class DerivativeAggregationTest extends AbstractJsonSerializeTestCase
 {

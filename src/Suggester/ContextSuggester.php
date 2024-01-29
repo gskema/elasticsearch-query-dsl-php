@@ -1,12 +1,12 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Suggester;
+namespace Gskema\ElasticsearchQueryDSL\Suggester;
 
-use Gskema\ElasticSearchQueryDSL\Options;
-use Gskema\ElasticSearchQueryDSL\Suggester\ContextQuery\ContextQueryInterface;
+use Gskema\ElasticsearchQueryDSL\Options;
+use Gskema\ElasticsearchQueryDSL\Suggester\ContextQuery\ContextQueryInterface;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
-use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+use function Gskema\ElasticsearchQueryDSL\array_clone;
+use function Gskema\ElasticsearchQueryDSL\obj_array_json_serialize;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/suggester-context.html

@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
+namespace Gskema\ElasticsearchQueryDSL\SearchRequest;
 
-use Gskema\ElasticSearchQueryDSL\Suggester\TermSuggester;
+use Gskema\ElasticsearchQueryDSL\Suggester\TermSuggester;
 use PHPUnit\Framework\TestCase;
 
 final class HasSuggestersTraitTest extends TestCase

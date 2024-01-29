@@ -1,9 +1,9 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
+namespace Gskema\ElasticsearchQueryDSL\Matcher\Span;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\Matcher\TermLevel\PrefixMatcher;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\Matcher\TermLevel\PrefixMatcher;
 
 final class SpanMultiMatcherTest extends AbstractJsonSerializeTestCase
 {

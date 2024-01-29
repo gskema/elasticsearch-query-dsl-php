@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher\Specialized;
+namespace Gskema\ElasticsearchQueryDSL\Matcher\Specialized;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
 
 final class MoreLikeThisMatcherTest extends AbstractJsonSerializeTestCase
 {

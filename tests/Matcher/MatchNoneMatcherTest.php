@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher;
+namespace Gskema\ElasticsearchQueryDSL\Matcher;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
 
 final class MatchNoneMatcherTest extends AbstractJsonSerializeTestCase
 {

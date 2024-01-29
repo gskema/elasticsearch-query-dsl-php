@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\ScoreFunction;
+namespace Gskema\ElasticsearchQueryDSL\ScoreFunction;
 
-use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
+use Gskema\ElasticsearchQueryDSL\RawFragmentTest;
 
 final class RawScoreFunctionTest extends RawFragmentTest
 {

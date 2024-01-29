@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Pipeline;
 
-use Gskema\ElasticSearchQueryDSL\Aggregation\AggregationInterface;
+use Gskema\ElasticsearchQueryDSL\Aggregation\AggregationInterface;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-pipeline.html

@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SourceFilter;
+namespace Gskema\ElasticsearchQueryDSL\SourceFilter;
 
-use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
+use Gskema\ElasticsearchQueryDSL\RawFragmentTest;
 
 final class RawSourceFilterTest extends RawFragmentTest
 {

@@ -1,4 +1,4 @@
-# ElasticSearch Query DSL
+# Elasticsearch Query DSL
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -6,14 +6,14 @@
 [![Coverage Status][ico-coverage]][link-build]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Feature complete, object oriented, composable, extendable ElasticSearch query DSL builder for PHP.
+Feature complete, object oriented, composable, extendable Elasticsearch query DSL builder for PHP.
 
 ## Features
 
 - Dependency free
-- Can be used with any PHP ElasticSearch client
+- Can be used with any PHP Elasticsearch client
 - Fully interfaced, ready for custom classes and 
-- Explicit class and property naming, fully matches produced JSON and ElasticSearch docs
+- Explicit class and property naming, fully matches produced JSON and Elasticsearch docs
 - All configuration options are listed inside classes, links to documentation
 - Classes can be easily composed, extended
 - Usage of setters/getters so that everything can be inlined and chained.
@@ -23,20 +23,20 @@ Feature complete, object oriented, composable, extendable ElasticSearch query DS
 
 ## Versions
 
-Most of the classes should be compatible with any ElasticSearch versions.
+Most of the classes should be compatible with any Elasticsearch versions.
 If something is not compatible or not supported, `Raw*` or custom classes can be used.
 
-| Package version | ElasticSearch version |
+| Package version | Elasticsearch version |
 |-----------------|-----------------------|
 | >=6.0.0 <7.0.0  | >=6.0.0 <7.0.0        |
 | >=5.0.0 <6.0.0  | >=5.0.0 <6.0.0        |
 
-Because major version number follows ElasticSearch major version number, second number is reserved for breaking changes.
+Because major version number follows Elasticsearch major version number, second number is reserved for breaking changes.
 
 ## Install
 
 ``` bash
-composer require gskema/elasticsearch-query-dsl-php 6.* # match your ElasticSearch version
+composer require gskema/elasticsearch-query-dsl-php 6.* # match your Elasticsearch version
 ```
 
 ## Usage
@@ -55,10 +55,10 @@ $searchRequest->setAgg(
         ->setAgg('agg2', TermsAggregation::fromField('field2', 'value2'))
 );
 
-(new ElasticSearchClient())->search($searchRequest->jsonSerialize());
+(new ElasticsearchClient())->search($searchRequest->jsonSerialize());
 ```
 
-All classes match naming in official ElasticSearch documentation.
+All classes match naming in official Elasticsearch documentation.
 Each class has a list of possible configuration options listed above
 class using attributes:
 
@@ -85,7 +85,7 @@ class SearchRequest implements SearchRequestInterface {}
 
 ## Matcher?
 
-Request object that is received by ElasticSearch `/_search/` has many properties and sub-properties
+Request object that is received by Elasticsearch `/_search/` has many properties and sub-properties
 like `query`, `filter`, `post_filter`, etc.
 
 To avoid convoluted expressions like

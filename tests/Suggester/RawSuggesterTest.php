@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Suggester;
+namespace Gskema\ElasticsearchQueryDSL\Suggester;
 
-use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
+use Gskema\ElasticsearchQueryDSL\RawFragmentTest;
 
 final class RawSuggesterTest extends RawFragmentTest
 {

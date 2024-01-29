@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher;
+namespace Gskema\ElasticsearchQueryDSL\Matcher;
 
-use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
+use Gskema\ElasticsearchQueryDSL\RawFragmentTest;
 
 final class RawMultiTermMatcherTest extends RawFragmentTest
 {

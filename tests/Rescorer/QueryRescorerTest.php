@@ -1,9 +1,9 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Rescorer;
+namespace Gskema\ElasticsearchQueryDSL\Rescorer;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\Matcher\TermLevel\TermMatcher;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\Matcher\TermLevel\TermMatcher;
 
 final class QueryRescorerTest extends AbstractJsonSerializeTestCase
 {

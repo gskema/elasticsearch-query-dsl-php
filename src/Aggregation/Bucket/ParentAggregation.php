@@ -1,11 +1,11 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
+use Gskema\ElasticsearchQueryDSL\HasAggsTrait;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
-use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+use function Gskema\ElasticsearchQueryDSL\array_clone;
+use function Gskema\ElasticsearchQueryDSL\obj_array_json_serialize;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-bucket-parent-aggregation.html

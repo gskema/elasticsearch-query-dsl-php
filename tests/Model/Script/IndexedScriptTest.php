@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Model\Script;
+namespace Gskema\ElasticsearchQueryDSL\Model\Script;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
 
 final class IndexedScriptTest extends AbstractJsonSerializeTestCase
 {

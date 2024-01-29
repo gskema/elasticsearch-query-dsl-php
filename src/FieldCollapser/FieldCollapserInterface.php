@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\FieldCollapser;
+namespace Gskema\ElasticsearchQueryDSL\FieldCollapser;
 
 use JsonSerializable;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\FieldCollapser;
+namespace Gskema\ElasticsearchQueryDSL\FieldCollapser;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHits\InnerHitsRequest;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\SearchRequest\InnerHits\InnerHitsRequest;
 
 final class FieldCollapserTest extends AbstractJsonSerializeTestCase
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\FieldCollapser;
+namespace Gskema\ElasticsearchQueryDSL\FieldCollapser;
 
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-use Gskema\ElasticSearchQueryDSL\Options;
-use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHits\InnerHitsRequestInterface;
+use Gskema\ElasticsearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticsearchQueryDSL\Options;
+use Gskema\ElasticsearchQueryDSL\SearchRequest\InnerHits\InnerHitsRequestInterface;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticsearchQueryDSL\array_clone;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-collapse.html

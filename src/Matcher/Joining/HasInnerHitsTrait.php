@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher\Joining;
+namespace Gskema\ElasticsearchQueryDSL\Matcher\Joining;
 
-use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHits\InnerHitsRequestInterface;
+use Gskema\ElasticsearchQueryDSL\SearchRequest\InnerHits\InnerHitsRequestInterface;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-inner-hits.html

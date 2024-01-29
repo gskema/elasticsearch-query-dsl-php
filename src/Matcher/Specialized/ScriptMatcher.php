@@ -1,11 +1,11 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher\Specialized;
+namespace Gskema\ElasticsearchQueryDSL\Matcher\Specialized;
 
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
-use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
-use Gskema\ElasticSearchQueryDSL\Options;
+use Gskema\ElasticsearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticsearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticsearchQueryDSL\Model\Script\ScriptInterface;
+use Gskema\ElasticsearchQueryDSL\Options;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-script-query.html

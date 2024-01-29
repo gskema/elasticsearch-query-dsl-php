@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
+namespace Gskema\ElasticsearchQueryDSL\Matcher\Span;
 
-use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticsearchQueryDSL\Matcher\MatcherInterface;
 
 interface SpanMatcherInterface extends MatcherInterface
 {

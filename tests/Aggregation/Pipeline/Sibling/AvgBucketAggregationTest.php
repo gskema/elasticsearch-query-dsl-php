@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline\Sibling;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Pipeline\Sibling;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
 
 final class AvgBucketAggregationTest extends AbstractJsonSerializeTestCase
 {

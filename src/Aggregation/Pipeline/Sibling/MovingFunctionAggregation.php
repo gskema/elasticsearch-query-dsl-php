@@ -1,9 +1,9 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline\Sibling;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Pipeline\Sibling;
 
-use Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline\PipelineAggregationInterface;
-use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
+use Gskema\ElasticsearchQueryDSL\Aggregation\Pipeline\PipelineAggregationInterface;
+use Gskema\ElasticsearchQueryDSL\Model\Script\ScriptInterface;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-pipeline-movfn-aggregation.html

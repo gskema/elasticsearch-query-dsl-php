@@ -1,9 +1,9 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\Aggregation\RawAggregation;
-use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
+use Gskema\ElasticsearchQueryDSL\Aggregation\RawAggregation;
+use Gskema\ElasticsearchQueryDSL\RawFragmentTest;
 use stdClass;
 
 final class RawBucketAggregationTest extends RawFragmentTest

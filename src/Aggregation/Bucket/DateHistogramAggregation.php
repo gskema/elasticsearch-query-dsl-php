@@ -1,16 +1,16 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Bucket;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Bucket;
 
-use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
-use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
-use Gskema\ElasticSearchQueryDSL\Options;
+use Gskema\ElasticsearchQueryDSL\HasAggsTrait;
+use Gskema\ElasticsearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticsearchQueryDSL\Model\Script\InlineScript;
+use Gskema\ElasticsearchQueryDSL\Model\Script\ScriptInterface;
+use Gskema\ElasticsearchQueryDSL\Options;
 use InvalidArgumentException;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
-use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+use function Gskema\ElasticsearchQueryDSL\array_clone;
+use function Gskema\ElasticsearchQueryDSL\obj_array_json_serialize;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-bucket-datehistogram-aggregation.html

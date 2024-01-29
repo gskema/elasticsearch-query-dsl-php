@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
 
 final class EmptyAggregationTest extends AbstractJsonSerializeTestCase
 {

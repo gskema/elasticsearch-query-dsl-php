@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Suggester\ContextQuery;
+namespace Gskema\ElasticsearchQueryDSL\Suggester\ContextQuery;
 
-use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
+use Gskema\ElasticsearchQueryDSL\RawFragmentTest;
 
 final class RawContextQueryTest extends RawFragmentTest
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher\Joining;
+namespace Gskema\ElasticsearchQueryDSL\Matcher\Joining;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHits\InnerHitsRequest;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\SearchRequest\InnerHits\InnerHitsRequest;
 
 final class ParentIdMatcherTest extends AbstractJsonSerializeTestCase
 {

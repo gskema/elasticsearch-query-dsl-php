@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Metric;
 
-use Gskema\ElasticSearchQueryDSL\SearchRequest\TopHits\TopHitsRequestInterface;
+use Gskema\ElasticsearchQueryDSL\SearchRequest\TopHits\TopHitsRequestInterface;
 use stdClass;
 
 /**

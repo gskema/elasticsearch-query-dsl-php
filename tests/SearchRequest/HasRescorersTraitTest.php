@@ -1,10 +1,10 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
+namespace Gskema\ElasticsearchQueryDSL\SearchRequest;
 
-use Gskema\ElasticSearchQueryDSL\Matcher\MatchAllMatcher;
-use Gskema\ElasticSearchQueryDSL\Matcher\MatchNoneMatcher;
-use Gskema\ElasticSearchQueryDSL\Rescorer\QueryRescorer;
+use Gskema\ElasticsearchQueryDSL\Matcher\MatchAllMatcher;
+use Gskema\ElasticsearchQueryDSL\Matcher\MatchNoneMatcher;
+use Gskema\ElasticsearchQueryDSL\Rescorer\QueryRescorer;
 use PHPUnit\Framework\TestCase;
 
 final class HasRescorersTraitTest extends TestCase

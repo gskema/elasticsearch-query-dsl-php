@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SourceFilter;
+namespace Gskema\ElasticsearchQueryDSL\SourceFilter;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
 
 final class SourceFilterTest extends AbstractJsonSerializeTestCase
 {

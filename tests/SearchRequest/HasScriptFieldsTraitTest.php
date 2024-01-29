@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
+namespace Gskema\ElasticsearchQueryDSL\SearchRequest;
 
-use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
+use Gskema\ElasticsearchQueryDSL\Model\Script\InlineScript;
 use PHPUnit\Framework\TestCase;
 
 final class HasScriptFieldsTraitTest extends TestCase

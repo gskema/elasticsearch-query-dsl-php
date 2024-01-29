@@ -1,10 +1,10 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
+namespace Gskema\ElasticsearchQueryDSL\Matcher\Compound;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\Matcher\TermLevel\TermMatcher;
-use Gskema\ElasticSearchQueryDSL\Matcher\TermLevel\WildcardMatcher;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\Matcher\TermLevel\TermMatcher;
+use Gskema\ElasticsearchQueryDSL\Matcher\TermLevel\WildcardMatcher;
 
 final class BoostingMatcherTest extends AbstractJsonSerializeTestCase
 {

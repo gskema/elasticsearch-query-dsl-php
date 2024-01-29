@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Suggester\CandidateGenerator;
+namespace Gskema\ElasticsearchQueryDSL\Suggester\CandidateGenerator;
 
 use JsonSerializable;
 

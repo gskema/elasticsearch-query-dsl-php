@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Metric;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-metrics-geocentroid-aggregation.html

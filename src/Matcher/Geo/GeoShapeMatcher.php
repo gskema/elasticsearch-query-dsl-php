@@ -1,12 +1,12 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher\Geo;
+namespace Gskema\ElasticsearchQueryDSL\Matcher\Geo;
 
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
-use Gskema\ElasticSearchQueryDSL\Model\GeoShape\GeoShapeInterface;
-use Gskema\ElasticSearchQueryDSL\Model\GeoShape\IndexedGeoShape;
-use Gskema\ElasticSearchQueryDSL\Options;
+use Gskema\ElasticsearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticsearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticsearchQueryDSL\Model\GeoShape\GeoShapeInterface;
+use Gskema\ElasticsearchQueryDSL\Model\GeoShape\IndexedGeoShape;
+use Gskema\ElasticsearchQueryDSL\Options;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-geo-shape-query.html

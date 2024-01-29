@@ -1,10 +1,10 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
+namespace Gskema\ElasticsearchQueryDSL\SearchRequest;
 
-use Gskema\ElasticSearchQueryDSL\Sorter\SorterInterface;
+use Gskema\ElasticsearchQueryDSL\Sorter\SorterInterface;
 
-use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+use function Gskema\ElasticsearchQueryDSL\obj_array_json_serialize;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-sort.html

@@ -1,9 +1,9 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL;
+namespace Gskema\ElasticsearchQueryDSL;
 
-use Gskema\ElasticSearchQueryDSL\Aggregation\Bucket\GlobalAggregation;
-use Gskema\ElasticSearchQueryDSL\Aggregation\EmptyAggregation;
+use Gskema\ElasticsearchQueryDSL\Aggregation\Bucket\GlobalAggregation;
+use Gskema\ElasticsearchQueryDSL\Aggregation\EmptyAggregation;
 use PHPUnit\Framework\TestCase;
 
 final class HasAggsTraitTest extends TestCase

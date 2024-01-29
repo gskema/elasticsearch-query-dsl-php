@@ -1,10 +1,10 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Metric;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Metric;
 
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
-use Gskema\ElasticSearchQueryDSL\Model\Script\ScriptInterface;
+use Gskema\ElasticsearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticsearchQueryDSL\Model\Script\InlineScript;
+use Gskema\ElasticsearchQueryDSL\Model\Script\ScriptInterface;
 use InvalidArgumentException;
 
 abstract class AbstractNumericMetricAggregation implements MetricAggregationInterface

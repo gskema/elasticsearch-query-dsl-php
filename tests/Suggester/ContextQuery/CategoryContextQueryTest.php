@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Suggester\ContextQuery;
+namespace Gskema\ElasticsearchQueryDSL\Suggester\ContextQuery;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
 
 final class CategoryContextQueryTest extends AbstractJsonSerializeTestCase
 {

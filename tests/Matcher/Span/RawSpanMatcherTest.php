@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher\Span;
+namespace Gskema\ElasticsearchQueryDSL\Matcher\Span;
 
-use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
+use Gskema\ElasticsearchQueryDSL\RawFragmentTest;
 
 final class RawSpanMatcherTest extends RawFragmentTest
 {

@@ -1,20 +1,20 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHits;
+namespace Gskema\ElasticsearchQueryDSL\SearchRequest\InnerHits;
 
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-use Gskema\ElasticSearchQueryDSL\Options;
-use Gskema\ElasticSearchQueryDSL\SearchRequest\HasDocValueFieldsTrait;
-use Gskema\ElasticSearchQueryDSL\SearchRequest\HasFromTrait;
-use Gskema\ElasticSearchQueryDSL\SearchRequest\HasHighlighterTrait;
-use Gskema\ElasticSearchQueryDSL\SearchRequest\HasScriptFieldsTrait;
-use Gskema\ElasticSearchQueryDSL\SearchRequest\HasSizeTrait;
-use Gskema\ElasticSearchQueryDSL\SearchRequest\HasSortersTrait;
-use Gskema\ElasticSearchQueryDSL\SearchRequest\HasSourceFieldsTrait;
+use Gskema\ElasticsearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticsearchQueryDSL\Options;
+use Gskema\ElasticsearchQueryDSL\SearchRequest\HasDocValueFieldsTrait;
+use Gskema\ElasticsearchQueryDSL\SearchRequest\HasFromTrait;
+use Gskema\ElasticsearchQueryDSL\SearchRequest\HasHighlighterTrait;
+use Gskema\ElasticsearchQueryDSL\SearchRequest\HasScriptFieldsTrait;
+use Gskema\ElasticsearchQueryDSL\SearchRequest\HasSizeTrait;
+use Gskema\ElasticsearchQueryDSL\SearchRequest\HasSortersTrait;
+use Gskema\ElasticsearchQueryDSL\SearchRequest\HasSourceFieldsTrait;
 use stdClass;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
-use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+use function Gskema\ElasticsearchQueryDSL\array_clone;
+use function Gskema\ElasticsearchQueryDSL\obj_array_json_serialize;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-inner-hits.html

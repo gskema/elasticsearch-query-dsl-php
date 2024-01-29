@@ -1,14 +1,14 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
+namespace Gskema\ElasticsearchQueryDSL\SearchRequest;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
-use Gskema\ElasticSearchQueryDSL\Highlighter\Highlighter;
-use Gskema\ElasticSearchQueryDSL\Model\Script\InlineScript;
-use Gskema\ElasticSearchQueryDSL\SearchRequest\TopHits\TopHitsRequest;
-use Gskema\ElasticSearchQueryDSL\Sorter\FieldSorter;
-use Gskema\ElasticSearchQueryDSL\Sorter\RawSorter;
-use Gskema\ElasticSearchQueryDSL\SourceFilter\DisabledSourceFilter;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\Highlighter\Highlighter;
+use Gskema\ElasticsearchQueryDSL\Model\Script\InlineScript;
+use Gskema\ElasticsearchQueryDSL\SearchRequest\TopHits\TopHitsRequest;
+use Gskema\ElasticsearchQueryDSL\Sorter\FieldSorter;
+use Gskema\ElasticsearchQueryDSL\Sorter\RawSorter;
+use Gskema\ElasticsearchQueryDSL\SourceFilter\DisabledSourceFilter;
 
 final class TopHitsRequestTest extends AbstractJsonSerializeTestCase
 {

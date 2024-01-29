@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Rescorer;
+namespace Gskema\ElasticsearchQueryDSL\Rescorer;
 
-use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
+use Gskema\ElasticsearchQueryDSL\RawFragmentTest;
 
 final class RawRescorerTest extends RawFragmentTest
 {

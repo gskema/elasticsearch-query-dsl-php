@@ -1,16 +1,16 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
+namespace Gskema\ElasticsearchQueryDSL\SearchRequest;
 
-use Gskema\ElasticSearchQueryDSL\HasAggsTrait;
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-use Gskema\ElasticSearchQueryDSL\HasParametersTrait;
-use Gskema\ElasticSearchQueryDSL\Options;
-use Gskema\ElasticSearchQueryDSL\Parameters;
+use Gskema\ElasticsearchQueryDSL\HasAggsTrait;
+use Gskema\ElasticsearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticsearchQueryDSL\HasParametersTrait;
+use Gskema\ElasticsearchQueryDSL\Options;
+use Gskema\ElasticsearchQueryDSL\Parameters;
 use stdClass;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
-use function Gskema\ElasticSearchQueryDSL\obj_array_json_serialize;
+use function Gskema\ElasticsearchQueryDSL\array_clone;
+use function Gskema\ElasticsearchQueryDSL\obj_array_json_serialize;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-request-body.html

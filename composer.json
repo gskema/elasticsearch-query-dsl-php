@@ -1,7 +1,7 @@
 {
     "name": "gskema/elasticsearch-query-dsl-php",
     "type": "library",
-    "description": "Feature complete, object oriented, composable, extendable ElasticSearch query DSL builder for PHP.",
+    "description": "Feature complete, object oriented, composable, extendable Elasticsearch query DSL builder for PHP.",
     "keywords": [
         "elasticsearch",
         "query",
@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Gskema\\ElasticSearchQueryDSL\\": "src/"
+            "Gskema\\ElasticsearchQueryDSL\\": "src/"
         },
         "files": ["src/functions.php"]
     },
     "autoload-dev": {
-        "psr-4": { "Gskema\\ElasticSearchQueryDSL\\": "tests/" }
+        "psr-4": { "Gskema\\ElasticsearchQueryDSL\\": "tests/" }
     },
     "scripts": {
         "prep": "mkdir -p build",

@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Pipeline;
 
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticsearchQueryDSL\HasOptionsTrait;
 
 abstract class AbstractNumericPipelineAggregation implements PipelineAggregationInterface
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline\Parent;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Pipeline\Parent;
 
-use Gskema\ElasticSearchQueryDSL\Aggregation\Pipeline\PipelineAggregationInterface;
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-use Gskema\ElasticSearchQueryDSL\Options;
-use Gskema\ElasticSearchQueryDSL\SearchRequest\HasSortersTrait;
-use Gskema\ElasticSearchQueryDSL\Sorter\SorterInterface;
+use Gskema\ElasticsearchQueryDSL\Aggregation\Pipeline\PipelineAggregationInterface;
+use Gskema\ElasticsearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticsearchQueryDSL\Options;
+use Gskema\ElasticsearchQueryDSL\SearchRequest\HasSortersTrait;
+use Gskema\ElasticsearchQueryDSL\Sorter\SorterInterface;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticsearchQueryDSL\array_clone;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/search-aggregations-pipeline-bucket-sort-aggregation.html

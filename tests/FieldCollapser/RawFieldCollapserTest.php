@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\FieldCollapser;
+namespace Gskema\ElasticsearchQueryDSL\FieldCollapser;
 
-use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
+use Gskema\ElasticsearchQueryDSL\RawFragmentTest;
 
 final class RawFieldCollapserTest extends RawFragmentTest
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL;
+namespace Gskema\ElasticsearchQueryDSL;
 
 class RawFragmentTest extends AbstractRawFragmentTestCase
 {

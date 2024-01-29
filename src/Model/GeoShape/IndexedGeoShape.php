@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Model\GeoShape;
+namespace Gskema\ElasticsearchQueryDSL\Model\GeoShape;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-geo-shape-query.html#_pre_indexed_shape

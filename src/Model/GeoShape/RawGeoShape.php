@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Model\GeoShape;
+namespace Gskema\ElasticsearchQueryDSL\Model\GeoShape;
 
-use Gskema\ElasticSearchQueryDSL\RawFragment;
+use Gskema\ElasticsearchQueryDSL\RawFragment;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/geo-shape.html#input-structure

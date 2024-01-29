@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Suggester\ContextQuery;
+namespace Gskema\ElasticsearchQueryDSL\Suggester\ContextQuery;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/suggester-context.html#suggester-context-category

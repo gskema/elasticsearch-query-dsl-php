@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Highlighter;
+namespace Gskema\ElasticsearchQueryDSL\Highlighter;
 
 use JsonSerializable;
 

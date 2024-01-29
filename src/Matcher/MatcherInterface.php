@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher;
+namespace Gskema\ElasticsearchQueryDSL\Matcher;
 
 use JsonSerializable;
 

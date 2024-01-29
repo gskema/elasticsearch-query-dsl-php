@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
+namespace Gskema\ElasticsearchQueryDSL\SearchRequest;
 
-use Gskema\ElasticSearchQueryDSL\Matcher\MatchNoneMatcher;
+use Gskema\ElasticsearchQueryDSL\Matcher\MatchNoneMatcher;
 use PHPUnit\Framework\TestCase;
 
 final class HasQueryTraitTest extends TestCase

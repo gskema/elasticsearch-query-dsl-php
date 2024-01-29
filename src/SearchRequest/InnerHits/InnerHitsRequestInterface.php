@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest\InnerHits;
+namespace Gskema\ElasticsearchQueryDSL\SearchRequest\InnerHits;
 
 use JsonSerializable;
 

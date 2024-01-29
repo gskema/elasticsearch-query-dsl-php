@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Model\Script;
+namespace Gskema\ElasticsearchQueryDSL\Model\Script;
 
-use Gskema\ElasticSearchQueryDSL\RawFragmentTest;
+use Gskema\ElasticsearchQueryDSL\RawFragmentTest;
 
 final class RawScriptTest extends RawFragmentTest
 {

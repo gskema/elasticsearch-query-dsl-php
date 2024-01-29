@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Model\Script;
+namespace Gskema\ElasticsearchQueryDSL\Model\Script;
 
 use JsonSerializable;
 

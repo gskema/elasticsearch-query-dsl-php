@@ -1,13 +1,13 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Matcher\Compound;
+namespace Gskema\ElasticsearchQueryDSL\Matcher\Compound;
 
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-use Gskema\ElasticSearchQueryDSL\Options;
-use Gskema\ElasticSearchQueryDSL\ScoreFunction\ScoreFunctionInterface;
-use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticsearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticsearchQueryDSL\Options;
+use Gskema\ElasticsearchQueryDSL\ScoreFunction\ScoreFunctionInterface;
+use Gskema\ElasticsearchQueryDSL\Matcher\MatcherInterface;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticsearchQueryDSL\array_clone;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-function-score-query.html

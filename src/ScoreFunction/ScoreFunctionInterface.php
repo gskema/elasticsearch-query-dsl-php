@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\ScoreFunction;
+namespace Gskema\ElasticsearchQueryDSL\ScoreFunction;
 
 use JsonSerializable;
 

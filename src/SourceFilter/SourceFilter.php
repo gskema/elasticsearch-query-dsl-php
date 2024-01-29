@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SourceFilter;
+namespace Gskema\ElasticsearchQueryDSL\SourceFilter;
 
 use stdClass;
 

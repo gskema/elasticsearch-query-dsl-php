@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest;
+namespace Gskema\ElasticsearchQueryDSL\SearchRequest;
 
-use Gskema\ElasticSearchQueryDSL\Highlighter\Highlighter;
+use Gskema\ElasticsearchQueryDSL\Highlighter\Highlighter;
 use PHPUnit\Framework\TestCase;
 
 final class HasHighlighterTraitTest extends TestCase

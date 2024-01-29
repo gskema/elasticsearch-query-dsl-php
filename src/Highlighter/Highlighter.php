@@ -1,13 +1,13 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Highlighter;
+namespace Gskema\ElasticsearchQueryDSL\Highlighter;
 
-use Gskema\ElasticSearchQueryDSL\HasOptionsTrait;
-use Gskema\ElasticSearchQueryDSL\Matcher\MatcherInterface;
-use Gskema\ElasticSearchQueryDSL\Options;
+use Gskema\ElasticsearchQueryDSL\HasOptionsTrait;
+use Gskema\ElasticsearchQueryDSL\Matcher\MatcherInterface;
+use Gskema\ElasticsearchQueryDSL\Options;
 use stdClass;
 
-use function Gskema\ElasticSearchQueryDSL\array_clone;
+use function Gskema\ElasticsearchQueryDSL\array_clone;
 
 /**
  * Options can be global or on overridden on field level.

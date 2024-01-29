@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\ScoreFunction;
+namespace Gskema\ElasticsearchQueryDSL\ScoreFunction;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/query-dsl-function-score-query.html#function-field-value-factor

@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\SearchRequest\TopHits;
+namespace Gskema\ElasticsearchQueryDSL\SearchRequest\TopHits;
 
-use Gskema\ElasticSearchQueryDSL\RawFragment;
+use Gskema\ElasticsearchQueryDSL\RawFragment;
 
 class RawTopHitsRequest extends RawFragment implements TopHitsRequestInterface
 {

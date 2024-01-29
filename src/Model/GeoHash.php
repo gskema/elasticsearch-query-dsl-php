@@ -1,6 +1,6 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Model;
+namespace Gskema\ElasticsearchQueryDSL\Model;
 
 /**
  * @see GeoHashTest

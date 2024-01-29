@@ -1,8 +1,8 @@
 <?php
 
-namespace Gskema\ElasticSearchQueryDSL\Aggregation\Matrix;
+namespace Gskema\ElasticsearchQueryDSL\Aggregation\Matrix;
 
-use Gskema\ElasticSearchQueryDSL\AbstractJsonSerializeTestCase;
+use Gskema\ElasticsearchQueryDSL\AbstractJsonSerializeTestCase;
 
 final class MatrixStatsAggregationTest extends AbstractJsonSerializeTestCase
 {
