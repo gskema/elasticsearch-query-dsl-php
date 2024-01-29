@@ -4,6 +4,10 @@ All notable changes to `elasticsearch-query-dsl-php` will be documented in this 
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [6.1.0] - 2024-01-29
+### Changed
+- Renamed namespace `ElasticSearchQueryDSL` -> `ElasticsearchQueryDSL`
+
 ## [6.0.0] - 2023-10-25
 ### Added
 - `TermsSetMatcher`
